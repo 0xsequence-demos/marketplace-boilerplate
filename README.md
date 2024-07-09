@@ -4,9 +4,7 @@
 
 1. Set up a white-label marketplace in builder https://docs.sequence.xyz/solutions/marketplaces/white-label-marketplace
 
-2. Ensure that you select the Settings (Cog Icon) next to the collection in the marketplace section of the Builder to change the Marketplace type to 'Sequence Market'.
-
-3. Add an `.env` file to the root of the project with the following variables:
+2. Add an `.env` file to the root of the project with the following variables:
 
 You can run
 
