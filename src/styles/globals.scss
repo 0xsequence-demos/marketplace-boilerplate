@@ -5,6 +5,32 @@
 @layer base {
   html {
     background-color: hsl(var(--background));
+    --scrollbar-color-thumb: #202020; // Do not support hsl()
+    --scrollbar-color-track: var(--background);
+    --scrollbar-width: thin;
+    --scrollbar-width-legacy: 7px;
+
+    /* Modern browsers with `scrollbar-*` support */
+    @supports (scrollbar-width: auto) {
+      *scrollbar-color: var(--scrollbar-color-thumb)
+        var(--scrollbar-color-track);
+      *scrollbar-width: var(--scrollbar-width);
+    }
+
+    /* Legacy browsers with `::-webkit-scrollbar-*` support */
+    @supports selector(::-webkit-scrollbar) {
+      *::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: var(--scrollbar-color-thumb);
+      }
+      *::-webkit-scrollbar-track {
+        background: var(--scrollbar-color-track);
+      }
+      *::-webkit-scrollbar {
+        max-width: var(--scrollbar-width-legacy);
+        max-height: var(--scrollbar-width-legacy);
+      }
+    }
   }
   body {
     font-family: var(--font-main);
