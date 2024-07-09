@@ -2,9 +2,11 @@
 
 ## Setup
 
-Set up a white-label marketplace in builder https://docs.sequence.xyz/solutions/marketplaces/white-label-marketplace
+1. Set up a white-label marketplace in builder https://docs.sequence.xyz/solutions/marketplaces/white-label-marketplace
 
-Add an `.env` file to the root of the project with the following variables:
+2. Ensure that you select the Settings (Cog Icon) next to the collection in the marketplace section of the Builder to change the Marketplace type to 'Sequence Market'.
+
+3. Add an `.env` file to the root of the project with the following variables:
 
 You can run
 
@@ -33,7 +35,7 @@ For now we hardcoded port for app at `4420`
 
 ## Start
 
-If you want to build app and just explore, run these commands
+To start and build the application, run the following commands:
 
 ```sh
 pnpm install
@@ -66,3 +68,7 @@ Build server
 ```sh
 pnpm build
 ```
+
+## Common Errors
+
+If you forget to change your marketplace type in Builder before building the app, you will need to remove the `.next` cache and rerun the server.
