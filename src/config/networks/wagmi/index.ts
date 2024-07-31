@@ -16,32 +16,54 @@ import {
   apple,
   twitch,
   type SequenceOptions,
+  getDefaultWaasConnectors,
 } from '@0xsequence/kit';
 import { findNetworkConfig, allNetworks } from '@0xsequence/network';
 import type { Chain, Transport } from 'viem';
 import { createConfig, http } from 'wagmi';
 
-const accessKey = env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY;
+const accessKey = env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY!;
+const walletConnectProjectId = env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!;
+const waasConfigKey = env.NEXT_PUBLIC_WAAS_CONFIG_KEY!;
+const googleClientId = env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!;
+const walletType = env.NEXT_PUBLIC_WALLET_TYPE!;
 
 export const createWagmiConfig = (marketConfig: MarketConfig) => {
   const chains = getChainConfigs(marketConfig);
   const transports = getTransportConfigs(chains);
-  const sequenceWalletOptions = {
-    defaultNetwork: DEFAULT_NETWORK,
-    connect: {
-      projectAccessKey: accessKey,
-      app: marketConfig.title,
-      settings: {
-        bannerUrl: marketConfig.ogImage,
+  let connectors;
+
+  if (walletType === "universal") {
+    const sequenceWalletOptions = {
+      defaultNetwork: DEFAULT_NETWORK,
+      connect: {
+        projectAccessKey: accessKey,
+        app: marketConfig.title,
+        settings: {
+          bannerUrl: marketConfig.ogImage,
+        },
       },
-    },
-  };
-  const wallets = getWalletConfigs(marketConfig, sequenceWalletOptions);
-  const socialWallets = getSocialWalletConfigs(sequenceWalletOptions);
-  const connectors = getKitConnectWallets(accessKey, [
-    ...socialWallets,
-    ...wallets,
-  ]);
+    };
+  
+    
+    const wallets = getWalletConfigs(marketConfig, sequenceWalletOptions);
+    const socialWallets = getSocialWalletConfigs(sequenceWalletOptions);
+    connectors = getKitConnectWallets(accessKey, [
+      ...socialWallets,
+      ...wallets,
+    ]);
+  } else if (walletType === "waas") {
+    connectors = getDefaultWaasConnectors({
+      walletConnectProjectId,
+      waasConfigKey,
+      googleClientId,
+      // Notice: AppleID will only work if deployed on https to support Apple redirects
+      // appleClientId,
+      // appleRedirectURI,
+      appName: marketConfig.title,
+      projectAccessKey: accessKey,
+    });
+  } else throw new Error("Invalid wallet type environment");
 
   return createConfig({
     connectors,
