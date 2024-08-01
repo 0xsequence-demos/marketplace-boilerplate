@@ -10,16 +10,13 @@ import { marketConfig$ } from '~/lib/stores/marketConfig';
 
 import { ToastProvider, Tooltip } from '$ui';
 import { AccountEvents } from './accountEvents';
-import {
-  KitProvider,
-  type KitConfig,
-} from '@0xsequence/kit';
-import { KitCheckoutProvider } from '@0xsequence/kit-checkout'
+import { KitProvider, type KitConfig } from '@0xsequence/kit';
+import { KitCheckoutProvider } from '@0xsequence/kit-checkout';
 import { enableReactComponents } from '@legendapp/state/config/enableReactComponents';
+import { useMount } from '@legendapp/state/react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { WagmiProvider, type State } from 'wagmi';
-import { useMount } from '@legendapp/state/react';
 
 const queryClient = getQueryClient();
 

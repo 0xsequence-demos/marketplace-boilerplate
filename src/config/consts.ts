@@ -18,7 +18,6 @@ export const DEFAULT_NETWORK = ChainId.POLYGON;
 export const SEQUENCE_MARKET_V1_ADDRESS =
   '0xB537a160472183f2150d42EB1c3DD6684A55f74c';
 
-
 const SERVICES = {
   sequenceApi: 'https://api.sequence.app',
   metadata: 'https://metadata.sequence.app',
@@ -28,8 +27,7 @@ const SERVICES = {
   directorySearchEndpoint:
     'https://api.sequence.build/rpc/Builder/DirectorySearchCollections',
   imageProxy: 'https://imgproxy.sequence.xyz/',
-  builderMarketplaceApi:
-    'https://api.sequence.build/marketplace/${projectId}',
+  builderMarketplaceApi: 'https://api.sequence.build/marketplace/${projectId}',
 };
 
 export const sequenceApiURL = stringTemplate(SERVICES.sequenceApi, {});
@@ -52,4 +50,3 @@ export const rpcNodeURL = (network: string) =>
     network: network,
     accessKey: env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY,
   });
-

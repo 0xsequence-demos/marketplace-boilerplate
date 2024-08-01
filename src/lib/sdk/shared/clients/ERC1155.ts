@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getERC1155Contract } from '../../niftyswap-v2';
 import { ERC1155_ABI } from '../abi/token/ERC1155';

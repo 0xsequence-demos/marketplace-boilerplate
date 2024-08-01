@@ -39,10 +39,7 @@ const Layout = async ({
         />
       }
       controls={
-        <CollectionControls
-          chainId={chainId}
-          collectionId={collectionId}
-        />
+        <CollectionControls chainId={chainId} collectionId={collectionId} />
       }
       content={children}
     />

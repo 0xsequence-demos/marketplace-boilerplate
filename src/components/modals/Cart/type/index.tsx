@@ -3,11 +3,11 @@
 import { memo } from 'react';
 
 import { cartState } from '~/lib/stores/cart/Cart';
+import { OrderItemType } from '~/lib/stores/cart/types';
 
 import { OrderbookOrderComponents } from './orderbook';
 import { TransferOrderComponents } from './transfer';
 import { useSnapshot } from 'valtio';
-import { OrderItemType } from '~/lib/stores/cart/types';
 
 // eslint-disable-next-line react/display-name
 export const OrderRenderer = memo(() => {

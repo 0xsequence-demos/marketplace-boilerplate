@@ -1,8 +1,8 @@
 declare namespace JSX {
   interface IntrinsicElements {
     'model-viewer': any &
-      React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+      React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
   }
 }
 
-declare module '@google/model-viewer'
+declare module '@google/model-viewer';

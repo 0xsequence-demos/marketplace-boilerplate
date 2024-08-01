@@ -86,7 +86,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ) : (
           <>
             {loading ? <LoadingBox /> : null}
-            {!loading ? children ?? label : null}
+            {!loading ? (children ?? label) : null}
           </>
         )}
       </Comp>

@@ -10,8 +10,6 @@ import type { FilterProps } from './PropertyFilters';
 import { observer } from '@legendapp/state/react';
 import { capitalize } from 'radash';
 
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 export const IntFilter = observer(({ filter }: FilterProps) => {
   const { name, min, max } = filter;
 

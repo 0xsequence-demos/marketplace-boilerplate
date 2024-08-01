@@ -1,9 +1,9 @@
 import { getPublicClient } from '~/config/networks/wagmi/rpcClients';
+import { EIP2981_ABI } from '~/lib/sdk/shared/abi/standard/EIP2981';
 
 import { useQuery } from '@tanstack/react-query';
 import type { Hex } from 'viem';
 import { getContract } from 'viem';
-import { EIP2981_ABI } from '~/lib/sdk/shared/abi/standard/EIP2981';
 
 interface Props {
   chainId: number;

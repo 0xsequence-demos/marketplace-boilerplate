@@ -11,32 +11,38 @@ import type { OrderWithID } from '~/hooks/orderbook/useOrderbookOrders';
 import { useERC20Approval } from '~/hooks/transactions/useERC20Approval';
 import { useERC721Approval } from '~/hooks/transactions/useERC721Approval';
 import { useERC1155Approval } from '~/hooks/transactions/useERC1155Approval';
-import { useCountryCode } from '~/hooks/useCountryCode';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
+import { useCountryCode } from '~/hooks/useCountryCode';
 import { useNetworkSwitch } from '~/hooks/utils/useNetworkSwitch';
 import {
   balanceQueries,
   collectableQueries,
   collectionQueries,
 } from '~/lib/queries';
+import { Orderbook } from '~/lib/sdk/orderbook/clients/Orderbook';
 import {
   onTransactionFinish,
   setTransactionPendingState,
 } from '~/lib/stores/Transaction';
-import { Orderbook } from '~/lib/sdk/orderbook/clients/Orderbook';
 import { cartState, toggleCart, resetCart } from '~/lib/stores/cart/Cart';
 import { OrderItemType } from '~/lib/stores/cart/types';
+import {
+  checkCountryCodeValidity,
+  checkCurrencyValidity,
+} from '~/lib/utils/sardine';
 import {
   type GenericStep,
   generateStepsOrderbookAcceptRequest,
   type AcceptRequest,
 } from '~/lib/utils/txBundler';
-import { checkCountryCodeValidity, checkCurrencyValidity } from '~/lib/utils/sardine';
 
 import { Button, Text, Box, toast } from '$ui';
 import { transactionNotification } from '../../../Notifications/transactionNotification';
-import type { CheckoutSettings } from '@0xsequence/kit-checkout'
-import { useCheckoutModal, useCheckoutWhitelistStatus } from '@0xsequence/kit-checkout'
+import type { CheckoutSettings } from '@0xsequence/kit-checkout';
+import {
+  useCheckoutModal,
+  useCheckoutWhitelistStatus,
+} from '@0xsequence/kit-checkout';
 import { useQueryClient } from '@tanstack/react-query';
 import { snapshot, useSnapshot } from 'valtio';
 import type { Hex } from 'viem';
@@ -85,8 +91,8 @@ export const OrderbookOrderButtons = ({
 
   const { address: userAddress, isConnected, connector } = useAccount();
   const { data: walletClient } = useWalletClient();
-  const publicClient = usePublicClient()
-  const { triggerCheckout } = useCheckoutModal()
+  const publicClient = usePublicClient();
+  const { triggerCheckout } = useCheckoutModal();
 
   const { networkMismatch, targetChainId } = useNetworkSwitch({
     targetChainId: chainId,
@@ -140,16 +146,16 @@ export const OrderbookOrderButtons = ({
     disabled: !erc1155ApprovalEnabled,
   });
 
-  const { data: countryCodeData } = useCountryCode()
+  const { data: countryCodeData } = useCountryCode();
 
   // To test sardine integration on localhost, set isDev to true
-  const isDev = false
+  const isDev = false;
 
   const { data: isCheckoutWhitelisted = false } = useCheckoutWhitelistStatus({
     chainId: chainId || 137,
     marketplaceAddress: SEQUENCE_MARKET_V1_ADDRESS,
     isDev,
-  })
+  });
 
   if (!cartItems.length || !chainId || orders.length === 0) {
     return null;
@@ -165,26 +171,30 @@ export const OrderbookOrderButtons = ({
     void queryClient.invalidateQueries({ queryKey: balanceQueries.all() });
   };
 
-  const countryCode = isDev ? 'US' : countryCodeData
+  const countryCode = isDev ? 'US' : countryCodeData;
 
-  const isNFTCheckoutValidCountry = checkCountryCodeValidity(countryCode || '')
-  const isNFTCheckoutValidCurrency = checkCurrencyValidity(erc20Address, chainId)
+  const isNFTCheckoutValidCountry = checkCountryCodeValidity(countryCode || '');
+  const isNFTCheckoutValidCurrency = checkCurrencyValidity(
+    erc20Address,
+    chainId,
+  );
 
   const showCreditCardButton =
     cartType === OrderItemType.BUY &&
     isNFTCheckoutValidCountry &&
     isNFTCheckoutValidCurrency &&
-    isCheckoutWhitelisted
+    isCheckoutWhitelisted;
 
   const renderBuyWithCreditCard = () => {
     if (!showCreditCardButton) {
-      return null
+      return null;
     }
 
-    const isTooManyItems = cartItems.length > 1
-    const tooManyItemsMessage = 'Only 1 item can be purchased at a time with a credit card'
+    const isTooManyItems = cartItems.length > 1;
+    const tooManyItemsMessage =
+      'Only 1 item can be purchased at a time with a credit card';
 
-    const cartItem = cartItems[0]
+    const cartItem = cartItems[0];
 
     const orderbook = new Orderbook({
       chainId,
@@ -192,15 +202,15 @@ export const OrderbookOrderButtons = ({
     });
 
     const onCreditCardSuccesss = async (txnHash: string) => {
-      resetCart()
+      resetCart();
 
       await publicClient?.waitForTransactionReceipt({
         hash: txnHash as Hex,
-        confirmations: 5
-      })
+        confirmations: 5,
+      });
 
-      postTransactionCacheClear()
-    }
+      postTransactionCacheClear();
+    };
 
     const checkoutSettings: CheckoutSettings = {
       creditCardCheckout: {
@@ -220,22 +230,22 @@ export const OrderbookOrderButtons = ({
           quantity: cartItem?.quantity || 0n,
           receiver: userAddress!,
           additionalFees: [platformFee],
-          additionalFeeReceivers: [frontEndFeeRecipient as Hex]
+          additionalFeeReceivers: [frontEndFeeRecipient as Hex],
         }),
         approvedSpenderAddress: SEQUENCE_MARKET_V1_ADDRESS,
         isDev,
         onSuccess: (txnHash) => {
-          onCreditCardSuccesss(txnHash).catch(e => console.error(e))
+          onCreditCardSuccesss(txnHash).catch((e) => console.error(e));
         },
-        onError: error => {
-          console.error(error)
-        }
+        onError: (error) => {
+          console.error(error);
+        },
       },
-    }
+    };
 
     const onClickNFTCheckout = () => {
-      triggerCheckout(checkoutSettings)
-    }
+      triggerCheckout(checkoutSettings);
+    };
 
     return (
       <>
@@ -248,8 +258,8 @@ export const OrderbookOrderButtons = ({
         </Box>
         <Text className="text-center">OR</Text>
       </>
-    )
-  }
+    );
+  };
 
   if (!isConnected) {
     return (
