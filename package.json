@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "dev": "next dev -p 4420",
+    "dev": "next dev -p 4444",
     "lint": "next lint",
-    "start": "next start -p 4420",
+    "lint:fix": "next lint && prettier --write --ignore-path .prettierignore .",
+    "start": "next start -p 4444",
     "check": "tsc --noEmit",
     "knip": "knip",
     "env-file": "cp -n .env.example .env"

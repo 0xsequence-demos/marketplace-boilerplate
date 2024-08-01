@@ -1,0 +1,6 @@
+/node_modules
+/dist
+/.next
+/build
+pnpm-lock.yaml
+*.gen.*
