@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 'use client';
 
 import type { ChangeEvent } from 'react';
@@ -9,6 +8,8 @@ import { filters$ } from '../FilterStore';
 import type { FilterProps } from './PropertyFilters';
 import { observer } from '@legendapp/state/react';
 import { capitalize } from 'radash';
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 export const IntFilter = observer(({ filter }: FilterProps) => {
   const { name, min, max } = filter;
