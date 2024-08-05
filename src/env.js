@@ -8,7 +8,7 @@ export const env = createEnv({
     NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: z.string().optional(),
     NEXT_PUBLIC_WAAS_CONFIG_KEY: z.string().optional(),
     NEXT_PUBLIC_GOOGLE_CLIENT_ID: z.string().optional(),
-    NEXT_PUBLIC_WALLET_TYPE: z.enum(["waas", "universal"]),
+    NEXT_PUBLIC_APPLE_CLIENT_ID: z.string().optional(),
   },
 
   runtimeEnv: {
@@ -22,8 +22,8 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_WAAS_CONFIG_KEY,
     NEXT_PUBLIC_GOOGLE_CLIENT_ID:
       process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-    NEXT_PUBLIC_WALLET_TYPE:
-      process.env.NEXT_PUBLIC_WALLET_TYPE,
+    NEXT_PUBLIC_APPLE_CLIENT_ID:
+      process.env.NEXT_PUBLIC_APPLE_CLIENT_ID,
   },
   emptyStringAsUndefined: true,
 });
