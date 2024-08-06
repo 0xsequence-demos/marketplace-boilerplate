@@ -23,12 +23,11 @@ import {
 import { findNetworkConfig, allNetworks } from '@0xsequence/network';
 import type { Chain, Transport } from 'viem';
 import { createConfig, type CreateConnectorFn, http } from 'wagmi';
-import { polygon } from 'viem/chains';
 
 const projectAccessKey = env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY;
 const walletConnectProjectId = env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID;
 const waasConfigKey = env.NEXT_PUBLIC_WAAS_CONFIG_KEY;
-const walletType = waasConfigKey ? "waas" : "universal";
+const walletType = waasConfigKey ? 'waas' : 'universal';
 
 const defaultNetwork = DEFAULT_NETWORK;
 
@@ -36,7 +35,7 @@ export const createWagmiConfig = (marketConfig: MarketConfig) => {
   const chains = getChainConfigs(marketConfig);
   const transports = getTransportConfigs(chains);
   let connectors;
-  if (walletType === "universal") {
+  if (walletType === 'universal') {
     const sequenceWalletOptions = {
       defaultNetwork,
       connect: {
@@ -54,8 +53,11 @@ export const createWagmiConfig = (marketConfig: MarketConfig) => {
       ...socialWallets,
       ...wallets,
     ]);
-  } else if (walletType === "waas" && waasConfigKey) {
-    connectors = getWaasConnectors({ appName: marketConfig.title, waasConfigKey });
+  } else if (walletType === 'waas' && waasConfigKey) {
+    connectors = getWaasConnectors({
+      appName: marketConfig.title,
+      waasConfigKey,
+    });
   }
 
   return createConfig({
@@ -97,7 +99,6 @@ function getWalletConfigs(
   marketConfig: MarketConfig,
   sequenceWalletOptions: SequenceOptions,
 ): Wallet[] {
-
   const walletObject = {
     sequence: sequenceWallet(sequenceWalletOptions),
     ...(walletConnectProjectId
@@ -128,11 +129,11 @@ function getSocialWalletConfigs(
 }
 
 interface GetWaasConnectors {
-  appName: string
-  waasConfigKey: string
+  appName: string;
+  waasConfigKey: string;
 }
 
-const defaultChainId = defaultNetwork
+const defaultChainId = defaultNetwork;
 
 const googleClientId = env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 const appleClientId = env.NEXT_PUBLIC_APPLE_CLIENT_ID;
@@ -149,14 +150,14 @@ function getWaasConnectors({
     }),
 
     coinbaseWallet({
-      appName
-    }) as Wallet
+      appName,
+    }) as Wallet,
   ];
 
   if (walletConnectProjectId) {
     walletConnect({
-      projectId: walletConnectProjectId
-    })
+      projectId: walletConnectProjectId,
+    });
   }
 
   if (googleClientId) {
@@ -166,8 +167,8 @@ function getWaasConnectors({
         googleClientId,
         waasConfigKey,
         network: defaultChainId,
-      })
-    )
+      }),
+    );
   }
   // if (appleClientId) {
   //   wallets.push(
@@ -183,4 +184,3 @@ function getWaasConnectors({
 
   return getKitConnectWallets(projectAccessKey, wallets);
 }
-
