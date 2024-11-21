@@ -1,10 +1,10 @@
 import { memo } from 'react';
 
 import { classNames } from '~/config/classNames';
-import { formatDisplay, truncateAtMiddle } from '~/lib/utils/helpers';
 
 import { Avatar, Flex, Image, Text, cn } from '$ui';
-import { NetworkIcon } from './NetworkLabel';
+import { NetworkImage } from '@0xsequence/design-system';
+import { truncateMiddle } from '@0xsequence/marketplace-sdk';
 import NextLink from 'next/link';
 
 /* ************* CURRENCY AVATAR ***************** */
@@ -19,80 +19,6 @@ type CurrencyAvatarProps = {
   size?: 'default' | 'sm' | 'lg';
 
   loading?: boolean;
-};
-
-export const CurrencyAvatar = ({
-  amount,
-  currency,
-  title,
-  justify,
-  className,
-  size = 'default',
-  loading = false,
-}: CurrencyAvatarProps) => {
-  return (
-    <Flex
-      className={cn(
-        classNames.currencyAvatar,
-        'text-foreground/80 items-center gap-2',
-        justify,
-        className,
-      )}
-    >
-      <Avatar.Base size={size} className={`${loading ? 'loading' : ''}`}>
-        <Avatar.Image src={currency.src} alt={currency.symbol} />
-        <Avatar.Fallback>{currency.symbol?.slice(0, 2)}</Avatar.Fallback>
-      </Avatar.Base>
-      <Text
-        className={cn(
-          'text-sm font-medium text-inherit',
-          loading ? 'loading' : '',
-        )}
-        // size={size}
-        title={title ? (loading ? 'loading..' : String(title)) : undefined}
-      >
-        {formatDisplay(amount)} {currency.symbol}
-      </Text>
-    </Flex>
-  );
-};
-
-/* ************* CURRENCY PAIR ***************** */
-type CurrencyPairAvatarProps = {
-  assetAmount: number | string;
-  assetCurrency: { src: string; symbol: string };
-
-  tokenAmount: number | string;
-  tokenCurrency: { src: string; symbol: string };
-
-  justify?: 'justify-center' | 'justify-start' | 'justify-end';
-  className?: string;
-};
-
-export const CurrencyPairAvatar = ({
-  assetAmount,
-  assetCurrency,
-  tokenAmount,
-  tokenCurrency,
-  justify,
-  className,
-}: CurrencyPairAvatarProps) => {
-  return (
-    <Flex
-      className={cn(classNames.currencyPairAvatar, 'flex-col gap-2', className)}
-    >
-      <CurrencyAvatar
-        amount={assetAmount}
-        currency={assetCurrency}
-        justify={justify}
-      />
-      <CurrencyAvatar
-        amount={tokenAmount}
-        currency={tokenCurrency}
-        justify={justify}
-      />
-    </Flex>
-  );
 };
 
 /* ************* COLLECTION AVATAR ***************** */
@@ -119,7 +45,7 @@ export const CollectionAvatar = ({
       </Avatar.Base>
 
       <Text className="text-foreground/90 font-medium">{name}</Text>
-      {chainId ? <NetworkIcon size="sm" chainId={chainId} /> : null}
+      {chainId ? <NetworkImage size="sm" chainId={chainId} /> : null}
     </Flex>
   );
 };
@@ -156,7 +82,7 @@ export const PoolAvatar = memo(
 
     const Content = () => (
       <>
-        <Image.Base
+        <Image
           src={src}
           className={cn('h-[40px] w-[30px] min-w-[30px]', imageClassName)}
           loading={loading}
@@ -183,7 +109,7 @@ export const PoolAvatar = memo(
 
             {chainId ? (
               <Flex className="min-w-[20px]">
-                <NetworkIcon chainId={chainId} loading={loading} />
+                <NetworkImage size='sm' chainId={chainId} />
               </Flex>
             ) : null}
           </Flex>
@@ -195,7 +121,7 @@ export const PoolAvatar = memo(
               loading={loading}
               title={`${tokenId}`}
             >
-              #{truncateAtMiddle(`${tokenId}`, 10)}
+              #{truncateMiddle(`${tokenId}`, 10)}
             </Text>
           ) : null}
         </Flex>

@@ -1,8 +1,7 @@
 'use client';
 
-import { NetworkIcon } from '~/components/NetworkLabel';
-
 import { Box, Button, Flex, Text } from '$ui';
+import { NetworkImage } from '@0xsequence/design-system';
 import { useAccount, useSwitchChain } from 'wagmi';
 
 export const NetworkSelectModalContent = () => {
@@ -34,7 +33,7 @@ export const NetworkSelectModalContent = () => {
               key={chain.id}
             >
               <Flex className="flex-start w-full flex-row items-center justify-start gap-1">
-                <NetworkIcon chainId={chain.id} />
+                <NetworkImage chainId={chain.id} />
                 <Text className="pl-1 text-lg">{chain.name}</Text>
                 <Flex className="ml-2 items-center justify-center gap-1">
                   {connectedChain?.id === chain.id && (

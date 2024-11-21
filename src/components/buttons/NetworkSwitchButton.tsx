@@ -1,7 +1,5 @@
 'use client';
 
-import { DEFAULT_NETWORK } from '~/config/consts';
-
 import { Button } from '$ui';
 import { useSwitchChain } from 'wagmi';
 
@@ -16,7 +14,7 @@ export const NetworkSwitchButton = ({ targetChainId }: Props) => {
     <Button
       className="w-full"
       label={'SWITCH NETWORK'}
-      onClick={() => switchChain({ chainId: targetChainId ?? DEFAULT_NETWORK })}
+      onClick={() => switchChain({ chainId: targetChainId ?? 137 })}
     />
   );
 };

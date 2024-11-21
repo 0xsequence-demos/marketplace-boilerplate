@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 export { Text } from './Text';
 export { Button } from './Button';
 export { Box } from './Box';
-export { Image } from './Image';
+export { BaseImage as Image } from './Image/image';
 export { Flex } from './Flex';
 export { Grid } from './Grid';
 export { Badge } from './Badge';

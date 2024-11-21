@@ -3,7 +3,7 @@ import { Badge, Flex, Image, Text } from '$ui';
 export const CollectionCardSkeleton = () => {
   return (
     <Flex className="loading flex-col gap-2 bg-foreground/10 p-2">
-      <Image.Base
+      <Image
         containerClassName="h-full flex-1"
         className="object-cover"
         loading

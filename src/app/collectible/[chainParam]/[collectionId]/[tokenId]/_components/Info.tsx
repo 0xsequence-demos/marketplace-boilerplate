@@ -1,16 +1,11 @@
 'use client';
 
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
-import { NetworkIcon } from '~/components/NetworkLabel';
-import {
-  formatDecimals,
-  formatDisplay,
-  truncateAtMiddle,
-} from '~/lib/utils/helpers';
 
-import { Avatar, Badge, Flex, Text, cn } from '$ui';
+import { Avatar, Flex, Text, cn } from '$ui';
+import { NetworkImage } from '@0xsequence/design-system';
+import { truncateMiddle } from '@0xsequence/marketplace-sdk';
 import NextLink from 'next/link';
-import { useAccount } from 'wagmi';
 
 type CollectibleInfoProps = {
   collectionName: string | undefined;
@@ -34,23 +29,6 @@ export const CollectibleInfo = ({
   tokenDecimals,
   loading,
 }: CollectibleInfoProps) => {
-  const { address } = useAccount();
-  // const pathname = usePathname();
-
-  // const isConnected = useIsConnected();
-
-  // const { data: userBalance, isLoading: isBalanceLoading } =
-  //   useCollectibleBalance({
-  //     chainId: chainId,
-  //     userAddress: address as string,
-  //     contractAddress: collectionAddress,
-  //     tokenId,
-  //   });
-
-  // const userTokenBalance = userBalance
-  //   ? formatDisplay(formatDecimals(userBalance, tokenDecimals))
-  //   : 0;
-
   return (
     <Flex className="flex-col gap-2">
       <Flex className="items-center gap-2">
@@ -70,7 +48,7 @@ export const CollectibleInfo = ({
             >
               {collectionName ?? '<unknown>'}
             </NextLink>
-            <NetworkIcon size="sm" chainId={chainId} />
+            <NetworkImage size="sm" chainId={chainId} className='bg-red-300' />
           </Flex>
         </Flex>
         <ContractTypeBadge
@@ -86,7 +64,7 @@ export const CollectibleInfo = ({
           loading={loading}
           title={tokenId}
         >
-          #{truncateAtMiddle(tokenId, 20) || '--'}
+          #{truncateMiddle(tokenId, 20) || '--'}
         </Text>
 
         <Text
@@ -97,14 +75,6 @@ export const CollectibleInfo = ({
           {tokenName}
         </Text>
       </Flex>
-
-      {/* {isConnected && (
-        <Flex className="flex-wrap gap-3">
-          <Badge variant="muted" loading={isBalanceLoading}>
-            <span>{userTokenBalance}</span>&nbsp;Owned
-          </Badge>
-        </Flex>
-      )} */}
     </Flex>
   );
 };

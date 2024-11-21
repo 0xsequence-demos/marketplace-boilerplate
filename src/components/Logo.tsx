@@ -28,7 +28,7 @@ export const Logo = ({
   const logoUrl = _logoUrl ? _logoUrl : defaultLogoUrl;
 
   return (
-    <Image.Base
+    <Image
       src={logoUrl}
       containerClassName={cn(
         'flex h-full w-auto max-w-[200px] items-center',

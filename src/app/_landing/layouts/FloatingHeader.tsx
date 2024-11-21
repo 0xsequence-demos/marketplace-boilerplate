@@ -1,5 +1,5 @@
 import { Logo } from '~/components/Logo';
-import { type MarketConfig } from '~/config/marketplace';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 import { Box, Flex, cn } from '$ui';
 import { LandingCollections } from '../Grid/Collections';
@@ -15,7 +15,7 @@ export const FloatingBanner = ({
   title,
   shortDescription,
   logoUrl,
-}: MarketConfig) => {
+}: MarketplaceConfig) => {
   return (
     <Flex className={cn('mx-auto mb-16 h-full w-full flex-col gap-16')}>
       <Box className="relative">

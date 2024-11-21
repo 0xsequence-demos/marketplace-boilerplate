@@ -1,16 +1,13 @@
 'use client';
 
-import { getChainId } from '~/config/networks';
-import { collectableQueries } from '~/lib/queries';
-import { MarketplaceKind } from '~/lib/queries/marketplace/marketplace.gen';
 import { type Routes } from '~/lib/routes';
-import { OrderItemType } from '~/lib/stores/cart/types';
+import { getChainId } from '~/lib/utils/getChain';
 
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
-import { CollectionOfferModal } from '../_components/ListingOfferModal';
+import { MarketplaceKind, OrderSide } from '@0xsequence/marketplace-sdk';
 import { observer } from '@legendapp/state/react';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 
 type CollectionBuyPageParams = {
   params: typeof Routes.collection.params;
@@ -24,18 +21,17 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
   const properties = filters$.filterOptions.get();
   const includeEmpty = !filters$.showAvailableOnly.get();
 
-  const collectiblesResponse = useInfiniteQuery(
-    collectableQueries.listLowestListing({
-      chainId,
-      contractAddress: collectionId,
-      filter: {
-        searchText: text,
-        includeEmpty,
-        properties,
-        marketplaces: [MarketplaceKind.sequence_marketplace_v1],
-      },
-    }),
-  );
+  const collectiblesResponse = useListCollectibles({
+    chainId:String(chainId),
+    collectionAddress: collectionId,
+    filter: {
+      searchText: text,
+      includeEmpty,
+      properties,
+      marketplaces: [MarketplaceKind.sequence_marketplace_v1],
+    },
+    side: OrderSide.listing
+  });
 
   const collectibles =
     collectiblesResponse.data?.pages.flatMap((p) => p.collectibles) ?? [];
@@ -44,10 +40,8 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
     <>
       <CollectiblesGrid
         endReached={collectiblesResponse.fetchNextPage}
-        itemType={OrderItemType.BUY}
-        data={collectibles}
+        collectibleOrders={collectibles}
       />
-      <CollectionOfferModal />
     </>
   );
 });

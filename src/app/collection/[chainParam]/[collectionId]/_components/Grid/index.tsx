@@ -5,23 +5,25 @@ import { forwardRef } from 'react';
 import { VirtuosoGrid } from 'react-virtuoso';
 
 import { classNames } from '~/config/classNames';
-import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
-import type { OrderItemType } from '~/lib/stores/cart/types';
+import { Routes } from '~/lib/routes';
+import { getChain } from '~/lib/utils/getChain';
 
 import { Grid, cn } from '$ui';
 import { CollectibleCard } from './Card/CollectableCard';
+import { type CollectibleOrder } from '@0xsequence/marketplace-sdk';
 
 export type CollectiblesGridProps = {
-  data: CollectibleOrder[];
-  itemType: OrderItemType;
+  collectibleOrders: CollectibleOrder[];
   endReached?: () => void;
 };
 
 export const CollectiblesGrid = ({
   endReached,
-  data,
-  itemType,
+  collectibleOrders,
 }: CollectiblesGridProps) => {
+  const { chainParam, collectionId } = Routes.collection.useParams();
+  const chain = getChain(chainParam);
+
   return (
     <VirtuosoGrid
       className="@container/collectiblesGridContainer"
@@ -30,16 +32,22 @@ export const CollectiblesGrid = ({
         List: GridContainer,
       }}
       itemContent={(index, data) => (
-        <CollectibleCard key={index} itemType={itemType} data={data} />
+        <CollectibleCard
+          key={index}
+          tokenId={data.metadata.tokenId}
+          collectionAddress={collectionId}
+          collectionChainId={String(chain?.chainId)}
+          order={data.order}
+        />
       )}
       endReached={endReached}
-      data={data}
+      data={collectibleOrders}
     />
   );
 };
 
 type GridContainerProps = {
-  className: string;
+  className?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };

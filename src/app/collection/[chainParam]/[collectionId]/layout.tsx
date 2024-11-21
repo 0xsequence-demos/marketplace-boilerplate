@@ -1,13 +1,12 @@
-import { getMarketConfig } from '~/config/marketplace';
-import { getChainId } from '~/config/networks';
 import type { Routes } from '~/lib/routes';
-import { compareAddress } from '~/lib/utils/helpers';
+import { getChainId } from '~/lib/utils/getChain';
 
 import CollectionBanner from './_components/Banner';
 import CollectionControls from './_components/Controls';
 import CollectionHeader from './_components/Header';
 import { CollectionViewPageLayout } from './_components/Layout';
 import { CollectionSidebar } from './_components/Sidebar';
+import { ssrClient } from '~/config/marketplace-sdk/ssr';
 
 const Layout = async ({
   params: { chainParam, collectionId },
@@ -17,11 +16,13 @@ const Layout = async ({
   params: typeof Routes.collection.params;
 }) => {
   const chainId = getChainId(chainParam)!;
-  const marketConfig = await getMarketConfig();
+  const { getMarketplaceConfig } = ssrClient();
+  const marketplaceConfig = await getMarketplaceConfig();
 
-  const collectionConfig = marketConfig.collections?.find(
+  const collectionConfig = marketplaceConfig.collections?.find(
     (c) =>
-      compareAddress(c.collectionAddress, collectionId) && chainId == c.chainId,
+      c.collectionAddress.toLowerCase() == collectionId.toLowerCase() &&
+      chainId == c.chainId,
   );
 
   return (
@@ -35,7 +36,7 @@ const Layout = async ({
         <CollectionHeader
           chainId={chainId}
           collectionAddress={collectionId}
-          marketConfig={marketConfig}
+          marketplaceConfig={marketplaceConfig}
         />
       }
       controls={
