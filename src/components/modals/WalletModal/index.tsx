@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import ENSName from '~/components/ENSName';
 
-import { sequence } from '0xsequence';
+// import { sequence } from '0xsequence';
 import {
   Button,
   Dialog,
@@ -28,13 +28,13 @@ export const WalletModalContent = () => {
   };
 
   const openWalletSequence = async () => {
-    let wallet: sequence.provider.SequenceProvider | undefined;
-    try {
-      wallet = sequence.getWallet();
-    } catch (err) {}
-    if (wallet) {
-      void wallet.openWallet();
-    }
+    // let wallet: sequence.provider.SequenceProvider | undefined;
+    // try {
+    //   wallet = sequence.getWallet();
+    // } catch (err) {}
+    // if (wallet) {
+    //   void wallet.openWallet();
+    // }
   };
 
   return (

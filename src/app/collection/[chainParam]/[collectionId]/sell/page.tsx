@@ -2,18 +2,15 @@
 
 import { NotConnectedWarning } from '~/components/NotConnectedWarning';
 import { Box, Text } from '~/components/ui';
-import { getChainId } from '~/config/networks';
-import { collectableQueries } from '~/lib/queries';
-import { MarketplaceKind } from '~/lib/queries/marketplace/marketplace.gen';
 import { type Routes } from '~/lib/routes';
-import { OrderItemType } from '~/lib/stores/cart/types';
+import { getChainId } from '~/lib/utils/getChain';
 
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
-import { CollectionOfferModal } from '../_components/ListingOfferModal';
+import { MarketplaceKind, OrderSide } from '@0xsequence/marketplace-sdk';
 import { observer } from '@legendapp/state/react';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
+import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 
 type CollectionBuyPageParams = {
   params: typeof Routes.collection.params;
@@ -27,19 +24,18 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
   const text = filters$.searchText.get();
   const properties = filters$.filterOptions.get();
 
-  const collectiblesResponse = useInfiniteQuery(
-    collectableQueries.listHighestOffer({
-      chainId,
-      contractAddress: collectionId,
-      filter: {
-        searchText: text,
-        includeEmpty: !filters$.showAvailableOnly.get(),
-        properties,
-        inAccounts: address ? [address] : undefined,
-        marketplaces: [MarketplaceKind.sequence_marketplace_v1],
-      },
-    }),
-  );
+  const collectiblesResponse = useListCollectibles({
+    chainId: String(chainId),
+    collectionAddress: collectionId,
+    filter: {
+      searchText: text,
+      includeEmpty: !filters$.showAvailableOnly.get(),
+      properties,
+      inAccounts: address ? [address] : undefined,
+      marketplaces: [MarketplaceKind.sequence_marketplace_v1],
+    },
+    side: OrderSide.listing
+  });
 
   if (!address) {
     return <NotConnectedWarning isConnected={isConnected} />;
@@ -63,10 +59,8 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
     <>
       <CollectiblesGrid
         endReached={collectiblesResponse.fetchNextPage}
-        itemType={OrderItemType.SELL}
-        data={collectibles}
+        collectibleOrders={collectibles}
       />
-      <CollectionOfferModal />
     </>
   );
 });

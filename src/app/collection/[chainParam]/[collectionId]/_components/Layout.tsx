@@ -1,6 +1,6 @@
 import { Box, Flex, Grid, Text, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
-import type { MarketConfig } from '~/config/marketplace';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 import { FilterBadges } from './Badges';
 
@@ -11,7 +11,7 @@ type CollectionViewPageLayoutProps = {
   controls: React.ReactNode;
   content: React.ReactNode;
 
-  collectionConfig?: MarketConfig['collections'][0];
+  collectionConfig?: MarketplaceConfig['collections'][0];
   chainError?: string | null;
 };
 

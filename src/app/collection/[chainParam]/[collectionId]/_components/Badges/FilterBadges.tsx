@@ -12,32 +12,28 @@ import {
   Text,
 } from '~/components/ui';
 import { classNames } from '~/config/classNames';
-import { collectionQueries } from '~/lib/queries';
 
 import { filters$ } from '../FilterStore';
 import { IntBadge } from './IntBadge';
 import { StringAndArrayBadge } from './StringAndArrayBadge';
+import { useFilters } from '@0xsequence/marketplace-sdk/react';
 import { PropertyType } from '@0xsequence/metadata';
 import { observer } from '@legendapp/state/react';
-import { useQuery } from '@tanstack/react-query';
-
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { type Hex } from 'viem';
 
 type FilterBadgesProps = {
   chainId: number;
-  collectionAddress: string;
+  collectionAddress: Hex;
 };
 
 export const FilterBadges = observer(
   ({ chainId, collectionAddress }: FilterBadgesProps) => {
     const { filterOptions: filters, searchText } = filters$.get();
 
-    const { data } = useQuery(
-      collectionQueries.filter({
-        chainID: chainId.toString(),
-        contractAddress: collectionAddress,
-      }),
-    );
+    const { data } = useFilters({
+      chainId: chainId.toString(),
+      collectionAddress,
+    });
 
     const getFilterType = useCallback(
       (name: string) => data?.find((f) => f.name === name)?.type,
@@ -79,14 +75,19 @@ export const FilterBadges = observer(
                   }
                   return null;
                 case PropertyType.INT:
-                  return (
-                    <IntBadge
-                      key={i}
-                      name={filter.name}
-                      min={filter.values[0]}
-                      max={filter.values[1]}
-                    />
-                  );
+                  if (filter?.values.length == 2) {
+                    const min = filter.values[0] as number;
+                    const max = filter.values[1] as number;
+                    return (
+                      <IntBadge
+                        key={i}
+                        name={filter.name}
+                        min={min}
+                        max={max}
+                      />
+                    );
+                  }
+                  return null;
               }
             })}
 

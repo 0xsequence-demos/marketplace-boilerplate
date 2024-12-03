@@ -1,7 +1,6 @@
 'use client';
 
-import { truncateAtMiddle } from '~/lib/utils/helpers';
-
+import { truncateMiddle } from '@0xsequence/marketplace-sdk';
 import type { Address } from 'viem';
 import { useEnsName } from 'wagmi';
 
@@ -19,7 +18,7 @@ const ENSName = ({ address, truncateAt }: ENSNameProps) => {
 
   if (!data) {
     if (truncateAt) {
-      return truncateAtMiddle(address, truncateAt);
+      return truncateMiddle(address, truncateAt);
     } else {
       return address;
     }
