@@ -2,7 +2,7 @@
 
 import ENSName from '~/components/ENSName';
 import { InfoGrid } from '~/components/InfoGrid';
-import { getChain } from '~/config/networks';
+import { getChain } from '~/lib/utils/getChain';
 
 import { Box, Button, LinkIcon, cn } from '$ui';
 

@@ -70,7 +70,7 @@ export const CollectibleImage = ({
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Image.Base
+        <Image
           src={src}
           alt={id}
           className="aspect-square max-h-[500px]"
@@ -82,7 +82,7 @@ export const CollectibleImage = ({
         />
       </Dialog.Trigger>
       <Dialog.BaseContent className="border-none bg-transparent py-4">
-        <Image.Base
+        <Image
           src={src}
           alt={id}
           className="h-[90vh] w-[80vw] bg-transparent"

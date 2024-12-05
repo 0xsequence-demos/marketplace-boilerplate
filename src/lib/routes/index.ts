@@ -1,12 +1,7 @@
-import { DEFAULT_NETWORK } from '~/config/consts';
-import { getChainName } from '~/config/networks';
-
+import { getChain } from '../utils/getChain';
 import { makeRoute } from './utils/makeRoute';
 import { isAddress as viemIsAddress } from 'viem';
 import { z } from 'zod';
-
-const viewType = ['list', 'grid'] as const;
-const ViewTypeEnum = z.enum(viewType);
 
 const swapMode = ['buy', 'sell'] as const;
 const swapModeEnum = z.enum(swapMode);
@@ -23,26 +18,16 @@ const collectionParams = z.object({
   mode: swapModeEnum.optional(),
 });
 
-const tab = ['details', 'listings', 'offers'] as const;
-const CollectibleTabEnum = z.enum(tab);
-
 const collectibleParams = z.object({
   chainParam,
   collectionId,
   tokenId: z.string(),
-  // tab: CollectibleTabEnum,
 });
 
 const chainToName = (chainParam: number | string) => {
-  const chainName = getChainName(chainParam);
+  const chainName = getChain(chainParam)?.name;
   return chainName ?? chainParam;
 };
-
-const inventoryParams = z.object({
-  chainParam: chainParam.optional(),
-  isConnected: z.boolean(),
-  address: isAddress.optional(),
-});
 
 export const Routes = {
   // Landing

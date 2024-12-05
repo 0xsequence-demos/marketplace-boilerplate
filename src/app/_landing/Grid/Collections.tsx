@@ -1,10 +1,9 @@
-import { type MarketConfig } from '~/config/marketplace';
-
 import { Flex, Grid, Text, cn } from '$ui';
-import { CollectionCard } from './Card';
+import { CollectionCard } from './Card/index';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 type LandingCollectionsProps = {
-  collections: MarketConfig['collections'];
+  collections: MarketplaceConfig['collections'];
   className?: string;
 };
 

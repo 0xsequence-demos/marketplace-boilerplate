@@ -1,6 +1,6 @@
 'use client';
 
-import { type MarketConfig } from '~/config/marketplace';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 import { Flex, cn } from '$ui';
 import { LandingCollections } from '../Grid/Collections';
@@ -15,7 +15,7 @@ export const BigLeftBanner = ({
   socials,
   title,
   shortDescription,
-}: MarketConfig) => {
+}: MarketplaceConfig) => {
   return (
     <Flex
       className={cn('mt-0 w-full gap-4 px-3 lg:px-0 lg:pr-3')}

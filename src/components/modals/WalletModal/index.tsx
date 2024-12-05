@@ -31,10 +31,10 @@ export const WalletModalContent = () => {
     let wallet: sequence.provider.SequenceProvider | undefined;
     try {
       wallet = sequence.getWallet();
-    } catch (err) {}
-    if (wallet) {
-      void wallet.openWallet();
-    }
+      if (wallet) {
+        void wallet.openWallet();
+      }
+    } catch (e) { }
   };
 
   return (

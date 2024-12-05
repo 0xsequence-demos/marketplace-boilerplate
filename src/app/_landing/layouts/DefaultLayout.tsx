@@ -1,4 +1,4 @@
-import type { MarketConfig } from '~/config/marketplace';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 import { Flex, cn } from '$ui';
 import { LandingCollections } from '../Grid/Collections';
@@ -13,7 +13,7 @@ export const DefaultLayout = ({
   socials,
   title,
   shortDescription,
-}: MarketConfig) => {
+}: MarketplaceConfig) => {
   return (
     <Flex
       className={cn(

@@ -19,7 +19,7 @@ export const BannerImage = ({
 }: BannerImageProps) => {
   if (!!src) {
     return (
-      <Image.Base
+      <Image
         src={src}
         containerClassName={cn('h-full rounded-none', className)}
         className="object-cover"

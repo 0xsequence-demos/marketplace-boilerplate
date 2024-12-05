@@ -1,68 +1,82 @@
 'use client';
 
-import { useState } from 'react';
-
-import { type MarketConfig } from '~/config/marketplace';
-import { createWagmiConfig } from '~/config/networks/wagmi';
-import { env } from '~/env';
-import { getQueryClient } from '~/lib/queries/getQueryClient';
-import { marketConfig$ } from '~/lib/stores/marketConfig';
-
 import { ToastProvider, Tooltip } from '$ui';
-import { AccountEvents } from './accountEvents';
-import { KitProvider, type KitConfig } from '@0xsequence/kit';
-import { KitCheckoutProvider } from '@0xsequence/kit-checkout';
-import { enableReactComponents } from '@legendapp/state/config/enableReactComponents';
-import { useMount } from '@legendapp/state/react';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { WagmiProvider, type State } from 'wagmi';
+import { ThemeProvider } from '@0xsequence/design-system';
 
-import '@0xsequence/design-system/styles.css'
+import { type KitConfig, KitProvider } from '@0xsequence/kit';
+import { KitCheckoutProvider } from "@0xsequence/kit-checkout";
+import {
+  type MarketplaceConfig,
+  type SdkConfig,
+} from '@0xsequence/marketplace-sdk';
+import {
+  createWagmiConfig,
+  getQueryClient,
+  marketplaceConfigOptions,
+  MarketplaceProvider,
+  ModalProvider,
+} from '@0xsequence/marketplace-sdk/react';
+
+import { enableReactComponents } from '@legendapp/state/config/enableReactComponents';
+import { QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { type State, WagmiProvider } from 'wagmi';
 
 const queryClient = getQueryClient();
 
-export default function Providers({
-  marketConfig,
-  children,
-  wagmiInitState,
-}: {
-  wagmiInitState: State | undefined;
-  marketConfig: MarketConfig;
+interface ProvidersProps {
+  sdkInitialState?: { wagmi?: State };
+  sdkConfig: SdkConfig;
   children: React.ReactNode;
-}) {
+}
+
+export default function Providers({
+  sdkInitialState,
+  sdkConfig,
+  children,
+}: ProvidersProps) {
   enableReactComponents();
 
-  useMount(() => {
-    marketConfig$.set(marketConfig);
-  });
+  const { data: marketplaceConfig } = useQuery(
+    marketplaceConfigOptions(sdkConfig),
+    queryClient,
+  );
 
-  const kitConfig = {
-    defaultTheme: 'dark',
-    projectAccessKey: env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY,
+  if (!marketplaceConfig) {
+    return null; //TODO
+  }
+
+  const kitConfig: KitConfig = {
+    projectAccessKey: sdkConfig.projectAccessKey,
     signIn: {
-      projectName: marketConfig.title,
+      projectName: marketplaceConfig.title,
     },
-  } satisfies KitConfig;
+  };
 
-  const [wagmiConfig] = useState(createWagmiConfig(marketConfig));
+  const wagmiConfig = createWagmiConfig(
+    marketplaceConfig,
+    sdkConfig,
+    !!sdkInitialState,
+  );
 
   return (
-    <WagmiProvider config={wagmiConfig} initialState={wagmiInitState}>
-      <QueryClientProvider client={queryClient}>
-        <KitProvider config={kitConfig}>
-          <KitCheckoutProvider>
-            <QueryClientProvider client={queryClient}>
+    <ThemeProvider>
+      <WagmiProvider config={wagmiConfig} initialState={sdkInitialState?.wagmi}>
+        <QueryClientProvider client={queryClient}>
+          <KitProvider config={kitConfig}>
+            <KitCheckoutProvider>
               <Tooltip.Provider>
-                {children}
+                <MarketplaceProvider config={sdkConfig}>
+                  {children}
+                  <ReactQueryDevtools initialIsOpen={false} />
+                  <ModalProvider />
+                </MarketplaceProvider>
                 <ToastProvider />
               </Tooltip.Provider>
-              <AccountEvents wagmiConfig={wagmiConfig} />
-              <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
-          </KitCheckoutProvider>
-        </KitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+            </KitCheckoutProvider>
+          </KitProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
+    </ThemeProvider>
   );
 }

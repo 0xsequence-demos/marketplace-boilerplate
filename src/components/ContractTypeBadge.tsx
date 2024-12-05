@@ -1,9 +1,7 @@
 'use client';
 
-import { collectionQueries } from '~/lib/queries';
-
 import { Badge } from '$ui';
-import { useQuery } from '@tanstack/react-query';
+import { useCollection } from '@0xsequence/marketplace-sdk/react';
 
 interface Props {
   chainId: number;
@@ -14,12 +12,10 @@ export const ContractTypeBadge = ({ chainId, collectionAddress }: Props) => {
   const {
     data: collectionMetadataResp,
     isLoading: isCollectionMetadataLoading,
-  } = useQuery(
-    collectionQueries.detail({
-      chainID: chainId.toString(),
-      collectionId: collectionAddress,
-    }),
-  );
+  } = useCollection({
+    chainId: chainId.toString(),
+    collectionAddress,
+  });
   return (
     <Badge variant="muted" loading={isCollectionMetadataLoading}>
       {collectionMetadataResp?.type || 'unknown'}

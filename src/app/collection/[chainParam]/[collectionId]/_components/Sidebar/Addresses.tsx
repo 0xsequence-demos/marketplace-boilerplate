@@ -1,4 +1,4 @@
-import { AddressLabel } from '~/components/TextLabels';
+import { AddressLabel } from '~/components/AddressLabel';
 
 import { Text, Flex } from '$ui';
 
