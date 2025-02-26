@@ -22,7 +22,7 @@ export const LandingCollections = ({
         )}
       >
         {collections.map((d) => {
-          return <CollectionCard key={d.collectionAddress} {...d} />;
+          return <CollectionCard key={d.address} {...d} />;
         })}
       </Grid.Root>
     </Flex>

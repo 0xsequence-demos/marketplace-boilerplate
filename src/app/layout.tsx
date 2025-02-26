@@ -41,7 +41,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   const marketplaceConfig = await getMarketplaceConfig();
   return {
     title: {
-      template: marketplaceConfig.titleTemplate ?? '%s',
+      template: marketplaceConfig.title ?? '%s',
       default: marketplaceConfig.title ?? '',
     },
     description: marketplaceConfig.shortDescription ?? '',

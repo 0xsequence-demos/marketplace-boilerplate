@@ -69,7 +69,7 @@ export const InventoryTabs = ({
 
   // collectible balances and counts
   const collectionBalances = balances?.balances.filter(
-    (b) => b.contractType != ContractType.ERC20,
+    (b) => b.contractType !== ContractType.ERC20,
   );
 
   const filteredCollecionBalances: TokenBalance[] = collectionBalances.filter(
@@ -77,7 +77,7 @@ export const InventoryTabs = ({
       !!config.data?.collections?.find(
         (marketplaceCollection) =>
           compareAddress(
-            marketplaceCollection.collectionAddress,
+            marketplaceCollection.address,
             balanceCollection.contractAddress,
           ) &&
           // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
