@@ -7,6 +7,7 @@ import CollectionControls from './_components/Controls';
 import CollectionHeader from './_components/Header';
 import { CollectionViewPageLayout } from './_components/Layout';
 import { CollectionSidebar } from './_components/Sidebar';
+import type { ChainId } from '@0xsequence/network';
 
 const Layout = async ({
   params: { chainParam, collectionId },
@@ -15,14 +16,14 @@ const Layout = async ({
   children: React.ReactNode;
   params: typeof Routes.collection.params;
 }) => {
-  const chainId = getChainId(chainParam)!;
+  const chainId = getChainId(chainParam);
   const { getMarketplaceConfig } = ssrClient();
   const marketplaceConfig = await getMarketplaceConfig();
 
   const collectionConfig = marketplaceConfig.collections?.find(
     (c) =>
-      c.collectionAddress.toLowerCase() == collectionId.toLowerCase() &&
-      chainId == c.chainId,
+      c.address.toLowerCase() === collectionId.toLowerCase() &&
+      chainId === (c.chainId as ChainId),
   );
 
   return (
@@ -30,17 +31,20 @@ const Layout = async ({
       collectionConfig={collectionConfig}
       banner={<CollectionBanner bannerUrl={collectionConfig?.bannerUrl} />}
       sidebar={
-        <CollectionSidebar chainId={chainId} collectionAddress={collectionId} />
+        <CollectionSidebar
+          chainId={chainId!}
+          collectionAddress={collectionId}
+        />
       }
       header={
         <CollectionHeader
-          chainId={chainId}
+          chainId={chainId!}
           collectionAddress={collectionId}
           marketplaceConfig={marketplaceConfig}
         />
       }
       controls={
-        <CollectionControls chainId={chainId} collectionId={collectionId} />
+        <CollectionControls chainId={chainId!} collectionId={collectionId} />
       }
       content={children}
     />

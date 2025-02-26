@@ -3,6 +3,7 @@ import { classNames } from '~/config/classNames';
 
 import { FilterBadges } from './Badges';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import type { Address } from 'viem';
 
 type CollectionViewPageLayoutProps = {
   banner: React.ReactNode;
@@ -80,7 +81,7 @@ export const CollectionViewPageLayout = ({
             {collectionConfig && (
               <FilterBadges
                 chainId={collectionConfig.chainId}
-                collectionAddress={collectionConfig.collectionAddress}
+                collectionAddress={collectionConfig.address as Address}
               />
             )}
             {content}
@@ -133,7 +134,7 @@ export const CollectionViewPageLayout = ({
               {collectionConfig && (
                 <FilterBadges
                   chainId={collectionConfig.chainId}
-                  collectionAddress={collectionConfig.collectionAddress}
+                  collectionAddress={collectionConfig.address as Address}
                 />
               )}
               {content}

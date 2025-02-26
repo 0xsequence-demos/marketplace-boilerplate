@@ -24,10 +24,10 @@ export const CollectionCard = (params: CollectionCard) => {
   );
 };
 
-const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
+const Card = ({ chainId, address, bannerUrl }: CollectionCard) => {
   const { data } = useCollection({
     chainId,
-    collectionAddress,
+    collectionAddress: address,
   });
 
   // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
@@ -51,7 +51,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
       <NextLink
         href={Routes.collection({
           chainParam: chainId,
-          collectionId: collectionAddress,
+          collectionId: address,
           mode: 'buy',
         })}
       >

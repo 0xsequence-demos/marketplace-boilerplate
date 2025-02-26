@@ -19,11 +19,11 @@ import { StringAndArrayBadge } from './StringAndArrayBadge';
 import { useFilters } from '@0xsequence/marketplace-sdk/react';
 import { PropertyType } from '@0xsequence/metadata';
 import { observer } from '@legendapp/state/react';
-import type { Hex } from 'viem';
+import type { Address } from 'viem';
 
 type FilterBadgesProps = {
   chainId: number;
-  collectionAddress: Hex;
+  collectionAddress: Address;
 };
 
 export const FilterBadges = observer(
