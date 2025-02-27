@@ -73,6 +73,7 @@ export const filters$ = observable({
 
       if (newValues.length === 0) {
         filters$.filterOptions.set(otherFilters);
+        filters$.applyFilters();
         return;
       }
 
@@ -90,6 +91,7 @@ export const filters$ = observable({
         },
       ]);
     }
+    filters$.applyFilters();
   },
 
   isIntFilterActive: (name: string): boolean => {
@@ -118,6 +120,7 @@ export const filters$ = observable({
       ...otherFilters,
       { name, type: PropertyType.INT, min, max },
     ]);
+    filters$.applyFilters();
   },
 
   applyFilters: () => {
