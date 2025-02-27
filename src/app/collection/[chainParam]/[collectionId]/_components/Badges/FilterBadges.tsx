@@ -101,8 +101,8 @@ export const FilterBadges = observer(
                       <IntBadge
                         key={filter.name}
                         name={filter.name}
-                        min={filter.min as number}
-                        max={filter.max as number}
+                        min={Number(filter.min) || 0}
+                        max={Number(filter.max) || 0}
                       />
                     );
                   }
