@@ -77,15 +77,13 @@ export const FilterBadges = observer(
                   }
                   return null;
                 case PropertyType.INT:
-                  if (filter?.values?.length === 2) {
-                    const min = filter.values[0] as number;
-                    const max = filter.values[1] as number;
+                  if ('min' in filter && 'max' in filter) {
                     return (
                       <IntBadge
                         key={filter.name}
                         name={filter.name}
-                        min={min}
-                        max={max}
+                        min={filter.min as number}
+                        max={filter.max as number}
                       />
                     );
                   }
