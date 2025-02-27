@@ -76,8 +76,8 @@ const CollectionSidebarContent = ({
 
   const availableOnlyToggle = {
     id: 'available-items-only',
-    checked: filters$.showAvailableOnly,
-    onCheckedChange: () => filters$.showAvailableOnly.toggle(),
+    checked: filters$.get().showListedOnly,
+    onCheckedChange: () => filters$.showListedOnly.toggle(),
     children: isBuy ? 'Available Items Only' : 'Available Offers Only',
   };
 
@@ -188,8 +188,8 @@ function MobileSidebarWrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
-const FilterSwitch = observer(({ filter }: { filter: FilterOptions }) => {
-  const checked = filter.checked.get();
+const FilterSwitch = ({ filter }: { filter: FilterOptions }) => {
+  const checked = filter.checked;
   return (
     <div className="flex items-center space-x-2">
       <Switch.Base
@@ -200,4 +200,4 @@ const FilterSwitch = observer(({ filter }: { filter: FilterOptions }) => {
       <Label htmlFor={filter.id}>{filter.children}</Label>
     </div>
   );
-});
+};
