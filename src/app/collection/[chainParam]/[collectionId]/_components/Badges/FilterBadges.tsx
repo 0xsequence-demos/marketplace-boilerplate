@@ -16,7 +16,11 @@ import { classNames } from '~/config/classNames';
 import { filters$ } from '../FilterStore';
 import { IntBadge } from './IntBadge';
 import { StringAndArrayBadge } from './StringAndArrayBadge';
-import { useFilters } from '@0xsequence/marketplace-sdk/react';
+import { OrderSide } from '@0xsequence/marketplace-sdk';
+import {
+  useCountOfCollectables,
+  useFilters,
+} from '@0xsequence/marketplace-sdk/react';
 import { PropertyType } from '@0xsequence/metadata';
 import { observer } from '@legendapp/state/react';
 import type { Address } from 'viem';
@@ -28,11 +32,26 @@ type FilterBadgesProps = {
 
 export const FilterBadges = observer(
   ({ chainId, collectionAddress }: FilterBadgesProps) => {
-    const { filterOptions: filters, searchText } = filters$.get();
+    const {
+      filterOptions: filters,
+      searchText,
+      showListedOnly,
+    } = filters$.get();
 
     const { data } = useFilters({
       chainId: chainId.toString(),
       collectionAddress,
+    });
+
+    const { data: filteredCollectiblesCount } = useCountOfCollectables({
+      chainId: String(chainId),
+      collectionAddress,
+      filter: {
+        searchText,
+        includeEmpty: !showListedOnly,
+        properties: filters,
+      },
+      side: OrderSide.listing,
     });
 
     const getFilterType = useCallback(
@@ -66,30 +85,38 @@ export const FilterBadges = observer(
               </Badge>
             )}
 
-            {filters.map((filter, i) => {
+            {filters.map((filter) => {
               switch (getFilterType(filter.name)) {
                 case PropertyType.STRING:
                 case PropertyType.ARRAY:
                   if (filter?.values?.length) {
-                    return <StringAndArrayBadge key={i} filter={filter} />;
+                    return (
+                      <StringAndArrayBadge key={filter.name} filter={filter} />
+                    );
                   }
                   return null;
                 case PropertyType.INT:
-                  if (filter?.values.length == 2) {
-                    const min = filter.values[0] as number;
-                    const max = filter.values[1] as number;
+                  if ('min' in filter && 'max' in filter) {
                     return (
                       <IntBadge
-                        key={i}
+                        key={filter.name}
                         name={filter.name}
-                        min={min}
-                        max={max}
+                        min={Number(filter.min) || 0}
+                        max={Number(filter.max) || 0}
                       />
                     );
                   }
                   return null;
               }
             })}
+
+            {(filters.length > 0 || searchText) && (
+              <Badge size="lg" variant="outline" className="ml-auto">
+                <Text className="text-foreground/80 font-medium">
+                  {filteredCollectiblesCount || 0} results
+                </Text>
+              </Badge>
+            )}
 
             {filters.length ? (
               <Badge

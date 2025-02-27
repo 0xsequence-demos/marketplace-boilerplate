@@ -17,19 +17,23 @@ type CollectionBuyPageParams = {
 };
 
 const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
-  const chainId = getChainId(params.chainParam)!;
+  const chainId = getChainId(params.chainParam);
   const { collectionId } = params;
   const { address, isConnected } = useAccount();
 
   const text = filters$.searchText.get();
   const properties = filters$.filterOptions.get();
 
-  const collectiblesResponse = useListCollectibles({
+  const {
+    data: collectibles,
+    isLoading: collectiblesLoading,
+    fetchNextPage: fetchNextCollectibles,
+  } = useListCollectibles({
     chainId: String(chainId),
     collectionAddress: collectionId,
     filter: {
       searchText: text,
-      includeEmpty: !filters$.showAvailableOnly.get(),
+      includeEmpty: !filters$.showListedOnly.get(),
       properties,
       inAccounts: address ? [address] : undefined,
     },
@@ -40,11 +44,11 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
     return <NotConnectedWarning isConnected={isConnected} />;
   }
 
-  const collectibles =
-    collectiblesResponse.data?.pages.flatMap((p) => p.collectibles) ?? [];
+  const collectiblesFlat =
+    collectibles?.pages.flatMap((p) => p.collectibles) ?? [];
 
   //TODO: Implement error handling, loading states, and improve this message
-  if (collectibles.length === 0 && !collectiblesResponse.isLoading) {
+  if (collectiblesFlat.length === 0 && !collectiblesLoading) {
     return (
       <Box className="flex items-center justify-center">
         <Text className="text-foreground/60 text-lg">
@@ -57,8 +61,8 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
   return (
     <>
       <CollectiblesGrid
-        endReached={collectiblesResponse.fetchNextPage}
-        collectibleOrders={collectibles}
+        endReached={fetchNextCollectibles}
+        collectibleOrders={collectiblesFlat}
       />
     </>
   );

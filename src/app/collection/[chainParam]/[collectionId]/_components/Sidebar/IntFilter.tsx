@@ -1,33 +1,36 @@
 'use client';
 
-import type { ChangeEvent } from 'react';
-import { useState } from 'react';
-
 import { Accordion, Button, Flex, Input, Text } from '$ui';
 import { filters$ } from '../FilterStore';
 import type { FilterProps } from './PropertyFilters';
-import { observer } from '@legendapp/state/react';
+import { useIntRangeFilter } from './_hooks/useIntRangeFilter';
+import { observer, use$ } from '@legendapp/state/react';
 import { capitalize } from 'radash';
-
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 export const IntFilter = observer(({ filter }: FilterProps) => {
   const { name, min, max } = filter;
 
-  const values = filters$.getFilterValuesByName(name);
+  const {
+    localMin,
+    localMax,
+    isValid,
+    handleMinChange,
+    handleMaxChange,
+    applyFilter,
+  } = useIntRangeFilter(name, min, max);
 
-  const [localMin, setMin] = useState(values?.[0] || '');
-  const [localMax, setMax] = useState(values?.[1] || '');
+  const isActive = use$(() => filters$.isIntFilterActive(name));
 
-  const onApplyClick = () => {
-    filters$.setIntFilterValue(name, Number(localMin), Number(localMax));
+  const onClearClick = () => {
+    filters$.deleteFilter(name);
   };
+
   return (
     <Accordion.Item value={name}>
       <Accordion.Trigger>
         {capitalize(name)}
         <Flex className="ml-auto items-center gap-3">
-          {localMin || localMax ? (
+          {isActive ? (
             <Text className="text-primary mr-2 text-xs">ACTIVE</Text>
           ) : null}
         </Flex>
@@ -38,35 +41,44 @@ export const IntFilter = observer(({ filter }: FilterProps) => {
             <Input.Base
               id="property-min"
               type="number"
-              placeholder={String(min)}
+              placeholder={`Min (${min})`}
               min={min}
               max={max}
               value={localMin}
               className="w-full"
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setMin(e.target.value)
-              }
+              onChange={handleMinChange}
             />
             <Text className="text-foreground/80 text-xs uppercase">to</Text>
             <Input.Base
               id="property-max"
               type="number"
-              placeholder={String(max)}
+              placeholder={`Max (${max})`}
               min={min}
               max={max}
               value={localMax}
               className="w-full"
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setMax(e.target.value)
-              }
+              onChange={handleMaxChange}
             />
           </Flex>
-          <Button
-            className="w-full"
-            variant="secondary"
-            label="Apply"
-            onClick={onApplyClick}
-          />
+
+          {!isValid && isActive && (
+            <Text className="text-destructive text-xs mt-1">
+              This range is invalid
+            </Text>
+          )}
+
+          <Flex className="gap-2">
+            <Button
+              className="flex-1"
+              variant="secondary"
+              label="Apply"
+              onClick={() => applyFilter()}
+              disabled={!isValid}
+            />
+            {isActive && (
+              <Button variant="outline" label="Clear" onClick={onClearClick} />
+            )}
+          </Flex>
         </Flex>
       </Accordion.Content>
     </Accordion.Item>

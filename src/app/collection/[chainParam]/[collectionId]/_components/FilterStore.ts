@@ -1,48 +1,60 @@
-import { PropertyType } from '@0xsequence/metadata';
+import { type PropertyFilter, PropertyType } from '@0xsequence/metadata';
 import { observable } from '@legendapp/state';
 import { z } from 'zod';
 
-const FilterValues = z.object({
-  name: z.string(),
-  values: z.array(z.any()),
-  type: z.nativeEnum(PropertyType),
-});
+export interface CollectibleFilters {
+  filtersSidebarOpen: boolean;
+  showListedOnly: boolean;
+  searchBarOpen: boolean;
+  searchText: string;
+  filterOptions: PropertyFilter[];
+  appliedFilters: PropertyFilter[];
+}
 
-const collectibleFilters = z.object({
-  showAvailableOnly: z.boolean().default(false),
-  showOwnedOnly: z.boolean().default(false),
-  includeUserOrders: z.boolean().default(true),
-  searchText: z.string().default(''),
-  filterOptions: z.array(FilterValues).default([]),
-});
+export interface StringFilterValues {
+  type: PropertyType.STRING;
+  values: string[];
+}
 
-export type CollectibleFilters = z.infer<typeof collectibleFilters>;
+export interface IntFilterValues {
+  type: PropertyType.INT;
+  min: number;
+  max: number;
+}
 
-const initialFilters = collectibleFilters.parse({});
+export type FilterValues = StringFilterValues | IntFilterValues;
+
+const initialFilters: CollectibleFilters = {
+  filtersSidebarOpen: false,
+  showListedOnly: false,
+  searchBarOpen: false,
+  searchText: '',
+  filterOptions: [],
+  appliedFilters: [],
+};
 
 export const filters$ = observable({
   ...initialFilters,
-  getFilterValuesByName: (name: string) =>
-    filters$.filterOptions.get().find((f) => f.name === name)?.values,
-
-  deleteFilter: (name: string) => {
-    const otherFilters = filters$.filterOptions
-      .get()
-      .filter((f) => !(f.name === name));
-
-    filters$.filterOptions.set(otherFilters);
+  getFilter: (name: string): PropertyFilter | undefined => {
+    return filters$.filterOptions.get().find((f) => f.name === name);
   },
 
-  clearSearchText: () => {
-    filters$.searchText.set('');
+  getFilterValuesByName: (name: string): string[] | undefined => {
+    const filter = filters$.getFilter(name);
+    if (!filter || filter.type !== PropertyType.STRING) return undefined;
+
+    return filter.values as string[];
   },
 
-  clearAllFilters: () => {
-    filters$.showAvailableOnly.set(false);
-    filters$.showOwnedOnly.set(false);
-    filters$.includeUserOrders.set(true);
-    filters$.filterOptions.set([]);
-    filters$.searchText.set('');
+  isFilterActive: (name: string): boolean => {
+    return !!filters$.getFilter(name);
+  },
+
+  isStringValueSelected: (name: string, value: string): boolean => {
+    const filter = filters$.getFilter(name);
+    if (!filter || filter.type !== PropertyType.STRING) return false;
+
+    return (filter.values as string[])?.includes(value) ?? false;
   },
 
   toggleStringFilterValue: (name: string, value: string) => {
@@ -50,13 +62,18 @@ export const filters$ = observable({
       .get()
       .filter((f) => !(f.name === name));
 
-    const existingValues = filters$.getFilterValuesByName(name) ?? [];
+    const filter = filters$.getFilter(name);
+    const existingValues =
+      filter?.type === PropertyType.STRING
+        ? ((filter.values as string[]) ?? [])
+        : [];
 
     if (existingValues.includes(value)) {
       const newValues = existingValues.filter((v) => v !== value);
 
       if (newValues.length === 0) {
         filters$.filterOptions.set(otherFilters);
+        filters$.applyFilters();
         return;
       }
 
@@ -67,19 +84,66 @@ export const filters$ = observable({
     } else {
       filters$.filterOptions.set([
         ...otherFilters,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        { name, type: PropertyType.STRING, values: [...existingValues, value] },
+        {
+          name,
+          type: PropertyType.STRING,
+          values: [...existingValues, value],
+        },
       ]);
     }
+    filters$.applyFilters();
   },
+
+  isIntFilterActive: (name: string): boolean => {
+    const filter = filters$.getFilter(name);
+    return !!filter && filter.type === PropertyType.INT;
+  },
+
+  getIntFilterRange: (name: string): [number, number] | undefined => {
+    const filter = filters$.getFilter(name);
+    if (!filter || filter.type !== PropertyType.INT) return undefined;
+
+    return [filter.min ?? 0, filter.max ?? 0];
+  },
+
   setIntFilterValue: (name: string, min: number, max: number) => {
+    if (min === max && min === 0) {
+      filters$.deleteFilter(name);
+      return;
+    }
+
     const otherFilters = filters$.filterOptions
       .get()
       .filter((f) => !(f.name === name));
 
     filters$.filterOptions.set([
       ...otherFilters,
-      { name, type: PropertyType.INT, values: [min, max] },
+      { name, type: PropertyType.INT, min, max },
     ]);
+    filters$.applyFilters();
+  },
+
+  applyFilters: () => {
+    filters$.appliedFilters.set(filters$.filterOptions.get());
+  },
+
+  clearSearchText: () => {
+    filters$.searchText.set('');
+  },
+
+  clearAllFilters: () => {
+    filters$.showListedOnly.set(false);
+    filters$.filterOptions.set([]);
+    filters$.appliedFilters.set([]);
+    filters$.searchText.set('');
+  },
+
+  deleteFilter: (name: string) => {
+    const otherFilters = filters$.filterOptions
+      .get()
+      .filter((f) => !(f.name === name));
+
+    filters$.filterOptions.set(otherFilters);
+    filters$.appliedFilters.set(otherFilters);
   },
 });
