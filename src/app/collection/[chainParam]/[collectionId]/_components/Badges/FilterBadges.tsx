@@ -16,7 +16,11 @@ import { classNames } from '~/config/classNames';
 import { filters$ } from '../FilterStore';
 import { IntBadge } from './IntBadge';
 import { StringAndArrayBadge } from './StringAndArrayBadge';
-import { useFilters } from '@0xsequence/marketplace-sdk/react';
+import { OrderSide } from '@0xsequence/marketplace-sdk';
+import {
+  useCountOfCollectables,
+  useFilters,
+} from '@0xsequence/marketplace-sdk/react';
 import { PropertyType } from '@0xsequence/metadata';
 import { observer } from '@legendapp/state/react';
 import type { Address } from 'viem';
@@ -28,11 +32,26 @@ type FilterBadgesProps = {
 
 export const FilterBadges = observer(
   ({ chainId, collectionAddress }: FilterBadgesProps) => {
-    const { filterOptions: filters, searchText } = filters$.get();
+    const {
+      filterOptions: filters,
+      searchText,
+      showListedOnly,
+    } = filters$.get();
 
     const { data } = useFilters({
       chainId: chainId.toString(),
       collectionAddress,
+    });
+
+    const { data: filteredCollectiblesCount } = useCountOfCollectables({
+      chainId: String(chainId),
+      collectionAddress,
+      filter: {
+        searchText,
+        includeEmpty: !showListedOnly,
+        properties: filters,
+      },
+      side: OrderSide.listing,
     });
 
     const getFilterType = useCallback(
@@ -90,6 +109,14 @@ export const FilterBadges = observer(
                   return null;
               }
             })}
+
+            {(filters.length > 0 || searchText) && (
+              <Badge size="lg" variant="outline" className="ml-auto">
+                <Text className="text-foreground/80 font-medium">
+                  {filteredCollectiblesCount || 0} results
+                </Text>
+              </Badge>
+            )}
 
             {filters.length ? (
               <Badge
