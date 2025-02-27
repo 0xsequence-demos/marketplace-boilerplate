@@ -68,7 +68,6 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
       <CollectiblesGrid
         endReached={fetchNextCollectibles}
         collectibleOrders={collectiblesFlat}
-        collectibleOrdersLoading={collectiblesLoading}
       />
     </>
   );
