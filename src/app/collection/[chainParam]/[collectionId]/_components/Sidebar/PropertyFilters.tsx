@@ -46,13 +46,13 @@ export const PropertyFilters = ({ filters, loading }: PropertyFiltersProps) => {
       type="single"
       collapsible
     >
-      {filters.map((filter, index) => {
+      {filters.map((filter) => {
         switch (filter.type) {
           case PropertyType.STRING:
           case PropertyType.ARRAY:
-            return <StringFilter key={index} filter={filter} />;
+            return <StringFilter key={filter.name} filter={filter} />;
           case PropertyType.INT:
-            return <IntFilter key={index} filter={filter} />;
+            return <IntFilter key={filter.name} filter={filter} />;
         }
       })}
     </Accordion.Root>

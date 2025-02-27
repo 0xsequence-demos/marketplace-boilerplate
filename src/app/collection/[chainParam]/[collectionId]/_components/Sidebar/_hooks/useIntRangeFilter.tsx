@@ -71,7 +71,7 @@ export const useIntRangeFilter = (
     return !(minValue > maxValue && maxValue !== 0);
   }, [localMin, localMax, filterMin, filterMax]);
 
-  const applyFilter = (applyImmediately = false) => {
+  const applyFilter = () => {
     if (!isValid) return;
 
     const minValue = localMin === '' ? (filterMin ?? 0) : Number(localMin);
@@ -80,10 +80,6 @@ export const useIntRangeFilter = (
     isEditingRef.current = false;
 
     filters$.setIntFilterValue(name, minValue, maxValue);
-
-    if (applyImmediately) {
-      filters$.applyFilters();
-    }
   };
 
   return {
