@@ -26,11 +26,11 @@ export const StringFilter = observer(({ filter }: FilterProps) => {
     const filtered = fuse.search(value);
     setOptions(filtered.map((filteredItem) => filteredItem.item));
   };
-
   const checks = filters$.getFilterValuesByName(name) || [];
 
-  const onCheckChange = (value: string) =>
+  const onCheckChange = (value: string) => {
     filters$.toggleStringFilterValue(name, value);
+  };
 
   return (
     <Accordion.Item value={name}>
@@ -62,11 +62,11 @@ export const StringFilter = observer(({ filter }: FilterProps) => {
           </Text>
         )}
         <ScrollArea.Base className="mt-2 flex h-[400px] flex-col">
-          {options.map((property, i) => {
+          {options.map((property) => {
             const isChecked = checks.includes(property);
             return (
               <div
-                key={i}
+                key={property}
                 className="hover:bg-foreground/10 flex cursor-pointer items-center justify-between rounded-sm pr-2"
               >
                 <Label htmlFor={property} className="w-full py-2 pl-2">

@@ -63,8 +63,8 @@ export const BaseCollectionControls = ({
       <Grid.Child name="collection-control-mode">
         <Tabs.Root {...tabRoot}>
           <Tabs.List>
-            {tabValues.map((t, i) => (
-              <Tabs.Trigger key={i} value={t.value}>
+            {tabValues.map((t) => (
+              <Tabs.Trigger key={t.value} value={t.value}>
                 {t.label}
               </Tabs.Trigger>
             ))}

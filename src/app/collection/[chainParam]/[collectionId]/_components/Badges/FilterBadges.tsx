@@ -66,21 +66,23 @@ export const FilterBadges = observer(
               </Badge>
             )}
 
-            {filters.map((filter, i) => {
+            {filters.map((filter) => {
               switch (getFilterType(filter.name)) {
                 case PropertyType.STRING:
                 case PropertyType.ARRAY:
                   if (filter?.values?.length) {
-                    return <StringAndArrayBadge key={i} filter={filter} />;
+                    return (
+                      <StringAndArrayBadge key={filter.name} filter={filter} />
+                    );
                   }
                   return null;
                 case PropertyType.INT:
-                  if (filter?.values.length == 2) {
+                  if (filter?.values?.length === 2) {
                     const min = filter.values[0] as number;
                     const max = filter.values[1] as number;
                     return (
                       <IntBadge
-                        key={i}
+                        key={filter.name}
                         name={filter.name}
                         min={min}
                         max={max}
