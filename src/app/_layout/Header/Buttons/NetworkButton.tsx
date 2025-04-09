@@ -7,6 +7,8 @@ import { getThemeManagerElement } from '~/lib/utils/theme';
 import { Button, Dialog } from '$ui';
 import { type ChainId, networks } from '@0xsequence/network';
 import { useAccount } from 'wagmi';
+import { getPresentableChainName } from '~/lib/utils/getChain';
+import { getCurrencyIconUrl } from '~/lib/utils/getChain';
 
 export const NetworkButton = () => {
   const { chain } = useAccount();
@@ -29,7 +31,11 @@ export const NetworkButton = () => {
           className="backdrop-blur"
           aria-label="Select network"
         >
-          {chain?.name}
+          <img
+            src={getCurrencyIconUrl(chain.id)}
+            alt={getPresentableChainName(chain.id)}
+            className="h-4 w-4"
+          />
         </Button>
       );
     };

@@ -21,6 +21,7 @@ import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useCollection } from '@0xsequence/marketplace-sdk/react/hooks';
 import Markdown from 'markdown-to-jsx';
 import Head from 'next/head';
+import { getCurrencyIconUrl, getPresentableChainName } from '~/lib/utils/getChain';
 
 interface CollectionHeaderProps {
   chainId: number;
@@ -140,7 +141,11 @@ const CollectionHeader = ({
             name="collection-type-and-network"
             className="flex items-center gap-2"
           >
-            {chainId && chainId}
+            <img
+              src={getCurrencyIconUrl(chainId)}
+              alt={getPresentableChainName(chainId)}
+              className="h-4 w-4"
+            />
 
             <ContractTypeBadge
               chainId={chainId}

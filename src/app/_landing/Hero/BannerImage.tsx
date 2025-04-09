@@ -24,6 +24,7 @@ export const BannerImage = ({
         containerClassName={cn('h-full rounded-none', className)}
         className="object-cover"
         fallbackSrc=""
+        alt={title ?? 'unknown'}
       />
     );
   }
