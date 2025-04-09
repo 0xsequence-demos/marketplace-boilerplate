@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import Pill from './Pill';
-import { Image, Text } from '@0xsequence/design-system';
 import {
   getMarketplaceDetails,
   type MarketplaceKind,
@@ -27,9 +26,7 @@ const MarketplacePill = ({
   if (!marketplaceDetails) {
     return (
       <Pill>
-        <Text color="text100" fontSize="xsmall" fontWeight="bold">
-          Unknown
-        </Text>
+        <p className="text-text100 text-xsmall font-bold">Unknown</p>
       </Pill>
     );
   }
@@ -37,14 +34,14 @@ const MarketplacePill = ({
   return (
     <Pill>
       {isImageError ? (
-        <Image src="/images/chess-tile" alt="chess-tile" width={3} height={3} />
+        <img src="/images/chess-tile" alt="chess-tile" width={3} height={3} />
       ) : (
         <marketplaceDetails.logo width={3} height={3} onError={onImageError} />
       )}
 
-      <Text color="text100" fontSize="xsmall" fontWeight="bold">
+      <p className="text-text100 text-xsmall font-bold">
         {marketplaceDetails.displayName}
-      </Text>
+      </p>
     </Pill>
   );
 };

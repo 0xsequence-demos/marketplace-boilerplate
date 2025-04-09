@@ -1,6 +1,4 @@
-import { Flex, Table } from '~/components/ui';
-
-import { Skeleton } from '@0xsequence/design-system';
+import { Flex, LoadingIcon, Table } from '~/components/ui';
 
 const OrdersTableBodySkeleton = ({
   columns,
@@ -33,7 +31,7 @@ const OrdersTableRowSkeletonWideScreen = ({
     <Table.Row className="hidden md:table-row">
       {Array.from({ length: columns }).map((_, index) => (
         <Table.Cell key={index}>
-          <Skeleton size="normal" style={{ width: 60 }} />
+          <LoadingIcon style={{ width: 60 }} />
         </Table.Cell>
       ))}
     </Table.Row>
@@ -46,17 +44,17 @@ const OrdersTableRowSkeletonSmallScreen = () => {
       <Table.Cell>
         <Flex className="flex-col gap-4">
           <Flex className="gap-4">
-            <Skeleton size="sm" style={{ width: 60 }} />
+            <LoadingIcon style={{ width: 60 }} />
 
-            <Skeleton size="sm" style={{ width: 60 }} />
+            <LoadingIcon style={{ width: 60 }} />
           </Flex>
 
           <Flex className="gap-4">
-            <Skeleton size="sm" style={{ width: 60 }} />
+            <LoadingIcon style={{ width: 60 }} />
 
-            <Skeleton size="sm" style={{ width: 60 }} />
+            <LoadingIcon style={{ width: 60 }} />
 
-            <Skeleton size="sm" style={{ width: 60 }} />
+            <LoadingIcon style={{ width: 60 }} />
           </Flex>
         </Flex>
       </Table.Cell>

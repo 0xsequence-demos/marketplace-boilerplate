@@ -14,7 +14,6 @@ import {
   Text,
   cn,
 } from '$ui';
-import { NetworkImage } from '@0xsequence/design-system';
 import type { TokenBalance } from '@0xsequence/indexer';
 import {
   useCollection,
@@ -58,8 +57,8 @@ const CollectionSection = ({
     hasNextPage,
   } = useListBalances({
     chainId,
-    accountAddress,
-    contractAddress: collectionAddress,
+    accountAddress: accountAddress as `0x${string}`,
+    contractAddress: collectionAddress as `0x${string}`,
   });
   const { data: collectionMetadata, isLoading: isCollectionMetadataLoading } =
     useCollection({ chainId, collectionAddress });
@@ -106,10 +105,10 @@ const CollectionSection = ({
                 />
               </Avatar.Base>
 
-              <Text className="text-sm">
+              <p className="text-sm">
                 {collectionMetadata?.name || collectionAddress}
-              </Text>
-              <NetworkImage chainId={Number(collectionMetadata?.chainId)} />
+              </p>
+              {chainId && chainId}
               <ContractTypeBadge
                 chainId={chainId}
                 collectionAddress={collectionAddress}
@@ -150,17 +149,6 @@ const CollectionSection = ({
       </Accordion.Content>
     </Accordion.Item>
   );
-};
-
-const getContractType = (contractType?: string) => {
-  switch (contractType?.toUpperCase()) {
-    case 'ERC721':
-      return ContractType.ERC721;
-    case 'ERC1155':
-      return ContractType.ERC1155;
-    default:
-      return ContractType.UNKNOWN;
-  }
 };
 
 const ContentWrapper = ({

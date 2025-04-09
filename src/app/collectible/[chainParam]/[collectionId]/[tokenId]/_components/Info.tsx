@@ -3,7 +3,6 @@
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 
 import { Avatar, Flex, Text, cn } from '$ui';
-import { NetworkImage } from '@0xsequence/design-system';
 import { truncateMiddle } from '@0xsequence/marketplace-sdk';
 import NextLink from 'next/link';
 import { getChainName } from '~/lib/utils/getChain';
@@ -49,7 +48,7 @@ export const CollectibleInfo = ({
             >
               {collectionName ?? '<unknown>'}
             </NextLink>
-            <NetworkImage size="sm" chainId={chainId} className="bg-red-300" />
+            {chainId}
           </Flex>
         </Flex>
         <ContractTypeBadge

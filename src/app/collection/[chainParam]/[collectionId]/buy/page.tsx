@@ -3,7 +3,7 @@
 import type { Routes } from '~/lib/routes';
 import { getChainId } from '~/lib/utils/getChain';
 
-import { Box, Button, Flex, Text } from '$ui';
+import { Button, Flex, Text } from '$ui';
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
 import { OrderSide } from '@0xsequence/marketplace-sdk';
@@ -30,7 +30,7 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
     isLoading: collectiblesLoading,
     fetchNextPage: fetchNextCollectibles,
   } = useListCollectibles({
-    chainId: String(chainId),
+    chainId: chainId!,
     collectionAddress: collectionId,
     filter: {
       searchText: text,

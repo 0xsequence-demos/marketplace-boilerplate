@@ -1,10 +1,9 @@
 'use client';
 
 import { ToastProvider, Tooltip } from '$ui';
-import { ThemeProvider } from '@0xsequence/design-system';
-import { type KitConfig, KitProvider } from '@0xsequence/kit';
-import { KitCheckoutProvider } from '@0xsequence/kit-checkout';
-import type { MarketplaceConfig, SdkConfig } from '@0xsequence/marketplace-sdk';
+import { createConfig, SequenceConnect } from '@0xsequence/connect';
+import { SequenceCheckoutProvider } from '@0xsequence/checkout';
+import type { SdkConfig } from '@0xsequence/marketplace-sdk';
 import {
   MarketplaceProvider,
   ModalProvider,
@@ -15,7 +14,8 @@ import {
 import { enableReactComponents } from '@legendapp/state/config/enableReactComponents';
 import { QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Config, type State, WagmiProvider } from 'wagmi';
+import { type Config, type State, WagmiProvider } from 'wagmi';
+import { env } from '~/env';
 
 const queryClient = getQueryClient();
 
@@ -41,12 +41,18 @@ export default function Providers({
     return null; //TODO
   }
 
-  const kitConfig: KitConfig = {
-    projectAccessKey: sdkConfig.projectAccessKey,
-    signIn: {
-      projectName: marketplaceConfig.title,
+  const config = createConfig('waas', {
+    appName: 'Sequence Marketplace',
+    projectAccessKey: env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY,
+    waasConfigKey: env.NEXT_PUBLIC_WAAS_CONFIG_KEY!,
+    google: {
+      clientId: env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
     },
-  };
+    apple: {
+      clientId: 'com.horizon.sequence.waas',
+      redirectURI: window.location.origin + window.location.pathname
+    }
+  })
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment 
   const wagmiConfig:Config = createWagmiConfig(
@@ -56,11 +62,10 @@ export default function Providers({
   );
 
   return (
-    <ThemeProvider>
       <WagmiProvider config={wagmiConfig} initialState={sdkInitialState?.wagmi}>
         <QueryClientProvider client={queryClient}>
-          <KitProvider config={kitConfig}>
-            <KitCheckoutProvider>
+          <SequenceConnect config={config}>
+            <SequenceCheckoutProvider>
               <Tooltip.Provider>
                 <MarketplaceProvider config={sdkConfig}>
                   {children}
@@ -69,10 +74,9 @@ export default function Providers({
                 </MarketplaceProvider>
                 <ToastProvider />
               </Tooltip.Provider>
-            </KitCheckoutProvider>
-          </KitProvider>
+            </SequenceCheckoutProvider>
+          </SequenceConnect>
         </QueryClientProvider>
       </WagmiProvider>
-    </ThemeProvider>
   );
 }

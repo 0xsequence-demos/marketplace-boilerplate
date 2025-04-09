@@ -25,7 +25,7 @@ export const CollectibleCard = ({
 }: CollectibleCardProps) => {
   const { isConnected, chainId: accountChainId } = useAccount();
   const { data: collectible, isLoading: collectibleLoading } = useCollectible({
-    chainId: collectionChainId,
+    chainId: parseInt(collectionChainId),
     collectionAddress,
     collectibleId: tokenId,
   });

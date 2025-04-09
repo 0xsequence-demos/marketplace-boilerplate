@@ -3,7 +3,6 @@ import OrdersTableBody from './_components/Body';
 import OrdersTableFooter from './_components/Footer';
 import OrdersTableHeader from './_components/Header';
 import OrdersTableBodySkeleton from './_components/Skeletons';
-import { Box } from '@0xsequence/design-system';
 import type { Order, Page } from '@0xsequence/marketplace-sdk';
 import type { Observable } from '@legendapp/state';
 import { observer } from '@legendapp/state/react';
@@ -28,7 +27,6 @@ type OrdersTableProps = {
 
 const OrdersTable = observer((props: OrdersTableProps) => {
   const {
-    chainId,
     collectionAddress,
     page$,
     orders,
@@ -39,7 +37,7 @@ const OrdersTable = observer((props: OrdersTableProps) => {
   const columns = ['Price', 'Quantity', 'By', 'Expires', 'Marketplace'];
 
   return (
-    <Box className="overflow-hidden rounded-md border border-foreground/20">
+    <div className="overflow-hidden rounded-md border border-foreground/20">
       <Table.Root>
         <OrdersTableHeader items={columns} isLoading={props.isLoading} />
 
@@ -63,7 +61,7 @@ const OrdersTable = observer((props: OrdersTableProps) => {
           ordersCountLoading={ordersCountLoading}
         />
       </Table.Root>
-    </Box>
+    </div>
   );
 });
 

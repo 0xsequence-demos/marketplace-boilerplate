@@ -1,4 +1,4 @@
-import { Flex, Select, Table } from '~/components/ui';
+import { Button, Flex, LoadingIcon, Select, Table } from '~/components/ui';
 import {
   SelectContent,
   SelectItem,
@@ -6,13 +6,6 @@ import {
 } from '~/components/ui/Select/select';
 
 import { PAGE_SIZE_OPTIONS } from '../OrdersTable';
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  IconButton,
-  Skeleton,
-  Text,
-} from '@0xsequence/design-system';
 import type { Page } from '@0xsequence/marketplace-sdk';
 import type { Observable } from '@legendapp/state';
 import { observer } from '@legendapp/state/react';
@@ -54,11 +47,11 @@ const OrdersTableFooter = observer(
               <ItemsPerPageSelect page$={page$} />
 
               {ordersCountLoading ? (
-                <Skeleton size="sm" />
+                <LoadingIcon />
               ) : (
-                <Text color="text50" fontSize="small" fontWeight="medium">
+                <p className="text-text50 text-small font-medium">
                   {displayText}
-                </Text>
+                </p>
               )}
 
               <PageSelect
@@ -82,14 +75,14 @@ const OrdersTableFooter = observer(
 function ItemsPerPageSelect({ page$ }: { page$: Observable<Page> }) {
   return (
     <Flex className="hidden sm:flex items-center gap-2">
-      <Text color="text50">Items per page</Text>
+      <p className="text-text50">Items per page</p>
 
       <Select.Root
         onValueChange={(value) => page$.pageSize.set(Number(value))}
         value={page$.pageSize.get().toString()}
       >
         <SelectTrigger className="h-7 w-auto gap-1 bg-foreground/5 border-0">
-          <Text>{page$.pageSize.get()}</Text>
+          <p>{page$.pageSize.get()}</p>
         </SelectTrigger>
 
         <SelectContent>
@@ -127,7 +120,7 @@ function PageSelect({
         value={page$.page.get().toString()}
       >
         <SelectTrigger className="h-7 w-auto gap-1 bg-foreground/5 border-0">
-          <Text>{page$.page.get()}</Text>
+          <p>{page$.page.get()}</p>
         </SelectTrigger>
 
         <SelectContent>
@@ -140,11 +133,11 @@ function PageSelect({
       </Select.Root>
 
       {totalPagesLoading ? (
-        <Skeleton size="sm" />
+        <LoadingIcon />
       ) : (
-        <Text color="text50" fontWeight="medium" fontSize="small">
+        <p className="text-text50">
           of {totalPages}
-        </Text>
+        </p>
       )}
     </Flex>
   );
@@ -175,20 +168,18 @@ function PreviousNextPageControls({
 
   return (
     <Flex className="items-center gap-2">
-      <IconButton
+      <Button
         onClick={handlePrevPage}
-        variant="raised"
+        variant="ghost"
         disabled={currentPage <= 1}
         size="xs"
-        icon={ChevronLeftIcon}
       />
 
-      <IconButton
+      <Button
         onClick={handleNextPage}
-        variant="raised"
+        variant="ghost"
         disabled={currentPage >= totalPages}
         size="xs"
-        icon={ChevronRightIcon}
       />
     </Flex>
   );

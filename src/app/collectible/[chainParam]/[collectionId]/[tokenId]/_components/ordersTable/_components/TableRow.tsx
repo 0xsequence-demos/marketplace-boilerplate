@@ -1,14 +1,13 @@
 import { cn, Table } from '~/components/ui';
 
-import AddressPill from './AddressPill';
 import MarketplacePill from './MarketplacePill';
-import { Box, Text } from '@0xsequence/design-system';
 import { compareAddress, type Order } from '@0xsequence/marketplace-sdk';
 import { formatDistance } from 'date-fns';
 import { formatUnits, type Hex } from 'viem';
 import { useAccount } from 'wagmi';
 import { useCurrencies } from '@0xsequence/marketplace-sdk/react';
 import OrdersTableAction from './Action';
+import AddressPill from './AddressPill';
 
 const OrdersTableRow = ({
   order,
@@ -35,78 +34,69 @@ const OrdersTableRow = ({
         )}
       >
         <Table.Cell className="p-2">
-          <Box display="flex" alignItems="center" gap="10">
-            <Box display="flex" flexDirection="column" gap="1">
-              <Text color="text50" fontSize="xsmall" fontWeight="bold">
-                Quantity
-              </Text>
+          <div className="flex items-center gap-10">
+            <div className="flex flex-col gap-1">
+              <p className="text-text50 text-xsmall font-bold">Quantity</p>
 
-              <Text color="text100" fontSize="normal" fontWeight="bold">
+              <p className="text-text100 text-normal font-bold">
                 {order.quantityRemaining}
-              </Text>
-            </Box>
+              </p>
+            </div>
 
-            <Box display="flex" flexDirection="column" gap="1">
-              <Text color="text50" fontSize="xsmall" fontWeight="bold">
+            <div className="flex flex-col gap-1">
+              <p className="text-text50 text-xsmall font-bold">
                 Price
-              </Text>
+              </p>
 
-              <Text color="text100" fontSize="normal" fontWeight="bold">
+              <p className="text-text100 text-normal font-bold">
                 {formatUnits(
                   BigInt(order.priceAmount),
                   Number(currency?.decimals),
                 )}{' '}
                 {currency?.symbol}
-              </Text>
-            </Box>
+              </p>
+            </div>
 
-            <Box display="flex" flexDirection="column" gap="1">
-              <Text color="text50" fontSize="xsmall" fontWeight="bold">
-                Time left
-              </Text>
+            <div className="flex flex-col gap-1">
+              <p className="text-text50 text-xsmall font-bold">Time left</p>
 
-              <Text color="text100" fontSize="normal" fontWeight="bold">
+              <p className="text-text100 text-normal font-bold">
                 {formatDistance(order.validUntil, new Date())}
-              </Text>
-            </Box>
-          </Box>
+              </p>
+            </div>
+          </div>
 
-          <Box
-            display="flex"
-            alignItems="flex-end"
-            justifyContent="space-between"
-            gap="6"
-          >
-            <Box display="flex" flexDirection="column" gap="1" flexGrow="1">
-              <Text color="text50" fontSize="xsmall" fontWeight="bold">
+          <div className="flex items-end justify-between gap-6">
+            <div className="flex flex-col gap-1 flex-grow">
+              <p className="text-text50 text-xsmall font-bold">
                 By
-              </Text>
+              </p>
 
               <AddressPill address={order.createdBy} />
-            </Box>
+            </div>
 
-            <Box display="flex" flexDirection="column" gap="1">
-              <Text color="text50" fontSize="xsmall" fontWeight="bold">
+            <div className="flex flex-col gap-1">
+              <p className="text-text50 text-xsmall font-bold">
                 On
-              </Text>
+              </p>
 
               <MarketplacePill
                 marketplace={order.marketplace}
                 originName={order.originName}
               />
-            </Box>
+            </div>
 
             {accountAddress && (
               <Table.Cell className="p-0">
                 <OrdersTableAction
                   chainId={String(chainId)}
                   collectionAddress={collectionContractAddress as Hex}
-                  tokenId={tokenId}
+                  tokenId={tokenId!}
                   order={order}
                 />
               </Table.Cell>
             )}
-          </Box>
+          </div>
         </Table.Cell>
       </Table.Row>
 
@@ -119,10 +109,10 @@ const OrdersTableRow = ({
         )}
       >
         <Table.Cell>
-          <Text color="text80" fontSize="small" fontWeight="medium">
+          <p className="text-text80 text-small font-medium">
             {formatUnits(BigInt(order.priceAmount), Number(currency?.decimals))}{' '}
             {currency?.symbol}
-          </Text>
+          </p>
         </Table.Cell>
 
         <Table.Cell>{order.quantityRemaining}</Table.Cell>
@@ -132,9 +122,9 @@ const OrdersTableRow = ({
         </Table.Cell>
 
         <Table.Cell>
-          <Text color="text80" fontSize="small" fontWeight="medium">
+          <p className="text-text80 text-small font-medium">
             {formatDistance(order.validUntil, new Date())}
-          </Text>
+          </p>
         </Table.Cell>
 
         <Table.Cell>
@@ -149,7 +139,7 @@ const OrdersTableRow = ({
             <OrdersTableAction
               chainId={String(chainId)}
               collectionAddress={collectionContractAddress as Hex}
-              tokenId={tokenId}
+              tokenId={tokenId!}
               order={order}
             />
           </Table.Cell>

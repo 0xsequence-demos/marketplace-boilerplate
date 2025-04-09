@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Pill from './Pill';
-import { Image, Text } from '@0xsequence/design-system';
 
 type CollectiblePreviewPillProps = {
   imageSrc?: string;
@@ -15,7 +14,7 @@ const CollectiblePreviewPill = ({
   return (
     <Pill>
       {imageSrc && (
-        <Image
+        <img
           src={imageSrc}
           alt={`${name}-preview`}
           width="3"
@@ -24,9 +23,7 @@ const CollectiblePreviewPill = ({
         />
       )}
 
-      <Text color="text100" fontSize="xsmall" fontWeight="bold">
-        {name}
-      </Text>
+      <p className="text-text100 text-xsmall font-bold">{name}</p>
     </Pill>
   );
 };

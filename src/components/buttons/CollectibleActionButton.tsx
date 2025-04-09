@@ -44,7 +44,7 @@ export const CollectibleActionButton = ({
   const { show: showBuyModal } = useBuyModal({ onError });
   const { show: showTransferModal } = useTransferModal();
   const { data: tokenBalancesData } = useBalanceOfCollectible({
-    chainId: collectionChainId,
+    chainId: parseInt(collectionChainId),
     collectionAddress,
     collectableId: tokenId,
     userAddress: address,
@@ -52,12 +52,12 @@ export const CollectibleActionButton = ({
   const collectibleBalance = tokenBalancesData?.balance;
   const userOwnsCollectible = !!collectibleBalance;
   const { data: highestOffer } = useHighestOffer({
-    chainId: collectionChainId,
+    chainId: parseInt(collectionChainId),
     collectionAddress,
     tokenId,
   });
   const { data: lowestListing } = useLowestListing({
-    chainId: collectionChainId,
+    chainId: parseInt(collectionChainId),
     collectionAddress,
     tokenId,
   });
@@ -65,27 +65,27 @@ export const CollectibleActionButton = ({
   let orderSide: OrderSide = undefined;
 
   // sellable collectible
-  if (userOwnsCollectible && highestOffer?.order) {
+  if (userOwnsCollectible && highestOffer?.orderId) {
     orderSide = 'sell';
   }
 
   // buyable collectible
-  if (!userOwnsCollectible && lowestListing?.order) {
+  if (!userOwnsCollectible && lowestListing?.orderId) {
     orderSide = 'buy';
   }
 
   // transferable collectible
-  if (userOwnsCollectible && !highestOffer?.order) {
+  if (userOwnsCollectible && !highestOffer?.orderId) {
     orderSide = 'transfer';
   }
 
   // offerable collectible
-  if (!userOwnsCollectible && !lowestListing?.order) {
+  if (!userOwnsCollectible && !lowestListing?.orderId) {
     orderSide = 'order';
   }
 
   // listable collectible
-  if (userOwnsCollectible && !lowestListing?.order) {
+  if (userOwnsCollectible && !lowestListing?.orderId) {
     orderSide = 'listing';
   }
 
@@ -109,10 +109,11 @@ export const CollectibleActionButton = ({
             'lowestListing and collectibleName are required for buy',
           );
         showBuyModal({
-          tokenId,
+          collectibleId: tokenId,
           collectionAddress,
-          chainId: collectionChainId,
-          order: lowestListing.order!,
+          chainId: parseInt(collectionChainId),
+          orderId: lowestListing.orderId,
+          marketplace: lowestListing.marketplace
         });
       },
     },
@@ -127,8 +128,8 @@ export const CollectibleActionButton = ({
         showSellModal({
           tokenId,
           collectionAddress,
-          chainId: collectionChainId,
-          order: highestOffer.order!,
+          chainId: parseInt(collectionChainId),
+          order: highestOffer,
         });
       },
     },
@@ -138,7 +139,7 @@ export const CollectibleActionButton = ({
         showTransferModal({
           collectibleId: tokenId,
           collectionAddress: collectionAddress,
-          chainId: collectionChainId,
+          chainId: parseInt(collectionChainId),
         });
       },
     },
@@ -147,7 +148,7 @@ export const CollectibleActionButton = ({
       onClick: () => {
         showMakeOfferModal({
           collectionAddress,
-          chainId: collectionChainId,
+          chainId: parseInt(collectionChainId),
           collectibleId: tokenId,
         });
       },
@@ -157,7 +158,7 @@ export const CollectibleActionButton = ({
       onClick: () => {
         showCreateListingModal({
           collectionAddress,
-          chainId: collectionChainId,
+          chainId: parseInt(collectionChainId),
           collectibleId: tokenId,
         });
       },

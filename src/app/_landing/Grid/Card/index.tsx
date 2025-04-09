@@ -9,7 +9,6 @@ import { isVideo } from '~/lib/utils/helpers';
 
 import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
 import { CollectionCardSkeleton } from './Skeleton';
-import { NetworkImage } from '@0xsequence/design-system';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useCollection } from '@0xsequence/marketplace-sdk/react';
 import NextLink from 'next/link';
@@ -87,7 +86,7 @@ const Card = ({ chainId, address, bannerUrl }: CollectionCard) => {
               {name}
             </Text>
 
-            <NetworkImage size="xs" chainId={chainId} />
+            {/* <Image size="xs" chainId={chainId} /> */}
           </Flex>
 
           <Text

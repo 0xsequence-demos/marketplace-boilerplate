@@ -13,7 +13,7 @@ export const ContractTypeBadge = ({ chainId, collectionAddress }: Props) => {
     data: collectionMetadataResp,
     isLoading: isCollectionMetadataLoading,
   } = useCollection({
-    chainId: chainId.toString(),
+    chainId,
     collectionAddress,
   });
   return (

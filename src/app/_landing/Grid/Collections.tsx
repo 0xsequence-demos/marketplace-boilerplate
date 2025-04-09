@@ -11,6 +11,7 @@ export const LandingCollections = ({
   collections,
   className,
 }: LandingCollectionsProps) => {
+
   return (
     <Flex className="flex-col gap-4 @container/publisherCollectionsGrid">
       <Text className="size-sm font-bold text-foreground/50">Collections</Text>

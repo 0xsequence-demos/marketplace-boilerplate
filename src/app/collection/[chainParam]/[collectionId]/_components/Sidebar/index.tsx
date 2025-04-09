@@ -66,7 +66,7 @@ const CollectionSidebarContent = ({
   // const { isConnected } = useAccount();
 
   const collectableFilters = useFilters({
-    chainId: String(chainId),
+    chainId,
     collectionAddress,
   });
 

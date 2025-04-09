@@ -45,7 +45,7 @@ export const InventoryTabs = ({
     isError: errorGettingBalances,
   } = useListBalances({
     chainId,
-    accountAddress,
+    accountAddress: accountAddress as `0x${string}`,
   });
 
   if (balancesLoading) {

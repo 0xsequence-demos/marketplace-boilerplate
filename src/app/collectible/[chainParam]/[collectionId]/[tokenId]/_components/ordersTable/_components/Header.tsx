@@ -1,6 +1,5 @@
 import { Table } from '~/components/ui';
 
-import { Text } from '@0xsequence/design-system';
 import { useAccount } from 'wagmi';
 
 const OrdersTableHeader = ({
@@ -17,9 +16,7 @@ const OrdersTableHeader = ({
       <Table.Row>
         {items.map((item) => (
           <Table.Head key={item}>
-            <Text fontSize="small" color="text80">
-              {item}
-            </Text>
+            <p className="text-text80 text-small">{item}</p>
           </Table.Head>
         ))}
         {

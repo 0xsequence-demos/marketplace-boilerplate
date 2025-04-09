@@ -17,7 +17,6 @@ import {
   Text,
   cn,
 } from '$ui';
-import { NetworkImage } from '@0xsequence/design-system';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useCollection } from '@0xsequence/marketplace-sdk/react/hooks';
 import Markdown from 'markdown-to-jsx';
@@ -36,7 +35,7 @@ const CollectionHeader = ({
   marketplaceConfig,
 }: CollectionHeaderProps) => {
   const collectionMetadata = useCollection({
-    chainId: chainId.toString(),
+    chainId: chainId,
     collectionAddress,
   });
 
@@ -141,7 +140,7 @@ const CollectionHeader = ({
             name="collection-type-and-network"
             className="flex items-center gap-2"
           >
-            {chainId && <NetworkImage chainId={chainId} size="sm" />}
+            {chainId && chainId}
 
             <ContractTypeBadge
               chainId={chainId}

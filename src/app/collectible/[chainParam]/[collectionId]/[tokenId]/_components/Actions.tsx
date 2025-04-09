@@ -1,6 +1,7 @@
 'use client';
 
 import { Button, Flex, Text, toast } from '$ui';
+import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import {
   useBalanceOfCollectible,
@@ -49,7 +50,7 @@ export const CollectibleTradeActions = ({
 
   const { data: highestOffer, isLoading: isLoadingHighestOffer } =
     useHighestOffer({
-      chainId: String(chainId),
+      chainId: chainId,
       collectionAddress,
       tokenId: tokenId,
       filter: {
@@ -62,7 +63,7 @@ export const CollectibleTradeActions = ({
 
   const { data: lowestListing, isLoading: loadingLowestListing } =
     useLowestListing({
-      chainId: String(chainId),
+      chainId: chainId,
       collectionAddress,
       tokenId,
       query: {
@@ -98,26 +99,27 @@ export const CollectibleTradeActions = ({
 
   const onClickBuy = () => {
     showBuyModal({
-      chainId: String(chainId),
+      chainId: chainId,
       collectionAddress,
-      tokenId,
-      order: lowestListing!.order!,
+      collectibleId: tokenId,
+      orderId: lowestListing!.orderId,
+      marketplace: MarketplaceKind.sequence_marketplace_v2
     });
   };
 
   const onClickSell = () => {
     showSellModal({
       collectionAddress,
-      chainId: String(chainId),
+      chainId: chainId,
       tokenId,
-      order: highestOffer!.order!,
+      order: highestOffer!
     });
   };
 
   const onClickOffer = () => {
     showOfferModal({
       collectionAddress,
-      chainId: String(chainId),
+      chainId: chainId,
       collectibleId: tokenId,
     });
   };
@@ -125,16 +127,16 @@ export const CollectibleTradeActions = ({
   const onClickList = () => {
     showListModal({
       collectionAddress,
-      chainId: String(chainId),
+      chainId: chainId,
       collectibleId: tokenId,
     });
   };
 
   const buyDisabled =
-    !isConnected || !lowestListing?.order || item721AlreadyOwned;
+    !isConnected || !lowestListing?.orderId || item721AlreadyOwned;
   const offerDisabled = !isConnected || item721AlreadyOwned;
   const listingDisabled = !isConnected || !tokenBalance;
-  const sellDisabled = !isConnected || !highestOffer?.order || !tokenBalance;
+  const sellDisabled = !isConnected || !highestOffer?.orderId || !tokenBalance;
 
   return (
     <Flex className="flex-col gap-4">

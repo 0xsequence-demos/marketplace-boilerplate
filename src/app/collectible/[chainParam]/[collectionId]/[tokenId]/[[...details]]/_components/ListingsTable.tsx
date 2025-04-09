@@ -5,7 +5,6 @@ import OrdersTable, {
 } from '~/app/collectible/[chainParam]/[collectionId]/[tokenId]/_components/ordersTable/OrdersTable';
 import { Routes } from '~/lib/routes';
 
-import { Box, Text } from '@0xsequence/design-system';
 import type { Page } from '@0xsequence/marketplace-sdk';
 import {
   useCountListingsForCollectible,
@@ -22,7 +21,7 @@ const ListingsTable = observer(() => {
   });
   const { data: listings, isLoading: listingsLoading } =
     useListListingsForCollectible({
-      chainId: chainParam as string,
+      chainId: parseInt(chainParam as string),
       collectionAddress: collectionId,
       collectibleId: tokenId,
       page: {
@@ -39,21 +38,17 @@ const ListingsTable = observer(() => {
   const { data: countOfListings, isLoading: countOfListingsLoading } =
     useCountListingsForCollectible({
       collectionAddress: collectionId,
-      chainId: chainParam as string,
+      chainId: parseInt(chainParam as string),
       collectibleId: tokenId,
     });
 
   if (!listings?.listings.length && !listingsLoading) {
     return (
-      <Box
-        width="full"
-        textAlign="center"
-        className="border border-foreground/30 py-8 rounded-md"
-      >
-        <Text fontSize="small" fontWeight="medium" color="text50">
+      <div className="flex w-full items-center justify-center rounded-md border border-foreground/30 py-8">
+        <p className="text-text50 text-small font-medium">
           Your listings will appear here
-        </Text>
-      </Box>
+        </p>
+      </div>
     );
   }
 

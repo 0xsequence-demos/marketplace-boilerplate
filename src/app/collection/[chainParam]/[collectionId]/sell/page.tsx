@@ -29,7 +29,7 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
     isLoading: collectiblesLoading,
     fetchNextPage: fetchNextCollectibles,
   } = useListCollectibles({
-    chainId: String(chainId),
+    chainId: chainId!,
     collectionAddress: collectionId,
     filter: {
       searchText: text,

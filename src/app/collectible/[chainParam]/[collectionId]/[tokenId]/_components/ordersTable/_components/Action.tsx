@@ -1,4 +1,3 @@
-import { Button } from '@0xsequence/design-system';
 import { type Order, OrderSide } from '@0xsequence/marketplace-sdk';
 import {
   useBalanceOfCollectible,
@@ -9,6 +8,7 @@ import {
 import { toast } from 'react-toastify';
 import type { Hex } from 'viem';
 import { useAccount } from 'wagmi';
+import { Button } from '~/components/ui';
 
 const OrdersTableAction = ({
   collectionAddress,
@@ -25,7 +25,7 @@ const OrdersTableAction = ({
   const { data: balance } = useBalanceOfCollectible({
     collectableId: tokenId,
     collectionAddress,
-    chainId,
+    chainId: parseInt(chainId),
     userAddress: accountAddress,
     query: {
       enabled: !!accountAddress,
@@ -33,7 +33,7 @@ const OrdersTableAction = ({
   });
   const { show: showSellModal } = useSellModal();
   const { cancelOrder } = useCancelOrder({
-    chainId,
+    chainId: parseInt(chainId),
     collectionAddress,
     onError: (error) => {
       toast("An error occurred while cancelling the order", {
@@ -87,7 +87,7 @@ const OrdersTableAction = ({
 
   function handleSell() {
     showSellModal({
-      chainId,
+      chainId: parseInt(chainId),
       collectionAddress,
       tokenId,
       order,
@@ -104,9 +104,10 @@ const OrdersTableAction = ({
   function handleBuy() {
     openBuyModal({
       collectionAddress,
-      chainId,
-      tokenId,
-      order,
+      chainId: parseInt(chainId),
+      collectibleId: tokenId,
+      orderId: order.orderId,
+      marketplace: order.marketplace,
     });
   }
 
@@ -118,7 +119,7 @@ const OrdersTableAction = ({
     <Button
       label={buttonProps.label}
       onClick={buttonProps.onClick}
-      variant="primary"
+      variant="default"
       size="xs"
     />
   );

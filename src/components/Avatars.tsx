@@ -3,23 +3,8 @@ import { memo } from 'react';
 import { classNames } from '~/config/classNames';
 
 import { Avatar, Flex, Image, Text, cn } from '$ui';
-import { NetworkImage } from '@0xsequence/design-system';
 import { truncateMiddle } from '@0xsequence/marketplace-sdk';
 import NextLink from 'next/link';
-
-/* ************* CURRENCY AVATAR ***************** */
-type CurrencyAvatarProps = {
-  amount: number | string;
-  currency: { src: string | undefined; symbol: string | undefined };
-  title?: string | number;
-
-  className?: string;
-  justify?: 'justify-center' | 'justify-start' | 'justify-end';
-
-  size?: 'default' | 'sm' | 'lg';
-
-  loading?: boolean;
-};
 
 /* ************* COLLECTION AVATAR ***************** */
 type CollectionAvatarProps = {
@@ -45,7 +30,7 @@ export const CollectionAvatar = ({
       </Avatar.Base>
 
       <Text className="text-foreground/90 font-medium">{name}</Text>
-      {chainId ? <NetworkImage size="sm" chainId={chainId} /> : null}
+      {chainId && chainId}
     </Flex>
   );
 };
@@ -109,7 +94,7 @@ export const PoolAvatar = memo(
 
             {chainId ? (
               <Flex className="min-w-[20px]">
-                <NetworkImage size="sm" chainId={chainId} />
+                {chainId && chainId}
               </Flex>
             ) : null}
           </Flex>

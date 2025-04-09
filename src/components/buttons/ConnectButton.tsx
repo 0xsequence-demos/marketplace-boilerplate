@@ -3,7 +3,7 @@
 import type { ComponentProps } from 'react';
 
 import { Button, WalletIcon } from '$ui';
-import { useOpenConnectModal } from '@0xsequence/kit';
+import { useOpenConnectModal } from '@0xsequence/connect';
 import { useAccount } from 'wagmi';
 
 export const ConnectButton = ({

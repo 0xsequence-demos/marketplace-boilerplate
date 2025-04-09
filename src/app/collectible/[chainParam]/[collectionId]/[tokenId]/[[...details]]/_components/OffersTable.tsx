@@ -5,7 +5,6 @@ import OrdersTable, {
 } from '~/app/collectible/[chainParam]/[collectionId]/[tokenId]/_components/ordersTable/OrdersTable';
 import { Routes } from '~/lib/routes';
 
-import { Box, Text } from '@0xsequence/design-system';
 import type { Page } from '@0xsequence/marketplace-sdk';
 import {
   useCountOffersForCollectible,
@@ -22,7 +21,7 @@ const OffersTable = observer(() => {
   });
   const { data: offers, isLoading: offersLoading } =
     useListOffersForCollectible({
-      chainId: chainParam as string,
+      chainId: parseInt(chainParam as string),
       collectionAddress: collectionId,
       collectibleId: tokenId,
       page: {
@@ -39,21 +38,19 @@ const OffersTable = observer(() => {
   const { data: countOfOffers, isLoading: countOfOffersLoading } =
     useCountOffersForCollectible({
       collectionAddress: collectionId,
-      chainId: chainParam as string,
+      chainId: parseInt(chainParam as string),
       collectibleId: tokenId,
     });
 
   if (!offers?.offers.length && !offersLoading) {
     return (
-      <Box
-        width="full"
-        textAlign="center"
+      <div
         className="border border-foreground/30 py-8 rounded-md"
       >
-        <Text fontSize="small" fontWeight="medium" color="text50">
+        <p className="text-sm font-medium text-foreground/50">
           Your offers will appear here
-        </Text>
-      </Box>
+        </p>
+      </div>
     );
   }
 
