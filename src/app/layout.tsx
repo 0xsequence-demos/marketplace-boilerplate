@@ -6,7 +6,6 @@ import { cn } from '$ui';
 import { Layout } from './_layout';
 import Providers from './_providers';
 import type { Metadata } from 'next';
-import { env } from 'process';
 
 export default async function RootLayout({
   children,

@@ -16,6 +16,7 @@ import { QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { type Config, type State, WagmiProvider } from 'wagmi';
 import { env } from '~/env';
+import { ThemeProvider } from '@0xsequence/design-system';
 
 const queryClient = getQueryClient();
 
@@ -62,6 +63,7 @@ export default function Providers({
   );
 
   return (
+    <ThemeProvider>
       <WagmiProvider config={wagmiConfig} initialState={sdkInitialState?.wagmi}>
         <QueryClientProvider client={queryClient}>
           <SequenceConnect config={config}>
@@ -78,5 +80,6 @@ export default function Providers({
           </SequenceConnect>
         </QueryClientProvider>
       </WagmiProvider>
+    </ThemeProvider>
   );
 }

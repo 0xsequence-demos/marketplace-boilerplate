@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import '@0xsequence/design-system/preset';
 
 @layer base {
   html {
