@@ -44,6 +44,6 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts"
-  ],
+, "postcss.config.mjs"  ],
   "exclude": ["node_modules"]
 }

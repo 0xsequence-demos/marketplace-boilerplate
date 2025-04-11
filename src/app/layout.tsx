@@ -1,6 +1,6 @@
 import { classNames } from '~/config/classNames';
 import { ssrClient } from '~/config/marketplace-sdk/ssr';
-import '~/styles/globals.scss';
+import '~/styles/globals.css';
 
 import { cn } from '$ui';
 import { Layout } from './_layout';
