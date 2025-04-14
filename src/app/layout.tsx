@@ -13,9 +13,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { getInitialState, getMarketplaceConfig, config } = ssrClient();
-  const { fontUrl, cssString, faviconUrl } = await getMarketplaceConfig();
-  const initialState = await getInitialState();
+  const client = await ssrClient();
+  const { fontUrl, cssString, faviconUrl } = await client.getMarketplaceConfig();
+  const initialState = await client.getInitialState();
 
   return (
     <html lang="en">

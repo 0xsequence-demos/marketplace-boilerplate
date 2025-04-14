@@ -4,7 +4,7 @@ import ENSName from '~/components/ENSName';
 import { InfoBox } from '~/components/InfoGrid';
 import { Spinner } from '~/components/Spinner';
 
-import { Button, Flex, Grid, Tabs, Text } from '$ui';
+import { Flex, Grid, Tabs, Text } from '$ui';
 import { InventoryCollectiblesContent } from './InventoryCollectiblesContent';
 import { ContractType, type TokenBalance } from '@0xsequence/indexer';
 import { compareAddress } from '@0xsequence/marketplace-sdk';

@@ -9,16 +9,26 @@ import { CollectionViewPageLayout } from './_components/Layout';
 import { CollectionSidebar } from './_components/Sidebar';
 import type { ChainId } from '@0xsequence/network';
 
-const Layout = async ({
-  params: { chainParam, collectionId },
-  children,
-}: {
-  children: React.ReactNode;
-  params: typeof Routes.collection.params;
-}) => {
+const Layout = async (
+  props: {
+    children: React.ReactNode;
+    params: Promise<typeof Routes.collection.params>;
+  }
+) => {
+  const params = await props.params;
+
+  const {
+    chainParam,
+    collectionId
+  } = params;
+
+  const {
+    children
+  } = props;
+
   const chainId = getChainId(chainParam);
-  const { getMarketplaceConfig } = ssrClient();
-  const marketplaceConfig = await getMarketplaceConfig();
+  const client = await ssrClient();
+  const marketplaceConfig = await client.getMarketplaceConfig();
 
   const collectionConfig = marketplaceConfig.collections?.find(
     (c) =>
