@@ -212,7 +212,7 @@ export const LoadingIcon = ({ className, ...otherProps }: IconProps) => (
   </svg>
 );
 
-export const ChevronRightIcon = (props: IconProps) => (
+const ChevronRightIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -473,7 +473,7 @@ export const TwitterIcon = (props: IconProps) => (
   </svg>
 );
 
-export const ChevronLeftIcon = (props: IconProps) => (
+const ChevronLeftIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
