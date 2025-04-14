@@ -128,9 +128,6 @@ importers:
       react-virtuoso:
         specifier: ^4.12.5
         version: 4.12.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      sass:
-        specifier: ^1.85.1
-        version: 1.85.1
       tailwind-merge:
         specifier: ^2.6.0
         version: 2.6.0
@@ -8881,6 +8878,7 @@ snapshots:
   chokidar@4.0.3:
     dependencies:
       readdirp: 4.1.1
+    optional: true
 
   chrome-trace-event@1.0.4: {}
 
@@ -9850,7 +9848,8 @@ snapshots:
 
   immediate@3.0.6: {}
 
-  immutable@5.0.3: {}
+  immutable@5.0.3:
+    optional: true
 
   import-fresh@3.3.0:
     dependencies:
@@ -10751,7 +10750,8 @@ snapshots:
     dependencies:
       picomatch: 2.3.1
 
-  readdirp@4.1.1: {}
+  readdirp@4.1.1:
+    optional: true
 
   real-require@0.1.0: {}
 
@@ -10838,6 +10838,7 @@ snapshots:
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.1
+    optional: true
 
   saxes@6.0.0:
     dependencies:
