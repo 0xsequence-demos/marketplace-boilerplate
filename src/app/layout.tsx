@@ -28,7 +28,7 @@ export default async function RootLayout({
         <style>{cssString}</style>
       </head>
       <body className={cn(classNames.themeManager)}>
-        <Providers sdkInitialState={initialState} sdkConfig={config}>
+        <Providers sdkInitialState={initialState} sdkConfig={client.config}>
           <Layout>{children}</Layout>
         </Providers>
       </body>
@@ -37,7 +37,7 @@ export default async function RootLayout({
 }
 
 export const generateMetadata = async (): Promise<Metadata> => {
-  const { getMarketplaceConfig } = ssrClient();
+  const { getMarketplaceConfig } = await ssrClient();
   const marketplaceConfig = await getMarketplaceConfig();
   return {
     title: {
