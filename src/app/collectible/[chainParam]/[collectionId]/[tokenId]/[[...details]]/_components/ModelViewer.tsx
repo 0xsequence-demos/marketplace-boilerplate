@@ -4,6 +4,7 @@ import '@google/model-viewer';
 const ModelViewer = ({ fileSrc, src }: { fileSrc: string; src?: string }) => {
   return (
     <Box className="bg-foreground/5">
+      {/* @ts-expect-error model-viewer is a custom element */}
       <model-viewer
         alt="3d model"
         class="h-[500px] w-full"
