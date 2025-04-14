@@ -18,7 +18,7 @@ export const WalletIcon = (props: IconProps) => (
   </svg>
 );
 
-export const SunIcon = (props: IconProps) => (
+const SunIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -86,7 +86,7 @@ export const GlobeIcon = (props: IconProps) => (
   </svg>
 );
 
-export const ProfileIcon = (props: IconProps) => (
+const ProfileIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -104,7 +104,7 @@ export const ProfileIcon = (props: IconProps) => (
   </svg>
 );
 
-export const CartIcon = (props: IconProps) => (
+const CartIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -230,7 +230,7 @@ export const ChevronRightIcon = (props: IconProps) => (
   </svg>
 );
 
-export const AddIcon = (props: IconProps) => (
+const AddIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -266,7 +266,7 @@ export const ChevronUpIcon = (props: IconProps) => (
   </svg>
 );
 
-export const ShareIcon = (props: IconProps) => (
+const ShareIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -334,7 +334,7 @@ export const LinkIcon = (props: IconProps) => (
   </svg>
 );
 
-export const ArrowUpIcon = (props: IconProps) => (
+const ArrowUpIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -350,7 +350,7 @@ export const ArrowUpIcon = (props: IconProps) => (
   </svg>
 );
 
-export const ArrowDownIcon = (props: IconProps) => (
+const ArrowDownIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -366,7 +366,7 @@ export const ArrowDownIcon = (props: IconProps) => (
   </svg>
 );
 
-export const EyeIcon = (props: IconProps) => (
+const EyeIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -388,7 +388,7 @@ export const EyeIcon = (props: IconProps) => (
   </svg>
 );
 
-export const TransferIcon = (props: IconProps) => (
+const TransferIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -408,7 +408,7 @@ export const TransferIcon = (props: IconProps) => (
   </svg>
 );
 
-export const MenuIcon = (props: IconProps) => (
+const MenuIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -423,7 +423,7 @@ export const MenuIcon = (props: IconProps) => (
   </svg>
 );
 
-export const RefreshIcon = (props: IconProps) => (
+const RefreshIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -491,7 +491,7 @@ export const ChevronLeftIcon = (props: IconProps) => (
   </svg>
 );
 
-export const CollapseIcon = (props: IconProps) => (
+const CollapseIcon = (props: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -513,7 +513,7 @@ export const CollapseIcon = (props: IconProps) => (
   </svg>
 );
 
-export const CaretIcon = (props: IconProps) => {
+const CaretIcon = (props: IconProps) => {
   return (
     <svg
       width="24"
@@ -531,7 +531,7 @@ export const CaretIcon = (props: IconProps) => {
   );
 };
 
-export const VerifiedIcon = (props: IconProps) => {
+const VerifiedIcon = (props: IconProps) => {
   return (
     <svg
       width="16"
@@ -567,7 +567,7 @@ export const CheckmarkIcon = (props: IconProps) => {
   );
 };
 
-export const ListIcon = (props: IconProps) => {
+const ListIcon = (props: IconProps) => {
   return (
     <svg
       width="20"
@@ -623,7 +623,7 @@ export const ListIcon = (props: IconProps) => {
   );
 };
 
-export const GridIcon = (props: IconProps) => {
+const GridIcon = (props: IconProps) => {
   return (
     <svg
       width="20"
@@ -661,7 +661,7 @@ export const GridIcon = (props: IconProps) => {
   );
 };
 
-export const SubtractIcon = (props: IconProps) => {
+const SubtractIcon = (props: IconProps) => {
   return (
     <svg
       width="20"
@@ -716,7 +716,7 @@ export const DisconnectIcon = (props: IconProps) => {
   );
 };
 
-export const SettingsIcon = (props: IconProps) => {
+const SettingsIcon = (props: IconProps) => {
   return (
     <svg
       width="20"
@@ -751,7 +751,7 @@ export const BugIcon = (props: IconProps) => {
   );
 };
 
-export const InformationIcon = (props: IconProps) => {
+const InformationIcon = (props: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -768,7 +768,7 @@ export const InformationIcon = (props: IconProps) => {
   );
 };
 
-export const PencilIcon = (props: IconProps) => {
+const PencilIcon = (props: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -785,7 +785,7 @@ export const PencilIcon = (props: IconProps) => {
   );
 };
 
-export const SendPlaneIcon = (props: IconProps) => {
+const SendPlaneIcon = (props: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -819,7 +819,7 @@ export const GasIcon = (props: IconProps) => {
   );
 };
 
-export const GearIcon = (props: IconProps) => {
+const GearIcon = (props: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -836,7 +836,7 @@ export const GearIcon = (props: IconProps) => {
   );
 };
 
-export const MarketplaceIcon = (props: IconProps) => {
+const MarketplaceIcon = (props: IconProps) => {
   return (
     <svg
       width="20"
@@ -914,7 +914,7 @@ export const TiktokIcon = (props: IconProps) => {
   );
 };
 
-export const LoaderIcon = (props: IconProps) => (
+const LoaderIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -931,7 +931,7 @@ export const LoaderIcon = (props: IconProps) => (
   </svg>
 );
 
-export const CalendarIcon = (props: IconProps) => (
+const CalendarIcon = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"

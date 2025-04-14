@@ -4,7 +4,7 @@ import { forwardRef, memo } from 'react';
 
 import { cn } from '$ui';
 
-export interface ImageProps extends React.HTMLAttributes<HTMLImageElement> {
+interface ImageProps extends React.HTMLAttributes<HTMLImageElement> {
   src?: string;
   alt?: string;
 

@@ -6,7 +6,7 @@ import { getChain } from '~/lib/utils/getChain';
 
 import { Box, Button, LinkIcon, cn } from '$ui';
 
-export const CollectibleAddresses = ({
+const CollectibleAddresses = ({
   contractAddress,
   chainId,
 }: {

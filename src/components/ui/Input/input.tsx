@@ -37,7 +37,7 @@ const inputVariants = cva(
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
-export interface InputProps
+interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
     VariantProps<typeof inputVariants> {
   prefix?: React.ReactNode;
@@ -67,7 +67,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = 'Input';
 
-export interface SearchInputProps extends React.ComponentProps<typeof Input> {
+interface SearchInputProps extends React.ComponentProps<typeof Input> {
   iconClassname?: string;
   loading?: boolean;
 

@@ -22,7 +22,7 @@ import {
   Trigger,
 } from '@radix-ui/react-dropdown-menu';
 
-export const DropdownMenu = {
+const DropdownMenu = {
   BaseContent: DropdownMenuContent,
   BaseSubContent: DropdownMenuSubContent,
   BaseRadioItem: DropdownMenuRadioItem,

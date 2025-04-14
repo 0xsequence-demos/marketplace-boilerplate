@@ -175,12 +175,12 @@ const ControlledSelect = ({
 
 export {
   Select,
-  SelectGroup,
+  
   SelectValue,
   SelectTrigger,
   SelectContent,
-  SelectLabel,
+  
   SelectItem,
-  SelectSeparator,
+  
   ControlledSelect,
 };

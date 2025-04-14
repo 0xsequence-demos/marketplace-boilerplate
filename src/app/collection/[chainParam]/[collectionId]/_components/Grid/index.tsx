@@ -12,7 +12,7 @@ import { Grid, cn } from '$ui';
 import { CollectibleCard } from './Card/CollectableCard';
 import type { CollectibleOrder } from '@0xsequence/marketplace-sdk';
 
-export type CollectiblesGridProps = {
+type CollectiblesGridProps = {
   collectibleOrders: CollectibleOrder[];
   endReached?: () => void;
 };

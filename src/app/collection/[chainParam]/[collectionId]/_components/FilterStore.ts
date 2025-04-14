@@ -2,7 +2,7 @@ import { type PropertyFilter, PropertyType } from '@0xsequence/metadata';
 import { observable } from '@legendapp/state';
 import { z } from 'zod';
 
-export interface CollectibleFilters {
+interface CollectibleFilters {
   filtersSidebarOpen: boolean;
   showListedOnly: boolean;
   searchBarOpen: boolean;
@@ -11,18 +11,18 @@ export interface CollectibleFilters {
   appliedFilters: PropertyFilter[];
 }
 
-export interface StringFilterValues {
+interface StringFilterValues {
   type: PropertyType.STRING;
   values: string[];
 }
 
-export interface IntFilterValues {
+interface IntFilterValues {
   type: PropertyType.INT;
   min: number;
   max: number;
 }
 
-export type FilterValues = StringFilterValues | IntFilterValues;
+type FilterValues = StringFilterValues | IntFilterValues;
 
 const initialFilters: CollectibleFilters = {
   filtersSidebarOpen: false,

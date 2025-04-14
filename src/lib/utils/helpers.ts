@@ -1,4 +1,4 @@
-export const textClassName = (isEmpty: boolean) =>
+const textClassName = (isEmpty: boolean) =>
   `${isEmpty ? 'italic' : ''} text-${
     isEmpty ? 'foreground/50' : 'foreground'
   } font-${isEmpty ? 'light' : 'normal'}}`;
@@ -18,5 +18,5 @@ export const is3dModel = (fileName: string) => {
   return isGltf;
 };
 
-export const isDefined = <T>(value: T): value is NonNullable<T> =>
+const isDefined = <T>(value: T): value is NonNullable<T> =>
   value != null;

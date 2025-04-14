@@ -48,7 +48,7 @@ interface SVGProps {
   className?: string;
 }
 
-export const LogoSvg = ({ className }: SVGProps) => {
+const LogoSvg = ({ className }: SVGProps) => {
   return (
     <svg
       aria-label="Logo"

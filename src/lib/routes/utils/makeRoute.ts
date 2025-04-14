@@ -92,7 +92,7 @@ export function makeRoute<
   return routeBuilder;
 }
 
-export function convertURLSearchParamsToObject(
+function convertURLSearchParamsToObject(
   params: ReadonlyURLSearchParams | null,
 ): Record<string, string | string[]> {
   if (!params) {

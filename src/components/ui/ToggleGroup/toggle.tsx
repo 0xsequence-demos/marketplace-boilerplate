@@ -61,4 +61,4 @@ const ToggleItem = React.forwardRef<
 
 ToggleItem.displayName = TogglePrimitive.Item.displayName;
 
-export { ToggleGroupRoot, ToggleItem, toggleVariants };
+export { ToggleGroupRoot, ToggleItem,  };

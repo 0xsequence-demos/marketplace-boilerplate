@@ -1,6 +1,6 @@
 import { RadioGroup, RadioGroupItem } from './radio';
 
-export const Radio = {
+const Radio = {
   Group: RadioGroup,
   Item: RadioGroupItem,
 };
