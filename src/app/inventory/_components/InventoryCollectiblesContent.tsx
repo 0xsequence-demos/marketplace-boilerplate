@@ -20,7 +20,6 @@ import {
   useCollection,
   useListBalances,
 } from '@0xsequence/marketplace-sdk/react';
-import { ContractType } from '@0xsequence/metadata';
 import type { Hex } from 'viem';
 
 type InventoryCollectiblesContent = {
@@ -69,7 +68,7 @@ const CollectionSection = ({
   const isGridView = true;
 
   const collectibles =
-    collectionBalances?.pages.flatMap((p) => p.balances) || [];
+    collectionBalances?.pages.flatMap((p: { balances: any; }) => p.balances) || [];
 
   const handleLoadMore = () => {
     if (isFetchingNextPage) {
@@ -128,12 +127,13 @@ const CollectionSection = ({
           {collectibles.map((c) => {
             return isGridView ? (
               <CollectibleCard
+                key={c.tokenID + collectionAddress}
                 collectionAddress={collectionAddress as Hex}
-                tokenId={c.tokenID!}
+                tokenId={c.tokenID}
                 collectionChainId={String(c.chainId)}
               />
             ) : (
-              <InventoryRow />
+              <InventoryRow key={c.tokenID + collectionAddress} />
             );
           })}
         </ContentWrapper>
@@ -152,16 +152,6 @@ const CollectionSection = ({
   );
 };
 
-const getContractType = (contractType?: string) => {
-  switch (contractType?.toUpperCase()) {
-    case 'ERC721':
-      return ContractType.ERC721;
-    case 'ERC1155':
-      return ContractType.ERC1155;
-    default:
-      return ContractType.UNKNOWN;
-  }
-};
 
 const ContentWrapper = ({
   isGridView,

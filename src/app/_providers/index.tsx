@@ -4,7 +4,7 @@ import { ToastProvider, Tooltip } from '$ui';
 import { ThemeProvider } from '@0xsequence/design-system';
 import { type KitConfig, KitProvider } from '@0xsequence/kit';
 import { KitCheckoutProvider } from '@0xsequence/kit-checkout';
-import type { MarketplaceConfig, SdkConfig } from '@0xsequence/marketplace-sdk';
+import type { SdkConfig } from '@0xsequence/marketplace-sdk';
 import {
   MarketplaceProvider,
   ModalProvider,
@@ -15,7 +15,7 @@ import {
 import { enableReactComponents } from '@legendapp/state/config/enableReactComponents';
 import { QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Config, type State, WagmiProvider } from 'wagmi';
+import { type Config, type State, WagmiProvider } from 'wagmi';
 
 const queryClient = getQueryClient();
 

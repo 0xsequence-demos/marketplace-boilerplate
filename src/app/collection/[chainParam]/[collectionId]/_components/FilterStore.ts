@@ -1,6 +1,5 @@
 import { type PropertyFilter, PropertyType } from '@0xsequence/metadata';
 import { observable } from '@legendapp/state';
-import { z } from 'zod';
 
 interface CollectibleFilters {
   filtersSidebarOpen: boolean;
@@ -11,18 +10,8 @@ interface CollectibleFilters {
   appliedFilters: PropertyFilter[];
 }
 
-interface StringFilterValues {
-  type: PropertyType.STRING;
-  values: string[];
-}
 
-interface IntFilterValues {
-  type: PropertyType.INT;
-  min: number;
-  max: number;
-}
 
-type FilterValues = StringFilterValues | IntFilterValues;
 
 const initialFilters: CollectibleFilters = {
   filtersSidebarOpen: false,

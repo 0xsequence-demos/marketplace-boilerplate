@@ -53,7 +53,7 @@ const Order = ({ height, order }: OrderProps) => {
   });
 
   const currency = currencies?.find(
-    (c) => c.contractAddress === order.priceCurrencyAddress,
+    (c: { contractAddress: string; }) => c.contractAddress === order.priceCurrencyAddress,
   );
 
   return (

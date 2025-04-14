@@ -11,15 +11,9 @@ type AddressLabelProps = {
 };
 
 export const AddressLabel = ({ address, chainId }: AddressLabelProps) => {
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [, setShowTooltip] = useState(false);
   const [isCopied, setCopy] = useState(false);
-  const iconState = isCopied ? 'checkmark' : 'copy';
-  const tooltip = isCopied ? 'Copied!' : 'Copy Address';
 
-  const onCopy = () => {
-    setShowTooltip(true);
-    setCopy(true);
-  };
 
   const onClear = () => {
     setShowTooltip(false);

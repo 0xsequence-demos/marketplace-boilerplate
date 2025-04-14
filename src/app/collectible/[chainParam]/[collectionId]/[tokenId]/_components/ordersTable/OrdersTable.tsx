@@ -28,7 +28,6 @@ type OrdersTableProps = {
 
 const OrdersTable = observer((props: OrdersTableProps) => {
   const {
-    chainId,
     collectionAddress,
     page$,
     orders,

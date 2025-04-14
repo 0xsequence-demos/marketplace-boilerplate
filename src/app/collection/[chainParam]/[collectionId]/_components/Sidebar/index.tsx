@@ -12,7 +12,6 @@ import { PropertyFilters } from './PropertyFilters';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '@0xsequence/marketplace-sdk';
 import { useFilters } from '@0xsequence/marketplace-sdk/react';
 import type { ObservableBoolean } from '@legendapp/state';
-import { observer } from '@legendapp/state/react';
 import { usePathname } from 'next/navigation';
 import type { Hex } from 'viem';
 
