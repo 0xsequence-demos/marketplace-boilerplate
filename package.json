@@ -36,8 +36,8 @@
     "@t3-oss/env-nextjs": "^0.11.1",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/postcss": "^4.1.3",
-    "@tanstack/react-query": "^5.66.9",
-    "@tanstack/react-query-devtools": "^5.66.9",
+    "@tanstack/react-query": "^5.74.0",
+    "@tanstack/react-query-devtools": "^5.74.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -49,41 +49,41 @@
     "radash": "^12.1.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-hook-form": "^7.54.2",
-    "react-toastify": "^10.0.6",
-    "react-virtuoso": "^4.12.5",
-    "tailwind-merge": "^2.6.0",
+    "react-hook-form": "^7.55.0",
+    "react-toastify": "^11.0.5",
+    "react-virtuoso": "^4.12.6",
+    "tailwind-merge": "^3.2.0",
     "tailwindcss": "^4.1.3",
     "tailwindcss-animate": "^1.0.7",
-    "viem": "^2.23.5",
-    "wagmi": "^2.14.12",
+    "viem": "^2.26.5",
+    "wagmi": "^2.14.16",
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "^5.66.1",
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@tanstack/eslint-plugin-query": "^5.73.3",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/eslint": "^8.56.12",
-    "@types/node": "^22.13.5",
+    "@types/node": "^22.14.1",
     "@types/react": "19.1.1",
     "@types/react-dom": "19.1.2",
-    "@typescript-eslint/eslint-plugin": "^8.25.0",
-    "@typescript-eslint/parser": "^8.25.0",
+    "@typescript-eslint/eslint-plugin": "^8.29.1",
+    "@typescript-eslint/parser": "^8.29.1",
     "@vanilla-extract/next-plugin": "^2.4.10",
     "eslint": "^8.57.1",
     "eslint-config-next": "15.3.0",
-    "prettier": "^3.5.2",
+    "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.3"
   },
   "ct3aMetadata": {
     "initVersion": "7.34.0"
   },
-  "packageManager": "pnpm@9.15.6",
+  "packageManager": "pnpm@10.8.0",
   "pnpm": {
     "overrides": {
-      "cross-fetch": "./fetch-override",
       "@types/react": "19.1.1",
-      "@types/react-dom": "19.1.2"
+      "@types/react-dom": "19.1.2",
+      "cross-fetch": "./fetch-override"
     }
   }
 }
