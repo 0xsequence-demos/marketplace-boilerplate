@@ -31,7 +31,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'fixed inset-0 z-50 bg-background/80 backdrop-blur-sm transition-all',
+      'fixed inset-0 z-50 bg-background/80 backdrop-blur-xs transition-all',
       'duration-100 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in',
       className,
     )}
@@ -53,9 +53,9 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'fixed z-50 grid w-full gap-4 rounded-md border border-border bg-background p-4 shadow-lg focus:outline-none',
+        'fixed z-50 grid w-full gap-4 rounded-md border border-border bg-background p-4 shadow-lg focus:outline-hidden',
         'animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10',
-        'sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0',
+        'sm:zoom-in-90 sm:data-[state=open]:slide-in-from-bottom-0',
         className,
       )}
       {...props}
@@ -66,7 +66,7 @@ const DialogContent = React.forwardRef<
         className={cn(
           hideCloseButton ? 'hidden' : '',
           'absolute right-3 top-3 rounded-sm text-foreground/90 opacity-70 ring-offset-background transition-opacity hover:opacity-100',
-          'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+          'focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2',
           'disabled:pointer-events-none data-[state=open]:text-foreground/50',
         )}
       >

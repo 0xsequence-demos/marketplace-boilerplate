@@ -10,7 +10,7 @@ const switchRootVariants = cva(
   [
     'peer inline-flex h-[16px] w-[28px] shrink-0 cursor-pointer items-center transition-colors',
     'rounded-full border border-foreground/30 bg-background',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+    'focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
     'disabled:cursor-not-allowed disabled:opacity-50',
   ],
   {

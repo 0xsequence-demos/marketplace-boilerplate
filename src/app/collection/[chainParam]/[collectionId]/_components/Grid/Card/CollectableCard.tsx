@@ -39,7 +39,7 @@ export const CollectibleCard = ({
         classNames.collectibleSelectionIndicator,
         `relative flex h-full w-full flex-col align-top m-[0.1rem]`,
         'rounded-md bg-foreground/5 outline outline-2 outline-transparent',
-        'z-10 overflow-hidden !outline transition-all',
+        'z-10 overflow-hidden outline! transition-all',
       )}
     >
       <Link
@@ -60,7 +60,7 @@ export const CollectibleCard = ({
       {isConnected && accountChainId && (
         <CollectibleActionButton
           className={cn(
-            'bottom-0 m-0 w-full !rounded-none ease-in-out hover:visible peer-hover:visible',
+            'bottom-0 m-0 w-full rounded-none! ease-in-out hover:visible peer-hover:visible',
             '[@media(hover:hover)]:invisible [@media(hover:hover)]:absolute',
           )}
           tokenId={tokenId}

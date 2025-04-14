@@ -32,7 +32,7 @@ export const Logo = ({
       src={logoUrl}
       containerClassName={cn(
         'flex h-full w-auto max-w-[200px] items-center',
-        !disableMaxHeight ? 'max-h-[--headerHeight]' : '',
+        !disableMaxHeight ? 'max-h-(--headerHeight)' : '',
         !disableShadow
           ? 'hover:threed-drop-shadow-1 active:threed-drop-shadow-1'
           : '',

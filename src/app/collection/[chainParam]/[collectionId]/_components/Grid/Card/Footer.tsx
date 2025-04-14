@@ -21,7 +21,7 @@ export const Footer = ({ tokenMetadata, order }: FooterProps) => {
       <Text
         className={cn(
           height,
-          'md:text-md text-left text-xs font-medium text-foreground/50 max-lines-[1]',
+          'md:text-md text-left text-xs font-medium text-foreground/50 max-lines-1',
         )}
       >
         #{truncateMiddle(tokenId, 10) || '--'}

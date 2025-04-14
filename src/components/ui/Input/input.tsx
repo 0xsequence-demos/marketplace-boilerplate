@@ -10,12 +10,12 @@ import { type VariantProps, cva } from 'class-variance-authority';
 const inputBoxVariants = cva([
   'flex h-fit w-full items-center rounded-md border border-input bg-transparent text-foreground',
   'divide-x divide-input',
-  'ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
+  'ring-offset-background focus-within:outline-hidden focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
 ]);
 
 const inputVariants = cva(
   [
-    'h-full w-full bg-transparent outline-none',
+    'h-full w-full bg-transparent outline-hidden',
     'disabled:cursor-not-allowed disabled:opacity-50',
     'file:border-0 file:bg-transparent file:text-sm file:font-medium',
     'placeholder:text-muted-foreground/60',

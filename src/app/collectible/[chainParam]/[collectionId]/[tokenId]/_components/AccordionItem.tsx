@@ -16,7 +16,7 @@ export const CollectibleAccordionItem = ({
   return (
     <Accordion.Item
       value={id}
-      className="border-b-[1px] border-b-border bg-transparent focus:outline-none focus:ring-transparent"
+      className="border-b-[1px] border-b-border bg-transparent focus:outline-hidden focus:ring-transparent"
     >
       <Accordion.Trigger>{label}</Accordion.Trigger>
       <Accordion.Content className="overflow-x-auto pb-4">

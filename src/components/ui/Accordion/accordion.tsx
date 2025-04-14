@@ -26,7 +26,7 @@ const AccordionItem = React.forwardRef<
     ref={ref}
     className={cn(
       'rounded-md bg-foreground/[0.08] px-3 py-2.5',
-      'ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring',
+      'ring-offset-background focus-within:outline-hidden focus-within:ring-2 focus-within:ring-ring',
       className,
     )}
     {...props}
@@ -43,7 +43,7 @@ const AccordionTrigger = React.forwardRef<
       ref={ref}
       className={cn(
         'flex flex-1 items-center justify-between transition-all [&[data-state=open]>svg]:rotate-180',
-        'text-sm font-medium text-foreground/70 outline-none focus:outline-none',
+        'text-sm font-medium text-foreground/70 outline-hidden focus:outline-hidden',
         className,
       )}
       {...props}
