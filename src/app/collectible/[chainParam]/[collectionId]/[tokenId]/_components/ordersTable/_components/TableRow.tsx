@@ -98,7 +98,7 @@ const OrdersTableRow = ({
                 <OrdersTableAction
                   chainId={chainId}
                   collectionAddress={collectionContractAddress as Hex}
-                  tokenId={tokenId}
+                  tokenId={tokenId!}
                   order={order}
                 />
               </Table.Cell>
@@ -144,9 +144,9 @@ const OrdersTableRow = ({
         {accountAddress && (
           <Table.Cell className="p-0 pr-2">
             <OrdersTableAction
-              chainId={String(chainId)}
+              chainId={chainId}
               collectionAddress={collectionContractAddress as Hex}
-              tokenId={tokenId}
+              tokenId={tokenId!}
               order={order}
             />
           </Table.Cell>

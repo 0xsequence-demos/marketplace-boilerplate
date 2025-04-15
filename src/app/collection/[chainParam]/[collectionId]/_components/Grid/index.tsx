@@ -22,7 +22,7 @@ export const CollectiblesGrid = ({
   collectibleOrders,
 }: CollectiblesGridProps) => {
   const { chainParam, collectionId } = Routes.collection.useParams();
-  const chain = getChain(chainParam);
+  const chainId = getChain(chainParam)!.chainId
 
   return (
     <VirtuosoGrid
@@ -36,7 +36,7 @@ export const CollectiblesGrid = ({
           key={index}
           tokenId={data.metadata.tokenId}
           collectionAddress={collectionId}
-          collectionChainId={String(chain?.chainId)}
+          chainId={chainId}
           order={data.order}
         />
       )}

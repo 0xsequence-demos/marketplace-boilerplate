@@ -39,12 +39,12 @@ export const FilterBadges = observer(
     } = filters$.get();
 
     const { data } = useFilters({
-      chainId: chainId.toString(),
+      chainId,
       collectionAddress,
     });
 
     const { data: filteredCollectiblesCount } = useCountOfCollectables({
-      chainId: String(chainId),
+      chainId,
       collectionAddress,
       filter: {
         searchText,

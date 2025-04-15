@@ -1,9 +1,8 @@
-import { Table } from '../../../../../../../components/ui';
+import { Box, Table } from '../../../../../../../components/ui';
 import OrdersTableBody from './_components/Body';
 import OrdersTableFooter from './_components/Footer';
 import OrdersTableHeader from './_components/Header';
 import OrdersTableBodySkeleton from './_components/Skeletons';
-import { Box } from '@0xsequence/design-system';
 import type { Order, Page } from '@0xsequence/marketplace-sdk';
 import type { Observable } from '@legendapp/state';
 import { observer } from '@legendapp/state/react';

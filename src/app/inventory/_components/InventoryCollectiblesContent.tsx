@@ -20,7 +20,7 @@ import {
   useCollection,
   useListBalances,
 } from '@0xsequence/marketplace-sdk/react';
-import type { Hex } from 'viem';
+import type { Address, Hex } from 'viem';
 
 type InventoryCollectiblesContent = {
   collectionBalances: TokenBalance[];
@@ -57,8 +57,8 @@ const CollectionSection = ({
     hasNextPage,
   } = useListBalances({
     chainId,
-    accountAddress,
-    contractAddress: collectionAddress,
+    accountAddress: accountAddress as Address,
+    contractAddress: collectionAddress as Address,
   });
   const { data: collectionMetadata, isLoading: isCollectionMetadataLoading } =
     useCollection({ chainId, collectionAddress });
@@ -130,7 +130,7 @@ const CollectionSection = ({
                 key={c.tokenID + collectionAddress}
                 collectionAddress={collectionAddress as Hex}
                 tokenId={c.tokenID}
-                collectionChainId={String(c.chainId)}
+                chainId={c.chainId}
               />
             ) : (
               <InventoryRow key={c.tokenID + collectionAddress} />

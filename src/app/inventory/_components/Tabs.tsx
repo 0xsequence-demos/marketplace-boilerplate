@@ -13,10 +13,11 @@ import {
   useMarketplaceConfig,
 } from '@0xsequence/marketplace-sdk/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Address } from 'viem';
 
 type InventoryTabsProps = {
   chainId: number;
-  accountAddress: string;
+  accountAddress: Address;
 };
 
 const inventoryTabsList = {

@@ -22,7 +22,7 @@ type CollectibleActionButtonProps = {
   tokenId: string;
   collectionAddress: Hex;
   collectibleName?: string;
-  collectionChainId: string;
+  collectionChainId: number;
 };
 
 export const CollectibleActionButton = ({
@@ -65,27 +65,27 @@ export const CollectibleActionButton = ({
   let orderSide: OrderSide = undefined;
 
   // sellable collectible
-  if (userOwnsCollectible && highestOffer?.order) {
+  if (userOwnsCollectible && highestOffer) {
     orderSide = 'sell';
   }
 
   // buyable collectible
-  if (!userOwnsCollectible && lowestListing?.order) {
+  if (!userOwnsCollectible && lowestListing) {
     orderSide = 'buy';
   }
 
   // transferable collectible
-  if (userOwnsCollectible && !highestOffer?.order) {
+  if (userOwnsCollectible && !highestOffer) {
     orderSide = 'transfer';
   }
 
   // offerable collectible
-  if (!userOwnsCollectible && !lowestListing?.order) {
+  if (!userOwnsCollectible && !lowestListing) {
     orderSide = 'order';
   }
 
   // listable collectible
-  if (userOwnsCollectible && !lowestListing?.order) {
+  if (userOwnsCollectible && !lowestListing) {
     orderSide = 'listing';
   }
 
@@ -109,10 +109,11 @@ export const CollectibleActionButton = ({
             'lowestListing and collectibleName are required for buy',
           );
         showBuyModal({
-          tokenId,
+          collectibleId: tokenId,
           collectionAddress,
           chainId: collectionChainId,
-          order: lowestListing.order!,
+          orderId: lowestListing.orderId,
+          marketplace: lowestListing.marketplace,
         });
       },
     },
@@ -128,7 +129,7 @@ export const CollectibleActionButton = ({
           tokenId,
           collectionAddress,
           chainId: collectionChainId,
-          order: highestOffer.order!,
+          order: highestOffer
         });
       },
     },

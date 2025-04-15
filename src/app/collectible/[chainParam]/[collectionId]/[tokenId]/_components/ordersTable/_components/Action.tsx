@@ -17,7 +17,7 @@ const OrdersTableAction = ({
   order,
 }: {
   collectionAddress: Hex;
-  chainId: string;
+  chainId: number;
   tokenId: string;
   order: Order;
 }) => {
@@ -105,8 +105,9 @@ const OrdersTableAction = ({
     openBuyModal({
       collectionAddress,
       chainId,
-      tokenId,
-      order,
+      collectibleId: tokenId,
+      orderId: order.orderId,
+      marketplace: order.marketplace,
     });
   }
 
