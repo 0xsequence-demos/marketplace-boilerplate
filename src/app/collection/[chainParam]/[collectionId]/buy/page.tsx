@@ -1,6 +1,5 @@
 'use client';
 
-import type { Routes } from '~/lib/routes';
 import { getChainId } from '~/lib/utils/getChain';
 
 import { Button, Flex, Text } from '$ui';
@@ -10,11 +9,8 @@ import { OrderSide } from '@0xsequence/marketplace-sdk';
 import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 import { observer, use$ } from '@legendapp/state/react';
 
-type CollectionBuyPageParams = {
-  params: typeof Routes.collection.params;
-};
 
-const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
+const CollectionBuyPage = observer(({ params }) => {
   const chainId = getChainId(params.chainParam)!;
   const { collectionId } = params;
 

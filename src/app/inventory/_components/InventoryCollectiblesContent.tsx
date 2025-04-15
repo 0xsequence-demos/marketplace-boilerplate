@@ -129,7 +129,7 @@ const CollectionSection = ({
               <CollectibleCard
                 key={c.tokenID + collectionAddress}
                 collectionAddress={collectionAddress as Hex}
-                tokenId={c.tokenID}
+                tokenId={c.tokenID!}
                 chainId={c.chainId}
               />
             ) : (
