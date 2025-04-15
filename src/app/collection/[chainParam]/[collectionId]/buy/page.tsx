@@ -9,10 +9,11 @@ import { OrderSide } from '@0xsequence/marketplace-sdk';
 import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 import { observer, use$ } from '@legendapp/state/react';
 import { Address } from 'viem';
+import { use } from 'react';
 
 
-const CollectionBuyPage = observer(async ({ params }: { params: Promise<{ chainParam: string; collectionId: Address }> }) => {
-  const { chainParam, collectionId } = await params;
+const CollectionBuyPage = observer(({ params }: { params: Promise<{ chainParam: string; collectionId: Address }> }) => {
+  const { chainParam, collectionId } = use(params);
   const chainId = getChainId(chainParam)!;
 
   const text = filters$.searchText.get();
@@ -20,7 +21,7 @@ const CollectionBuyPage = observer(async ({ params }: { params: Promise<{ chainP
   const includeEmpty = !filters$.showListedOnly.get();
 
   const clearAllFilters = () => filters$.clearAllFilters();
-  const appliedFilters = use$(() => filters$.appliedFilters);
+  const appliedFilters = use$(filters$.appliedFilters);
 
   const {
     data: collectibles,
