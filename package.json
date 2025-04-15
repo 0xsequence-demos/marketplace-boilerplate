@@ -12,7 +12,6 @@
 		"check": "tsc --noEmit"
 	},
 	"dependencies": {
-		"0xsequence": "^2.3.8",
 		"@0xsequence/checkout": "^5.1.1",
 		"@0xsequence/connect": "^5.1.1",
 		"@0xsequence/design-system": "^2.1.6",
@@ -38,6 +37,7 @@
 		"@tailwindcss/postcss": "^4.1.4",
 		"@tanstack/react-query": "^5.74.3",
 		"@tanstack/react-query-devtools": "^5.74.3",
+		"0xsequence": "^2.3.8",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"date-fns": "^4.1.0",
@@ -55,12 +55,14 @@
 		"tailwind-merge": "^3.2.0",
 		"tailwindcss": "^4.1.4",
 		"tailwindcss-animate": "^1.0.7",
+		"typescript-eslint": "^8.30.1",
 		"viem": "^2.27.0",
 		"wagmi": "^2.14.16",
 		"zod": "^3.24.2"
 	},
 	"devDependencies": {
-		"@tanstack/eslint-plugin-query": "^5.73.3",
+		"@eslint/eslintrc": "^3.3.1",
+		"@eslint/js": "^9.24.0",
 		"@trivago/prettier-plugin-sort-imports": "^5.2.2",
 		"@types/eslint": "^8.56.12",
 		"@types/node": "^22.14.1",
@@ -69,7 +71,7 @@
 		"@typescript-eslint/eslint-plugin": "^8.30.1",
 		"@typescript-eslint/parser": "^8.30.1",
 		"@vanilla-extract/next-plugin": "^2.4.10",
-		"eslint": "^8.57.1",
+		"eslint": "^9.24.0",
 		"eslint-config-next": "15.3.0",
 		"prettier": "^3.5.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",

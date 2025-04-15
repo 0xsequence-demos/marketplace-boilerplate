@@ -68,7 +68,7 @@ const CollectionSection = ({
   const isGridView = true;
 
   const collectibles =
-    collectionBalances?.pages.flatMap((p: { balances: any; }) => p.balances) || [];
+    collectionBalances?.pages.flatMap((p) => p.balances) || [];
 
   const handleLoadMore = () => {
     if (isFetchingNextPage) {
