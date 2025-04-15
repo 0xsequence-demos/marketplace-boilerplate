@@ -10,12 +10,12 @@ export const CollectionCardSkeleton = () => {
       />
 
       <Flex className="items-center">
-        <Text as="h6" className="text-sm max-lines-1" loading>
+        <Text as="h6" className="text-sm line-clamp-1" loading>
           -----
         </Text>
       </Flex>
 
-      <Text className="text-sm text-foreground/50 max-lines-2" loading>
+      <Text className="text-sm text-foreground/50 line-clamp-2" loading>
         -------
         <br />
         -------

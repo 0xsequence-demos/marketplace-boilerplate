@@ -10,7 +10,7 @@ type DescriptionProps = {
 export const Description = ({ description, className }: DescriptionProps) => (
   <Text
     title={description}
-    className={cn('text-sm text-foreground/50 max-lines-3', className)}
+    className={cn('text-sm text-foreground/50 line-clamp-3', className)}
   >
     {description}
   </Text>

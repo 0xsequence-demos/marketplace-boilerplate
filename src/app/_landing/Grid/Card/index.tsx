@@ -43,7 +43,7 @@ const Card = ({ chainId, address, bannerUrl }: CollectionCard) => {
       className={cn(
         'relative flex flex-col rounded-md bg-foreground/10',
         'cursor-pointer transition-colors',
-        'hover:threed-shadow-base hover:threed-shadow-primary focus:outline-hidden focus:threed-shadow-base focus:threed-shadow-primary active:threed-shadow-sm',
+        'focus:outline-hidden',
         'duration-300 animate-in fade-in',
       )}
     >
@@ -80,7 +80,7 @@ const Card = ({ chainId, address, bannerUrl }: CollectionCard) => {
             </Avatar.Base>
 
             <Text
-              className="text-md font-semibold text-foreground max-lines-1"
+              className="text-md font-semibold text-foreground line-clamp-1"
               title={name}
             >
               {name}
@@ -91,7 +91,7 @@ const Card = ({ chainId, address, bannerUrl }: CollectionCard) => {
 
           <Text
             title={description}
-            className="overflow-hidden text-sm font-medium text-foreground/50 max-lines-3"
+            className="overflow-hidden text-sm font-medium text-foreground/50 line-clamp-3"
           >
             {description}
           </Text>
