@@ -2,7 +2,6 @@
 
 import { NotConnectedWarning } from '~/components/NotConnectedWarning';
 import { Box, Text } from '~/components/ui';
-import type { Routes } from '~/lib/routes';
 import { getChainId } from '~/lib/utils/getChain';
 
 import { filters$ } from '../_components/FilterStore';
@@ -12,13 +11,10 @@ import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 import { observer } from '@legendapp/state/react';
 import { useAccount } from 'wagmi';
 
-type CollectionBuyPageParams = {
-  params: typeof Routes.collection.params;
-};
 
-const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
-  const chainId = getChainId(params.chainParam)!;
-  const { collectionId } = params;
+const CollectionBuyPage = observer(async ({ params }: { params: Promise<{ chainParam: string; collectionId: string }> }) => {
+  const { chainParam, collectionId } = await params;
+  const chainId = getChainId(chainParam)!;
   const { address, isConnected } = useAccount();
 
   const text = filters$.searchText.get();

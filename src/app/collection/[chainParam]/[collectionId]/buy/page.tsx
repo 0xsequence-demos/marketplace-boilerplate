@@ -8,11 +8,12 @@ import { CollectiblesGrid } from '../_components/Grid';
 import { OrderSide } from '@0xsequence/marketplace-sdk';
 import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 import { observer, use$ } from '@legendapp/state/react';
+import { Address } from 'viem';
 
 
-const CollectionBuyPage = observer(({ params }) => {
-  const chainId = getChainId(params.chainParam)!;
-  const { collectionId } = params;
+const CollectionBuyPage = observer(async ({ params }: { params: Promise<{ chainParam: string; collectionId: Address }> }) => {
+  const { chainParam, collectionId } = await params;
+  const chainId = getChainId(chainParam)!;
 
   const text = filters$.searchText.get();
   const properties = filters$.filterOptions.get();
