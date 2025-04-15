@@ -24,7 +24,7 @@ const OrdersTableHeader = ({
         ))}
         {
           // empty cell for actions
-          address && !isLoading && <Table.Head/>
+          address && !isLoading && <Table.Head />
         }
       </Table.Row>
     </Table.Header>

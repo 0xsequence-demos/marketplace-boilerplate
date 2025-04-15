@@ -9,22 +9,15 @@ import { CollectionViewPageLayout } from './_components/Layout';
 import { CollectionSidebar } from './_components/Sidebar';
 import type { ChainId } from '@0xsequence/network';
 
-const Layout = async (
-  props: {
-    children: React.ReactNode;
-    params: Promise<typeof Routes.collection.params>;
-  }
-) => {
+const Layout = async (props: {
+  children: React.ReactNode;
+  params: Promise<typeof Routes.collection.params>;
+}) => {
   const params = await props.params;
 
-  const {
-    chainParam,
-    collectionId
-  } = params;
+  const { chainParam, collectionId } = params;
 
-  const {
-    children
-  } = props;
+  const { children } = props;
 
   const chainId = getChainId(chainParam);
   const client = await ssrClient();

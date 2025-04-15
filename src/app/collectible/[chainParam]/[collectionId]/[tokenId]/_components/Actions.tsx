@@ -131,8 +131,7 @@ export const CollectibleTradeActions = ({
     });
   };
 
-  const buyDisabled =
-    !isConnected || !lowestListing || item721AlreadyOwned;
+  const buyDisabled = !isConnected || !lowestListing || item721AlreadyOwned;
   const offerDisabled = !isConnected || item721AlreadyOwned;
   const listingDisabled = !isConnected || !tokenBalance;
   const sellDisabled = !isConnected || !highestOffer || !tokenBalance;

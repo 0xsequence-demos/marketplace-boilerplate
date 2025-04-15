@@ -1,4 +1,3 @@
-
 import Pill from './Pill';
 import { Text } from '@0xsequence/design-system';
 import {
@@ -17,7 +16,6 @@ const MarketplacePill = ({
     originName: originName,
     kind: marketplaceKind,
   });
-
 
   if (!marketplaceDetails) {
     return (

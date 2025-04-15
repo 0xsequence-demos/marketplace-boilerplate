@@ -1,29 +1,23 @@
 import { cn, Table } from '~/components/ui';
 
+import OrdersTableAction from './Action';
 import AddressPill from './AddressPill';
 import MarketplacePill from './MarketplacePill';
 import { Text } from '@0xsequence/design-system';
 import { compareAddress, type Order } from '@0xsequence/marketplace-sdk';
+import { useCurrencies } from '@0xsequence/marketplace-sdk/react';
 import { formatDistance } from 'date-fns';
 import { formatUnits, type Hex } from 'viem';
 import { useAccount } from 'wagmi';
-import { useCurrencies } from '@0xsequence/marketplace-sdk/react';
-import OrdersTableAction from './Action';
 
-const OrdersTableRow = ({
-  order,
-  index,
-}: {
-  order: Order;
-  index: number;
-}) => {
+const OrdersTableRow = ({ order, index }: { order: Order; index: number }) => {
   const { chainId, tokenId, collectionContractAddress } = order;
   const { address: accountAddress } = useAccount();
   const { data: currencies } = useCurrencies({
     chainId,
   });
-  const currency = currencies?.find(
-    (c) => compareAddress(c.contractAddress, order.priceCurrencyAddress)
+  const currency = currencies?.find((c) =>
+    compareAddress(c.contractAddress, order.priceCurrencyAddress),
   );
   return (
     <>
@@ -71,9 +65,7 @@ const OrdersTableRow = ({
             </div>
           </div>
 
-          <div
-            className="flex items-end justify-between gap-6"
-          >
+          <div className="flex items-end justify-between gap-6">
             <div className="flex flex-col gap-1 flex-grow">
               <Text color="text50" fontSize="xsmall" fontWeight="bold">
                 By

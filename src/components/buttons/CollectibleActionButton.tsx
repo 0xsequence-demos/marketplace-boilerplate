@@ -129,7 +129,7 @@ export const CollectibleActionButton = ({
           tokenId,
           collectionAddress,
           chainId: collectionChainId,
-          order: highestOffer
+          order: highestOffer,
         });
       },
     },

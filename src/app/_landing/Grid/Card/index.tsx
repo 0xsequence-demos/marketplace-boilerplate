@@ -30,7 +30,6 @@ const Card = ({ chainId, address, bannerUrl }: CollectionCard) => {
     collectionAddress: address,
   });
 
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const image = data?.extensions.ogImage || bannerUrl || placeholderImgUrl;
   const description = data?.extensions.description;
   const name = data?.name;

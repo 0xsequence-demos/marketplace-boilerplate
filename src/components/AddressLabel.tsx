@@ -14,7 +14,6 @@ export const AddressLabel = ({ address, chainId }: AddressLabelProps) => {
   const [, setShowTooltip] = useState(false);
   const [isCopied, setCopy] = useState(false);
 
-
   const onClear = () => {
     setShowTooltip(false);
     setCopy(false);

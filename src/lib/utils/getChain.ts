@@ -18,4 +18,3 @@ export const getChainName = (nameOrId: ChainNameOrId) =>
   getChain(nameOrId)?.name;
 export const getChainId = (nameOrId: ChainNameOrId) =>
   getChain(nameOrId)?.chainId;
-

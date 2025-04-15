@@ -18,7 +18,6 @@ export const WalletIcon = (props: IconProps) => (
   </svg>
 );
 
-
 export const GlobeIcon = (props: IconProps) => (
   <svg
     width="20"
@@ -36,8 +35,6 @@ export const GlobeIcon = (props: IconProps) => (
     />
   </svg>
 );
-
-
 
 export const SearchIcon = (props: IconProps) => (
   <svg
@@ -131,8 +128,6 @@ export const LoadingIcon = ({ className, ...otherProps }: IconProps) => (
   </svg>
 );
 
-
-
 export const ChevronUpIcon = (props: IconProps) => (
   <svg
     width="20"
@@ -150,7 +145,6 @@ export const ChevronUpIcon = (props: IconProps) => (
     />
   </svg>
 );
-
 
 export const CopyIcon = (props: IconProps) => (
   <svg
@@ -194,12 +188,6 @@ export const LinkIcon = (props: IconProps) => (
   </svg>
 );
 
-
-
-
-
-
-
 export const DiscordIcon = (props: IconProps) => (
   <svg
     width="20"
@@ -232,10 +220,6 @@ export const TwitterIcon = (props: IconProps) => (
   </svg>
 );
 
-
-
-
-
 export const CheckmarkIcon = (props: IconProps) => {
   return (
     <svg
@@ -253,9 +237,6 @@ export const CheckmarkIcon = (props: IconProps) => {
     </svg>
   );
 };
-
-
-
 
 export const DisconnectIcon = (props: IconProps) => {
   return (
@@ -289,7 +270,6 @@ export const DisconnectIcon = (props: IconProps) => {
   );
 };
 
-
 export const BugIcon = (props: IconProps) => {
   return (
     <svg
@@ -307,9 +287,6 @@ export const BugIcon = (props: IconProps) => {
   );
 };
 
-
-
-
 export const GasIcon = (props: IconProps) => {
   return (
     <svg
@@ -326,8 +303,6 @@ export const GasIcon = (props: IconProps) => {
     </svg>
   );
 };
-
-
 
 export const YoutubeIcon = (props: IconProps) => {
   return (
@@ -386,5 +361,3 @@ export const TiktokIcon = (props: IconProps) => {
     </svg>
   );
 };
-
-

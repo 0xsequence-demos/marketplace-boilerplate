@@ -152,7 +152,6 @@ const CollectionSection = ({
   );
 };
 
-
 const ContentWrapper = ({
   isGridView,
   children,

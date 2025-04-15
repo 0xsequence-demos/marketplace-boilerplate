@@ -1,9 +1,12 @@
 'use client';
 
 import { ToastProvider, Tooltip } from '$ui';
-import { ThemeProvider } from '@0xsequence/design-system';
-import { type ConnectConfig, SequenceConnectProvider } from '@0xsequence/connect';
 import { SequenceCheckoutProvider } from '@0xsequence/checkout';
+import {
+  type ConnectConfig,
+  SequenceConnectProvider,
+} from '@0xsequence/connect';
+import { ThemeProvider } from '@0xsequence/design-system';
 import type { SdkConfig } from '@0xsequence/marketplace-sdk';
 import {
   MarketplaceProvider,
@@ -48,8 +51,7 @@ export default function Providers({
     },
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment 
-  const wagmiConfig:Config = createWagmiConfig(
+  const wagmiConfig: Config = createWagmiConfig(
     marketplaceConfig,
     sdkConfig,
     !!sdkInitialState,

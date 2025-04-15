@@ -13,7 +13,7 @@ import {
   useMarketplaceConfig,
 } from '@0xsequence/marketplace-sdk/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Address } from 'viem';
+import { type Address } from 'viem';
 
 type InventoryTabsProps = {
   chainId: number;
@@ -80,9 +80,7 @@ export const InventoryTabs = ({
           compareAddress(
             marketplaceCollection.address,
             balanceCollection.contractAddress,
-          ) &&
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-          marketplaceCollection.chainId === balanceCollection.chainId,
+          ) && marketplaceCollection.chainId === balanceCollection.chainId,
       ),
   );
 

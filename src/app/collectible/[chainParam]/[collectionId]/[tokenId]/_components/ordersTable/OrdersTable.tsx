@@ -26,13 +26,8 @@ type OrdersTableProps = {
 };
 
 const OrdersTable = observer((props: OrdersTableProps) => {
-  const {
-    collectionAddress,
-    page$,
-    orders,
-    ordersCount,
-    ordersCountLoading,
-  } = props;
+  const { collectionAddress, page$, orders, ordersCount, ordersCountLoading } =
+    props;
 
   const columns = ['Price', 'Quantity', 'By', 'Expires', 'Marketplace'];
 
@@ -49,7 +44,7 @@ const OrdersTable = observer((props: OrdersTableProps) => {
         )}
 
         {!props.isLoading && (
-              <OrdersTableBody
+          <OrdersTableBody
             orders={orders}
             collectionAddress={collectionAddress}
           />

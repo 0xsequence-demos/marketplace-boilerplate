@@ -10,9 +10,6 @@ interface CollectibleFilters {
   appliedFilters: PropertyFilter[];
 }
 
-
-
-
 const initialFilters: CollectibleFilters = {
   filtersSidebarOpen: false,
   showListedOnly: false,
