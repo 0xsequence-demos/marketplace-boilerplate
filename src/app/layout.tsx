@@ -6,6 +6,7 @@ import { cn } from '$ui';
 import { Layout } from './_layout';
 import Providers from './_providers';
 import type { Metadata } from 'next';
+import InjectBuilderCss from '~/styles/inject-builder-css';
 
 export default async function RootLayout({
   children,
@@ -29,12 +30,13 @@ export default async function RootLayout({
           </>
         ) : null}
         {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null}
-        <style>{cssString}</style>
       </head>
       <body className={cn(classNames.themeManager)}>
-        <Providers sdkInitialState={initialState} sdkConfig={client.config}>
-          <Layout>{children}</Layout>
-        </Providers>
+        <InjectBuilderCss cssString={cssString}>
+          <Providers sdkInitialState={initialState} sdkConfig={client.config}>
+            <Layout>{children}</Layout>
+          </Providers>
+        </InjectBuilderCss>
       </body>
     </html>
   );
