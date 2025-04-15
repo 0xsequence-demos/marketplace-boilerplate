@@ -5,7 +5,6 @@ import '~/styles/globals.css';
 import { cn } from '$ui';
 import { Layout } from './_layout';
 import Providers from './_providers';
-import '@0xsequence/marketplace-sdk/styles';
 import type { Metadata } from 'next';
 
 export default async function RootLayout({
@@ -23,8 +22,12 @@ export default async function RootLayout({
       <head>
         <meta name="mobile-web-app-capable" content="yes" />
 
-        <link rel="icon" href={faviconUrl} />
-        <link rel="shortcut icon" href={faviconUrl} />
+        {faviconUrl ? (
+          <>
+            <link rel="icon" href={faviconUrl} />
+            <link rel="shortcut icon" href={faviconUrl} />
+          </>
+        ) : null}
         {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null}
         <style>{cssString}</style>
       </head>
