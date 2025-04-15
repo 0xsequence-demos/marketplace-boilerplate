@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import { getChain } from '~/lib/utils/getChain';
 
 import ENSName from './ENSName';
@@ -11,45 +9,10 @@ type AddressLabelProps = {
 };
 
 export const AddressLabel = ({ address, chainId }: AddressLabelProps) => {
-  const [, setShowTooltip] = useState(false);
-  const [isCopied, setCopy] = useState(false);
-
-  const onClear = () => {
-    setShowTooltip(false);
-    setCopy(false);
-  };
-
-  useEffect(() => {
-    if (isCopied) setTimeout(onClear, 2000);
-  }, [isCopied]);
-
   const explorerUrl = getChain(chainId)?.blockExplorer?.rootUrl;
 
   return (
     <Flex className="items-center gap-2">
-      {/* <Tooltip.Root
-        open={showTooltip}
-        onOpenChange={open => setShowTooltip(open)}
-      >
-        <Tooltip.Trigger asChild>
-          <Button
-            variant={isCopied ? 'success' : 'muted'}
-            onClick={() => {
-              navigator?.clipboard?.writeText(address)
-              onCopy()
-            }}
-          >
-            <Icon
-              type={iconState}
-              size={16}
-              css={{ color: 'inherit', cursor: 'pointer', minWidth: 16 }}
-            />
-          </Button>
-        </Tooltip.Trigger>
-
-        <Tooltip.Content side="top">{tooltip}</Tooltip.Content>
-      </Tooltip.Root> */}
-
       <Button asChild variant="link" title={address} className="px-0 uppercase">
         <a
           href={`${explorerUrl}address/${address}`}
