@@ -2,8 +2,8 @@
 
 import { ToastProvider, Tooltip } from '$ui';
 import { ThemeProvider } from '@0xsequence/design-system';
-import { type KitConfig, KitProvider } from '@0xsequence/kit';
-import { KitCheckoutProvider } from '@0xsequence/kit-checkout';
+import { type ConnectConfig, SequenceConnectProvider } from '@0xsequence/connect';
+import { SequenceCheckoutProvider } from '@0xsequence/checkout';
 import type { SdkConfig } from '@0xsequence/marketplace-sdk';
 import {
   MarketplaceProvider,
@@ -41,7 +41,7 @@ export default function Providers({
     return null; //TODO
   }
 
-  const kitConfig: KitConfig = {
+  const connectConfig: ConnectConfig = {
     projectAccessKey: sdkConfig.projectAccessKey,
     signIn: {
       projectName: marketplaceConfig.title,
@@ -59,8 +59,8 @@ export default function Providers({
     <ThemeProvider>
       <WagmiProvider config={wagmiConfig} initialState={sdkInitialState?.wagmi}>
         <QueryClientProvider client={queryClient}>
-          <KitProvider config={kitConfig}>
-            <KitCheckoutProvider>
+          <SequenceConnectProvider config={connectConfig}>
+            <SequenceCheckoutProvider>
               <Tooltip.Provider>
                 <MarketplaceProvider config={sdkConfig}>
                   {children}
@@ -69,8 +69,8 @@ export default function Providers({
                 </MarketplaceProvider>
                 <ToastProvider />
               </Tooltip.Provider>
-            </KitCheckoutProvider>
-          </KitProvider>
+            </SequenceCheckoutProvider>
+          </SequenceConnectProvider>
         </QueryClientProvider>
       </WagmiProvider>
     </ThemeProvider>
