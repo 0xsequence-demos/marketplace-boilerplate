@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 import { Button } from '@0xsequence/design-system';
 import { type Order, OrderSide } from '@0xsequence/marketplace-sdk';
 import {
@@ -6,7 +8,6 @@ import {
   useCancelOrder,
   useSellModal,
 } from '@0xsequence/marketplace-sdk/react';
-import { toast } from 'react-toastify';
 import type { Hex } from 'viem';
 import { useAccount } from 'wagmi';
 
@@ -17,7 +18,7 @@ const OrdersTableAction = ({
   order,
 }: {
   collectionAddress: Hex;
-  chainId: string;
+  chainId: number;
   tokenId: string;
   order: Order;
 }) => {
@@ -36,27 +37,27 @@ const OrdersTableAction = ({
     chainId,
     collectionAddress,
     onError: (error) => {
-      toast("An error occurred while cancelling the order", {
-        type: "error",
+      toast('An error occurred while cancelling the order', {
+        type: 'error',
       });
       console.error(error);
     },
     onSuccess: () => {
-      toast("You canceled the order", {
-        type: "success",
+      toast('You canceled the order', {
+        type: 'success',
       });
     },
   });
   const { show: openBuyModal } = useBuyModal({
     onError: (error) => {
-      toast("An error occurred while purchasing", {
-        type: "error",
+      toast('An error occurred while purchasing', {
+        type: 'error',
       });
       console.error(error);
     },
     onSuccess: () => {
-      toast("You purchased the collectible", {
-        type: "success",
+      toast('You purchased the collectible', {
+        type: 'success',
       });
     },
   });
@@ -105,8 +106,9 @@ const OrdersTableAction = ({
     openBuyModal({
       collectionAddress,
       chainId,
-      tokenId,
-      order,
+      collectibleId: tokenId,
+      orderId: order.orderId,
+      marketplace: order.marketplace,
     });
   }
 

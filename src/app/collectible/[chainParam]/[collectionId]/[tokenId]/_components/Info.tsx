@@ -1,12 +1,12 @@
 'use client';
 
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
+import { getChainName } from '~/lib/utils/getChain';
 
 import { Avatar, Flex, Text, cn } from '$ui';
 import { NetworkImage } from '@0xsequence/design-system';
 import { truncateMiddle } from '@0xsequence/marketplace-sdk';
 import NextLink from 'next/link';
-import { getChainName } from '~/lib/utils/getChain';
 
 type CollectibleInfoProps = {
   collectionName: string | undefined;

@@ -9,7 +9,7 @@ const buttonVariants = cva(
     'btn',
     'flex w-fit items-center justify-center gap-2 rounded-md transition-all',
     'pre-wrap whitespace-nowrap text-sm',
-    'ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+    'ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
     'disabled:pointer-events-none disabled:opacity-50',
   ],
   {
@@ -49,7 +49,7 @@ const buttonVariants = cva(
   },
 );
 
-export interface ButtonProps
+interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   label?: React.ReactNode;
@@ -95,7 +95,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = 'Button';
 
-export { Button, buttonVariants };
+export { Button };
 
 const LoadingBox = () => {
   return (

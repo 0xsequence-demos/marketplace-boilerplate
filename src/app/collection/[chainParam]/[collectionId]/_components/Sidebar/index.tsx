@@ -12,7 +12,6 @@ import { PropertyFilters } from './PropertyFilters';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '@0xsequence/marketplace-sdk';
 import { useFilters } from '@0xsequence/marketplace-sdk/react';
 import type { ObservableBoolean } from '@legendapp/state';
-import { observer } from '@legendapp/state/react';
 import { usePathname } from 'next/navigation';
 import type { Hex } from 'viem';
 
@@ -66,7 +65,7 @@ const CollectionSidebarContent = ({
   // const { isConnected } = useAccount();
 
   const collectableFilters = useFilters({
-    chainId: String(chainId),
+    chainId,
     collectionAddress,
   });
 
@@ -160,7 +159,7 @@ function MobileSidebarWrapper({ children }: { children: React.ReactNode }) {
     <Portal>
       <Box className="fixed bottom-0 left-1/2 z-20 -translate-x-1/2 rounded-md bg-background">
         <Button
-          className="!rounded-[inherit]"
+          className="rounded-[inherit]!"
           variant="muted"
           label="SHOW SIDEBAR"
           onClick={toggleState}
@@ -175,7 +174,7 @@ function MobileSidebarWrapper({ children }: { children: React.ReactNode }) {
         }}
         className={cn(
           isOpen
-            ? 'visible left-0 bg-background/50 backdrop-blur-sm'
+            ? 'visible left-0 bg-background/50 backdrop-blur-xs'
             : 'invisible left-[-100vw] bg-transparent backdrop-blur-0',
           'fixed top-14 z-30 h-[calc(100vh-3.5rem)] w-screen transition-all',
         )}

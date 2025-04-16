@@ -7,9 +7,9 @@ import CollectibleAddresses from '../_components/Addresses';
 import { CollectibleDescription } from '../_components/Description';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import { CollectibleImage } from './_components/Image';
-import { CollectibleProperties } from './_components/Properties';
 import ListingsTable from './_components/ListingsTable';
 import OffersTable from './_components/OffersTable';
+import { CollectibleProperties } from './_components/Properties';
 
 export default function Page() {
   const { collectibleMetadata, collectionId, chainId } = useCollectableData();
@@ -49,7 +49,7 @@ export default function Page() {
         </CollectibleAccordionItem>
 
         <CollectibleAccordionItem id="listings" label="Listings">
-          <ListingsTable/>
+          <ListingsTable />
         </CollectibleAccordionItem>
 
         <CollectibleAccordionItem id="offers" label="Offers">

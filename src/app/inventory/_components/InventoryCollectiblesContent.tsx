@@ -20,8 +20,7 @@ import {
   useCollection,
   useListBalances,
 } from '@0xsequence/marketplace-sdk/react';
-import { ContractType } from '@0xsequence/metadata';
-import type { Hex } from 'viem';
+import type { Address, Hex } from 'viem';
 
 type InventoryCollectiblesContent = {
   collectionBalances: TokenBalance[];
@@ -58,8 +57,8 @@ const CollectionSection = ({
     hasNextPage,
   } = useListBalances({
     chainId,
-    accountAddress,
-    contractAddress: collectionAddress,
+    accountAddress: accountAddress as Address,
+    contractAddress: collectionAddress as Address,
   });
   const { data: collectionMetadata, isLoading: isCollectionMetadataLoading } =
     useCollection({ chainId, collectionAddress });
@@ -128,12 +127,13 @@ const CollectionSection = ({
           {collectibles.map((c) => {
             return isGridView ? (
               <CollectibleCard
+                key={c.tokenID + collectionAddress}
                 collectionAddress={collectionAddress as Hex}
                 tokenId={c.tokenID!}
-                collectionChainId={String(c.chainId)}
+                chainId={c.chainId}
               />
             ) : (
-              <InventoryRow />
+              <InventoryRow key={c.tokenID + collectionAddress} />
             );
           })}
         </ContentWrapper>
@@ -150,17 +150,6 @@ const CollectionSection = ({
       </Accordion.Content>
     </Accordion.Item>
   );
-};
-
-const getContractType = (contractType?: string) => {
-  switch (contractType?.toUpperCase()) {
-    case 'ERC721':
-      return ContractType.ERC721;
-    case 'ERC1155':
-      return ContractType.ERC1155;
-    default:
-      return ContractType.UNKNOWN;
-  }
 };
 
 const ContentWrapper = ({

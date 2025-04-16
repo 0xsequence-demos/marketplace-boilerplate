@@ -10,7 +10,7 @@ type GridStyleProps = {
   template?: string;
 };
 
-export interface GridProps
+interface GridProps
   extends React.HTMLAttributes<HTMLDivElement>,
     GridStyleProps {
   as?: string;

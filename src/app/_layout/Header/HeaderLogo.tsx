@@ -4,8 +4,8 @@ import { ssrClient } from '~/config/marketplace-sdk/ssr';
 import Link from 'next/link';
 
 export async function HeaderLogo() {
-  const { getMarketplaceConfig } = ssrClient();
-  const marketplaceConfig = await getMarketplaceConfig();
+  const client = await ssrClient();
+  const marketplaceConfig = await client.getMarketplaceConfig();
   return (
     <Link
       prefetch={false}

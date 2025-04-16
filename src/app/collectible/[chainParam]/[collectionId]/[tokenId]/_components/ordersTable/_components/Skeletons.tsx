@@ -24,11 +24,7 @@ const OrdersTableBodySkeleton = ({
   );
 };
 
-const OrdersTableRowSkeletonWideScreen = ({
-  columns,
-}: {
-  columns: number;
-}) => {
+const OrdersTableRowSkeletonWideScreen = ({ columns }: { columns: number }) => {
   return (
     <Table.Row className="hidden md:table-row">
       {Array.from({ length: columns }).map((_, index) => (

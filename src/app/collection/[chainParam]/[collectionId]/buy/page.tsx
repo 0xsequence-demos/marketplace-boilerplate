@@ -1,36 +1,34 @@
 'use client';
 
-import type { Routes } from '~/lib/routes';
 import { getChainId } from '~/lib/utils/getChain';
 
-import { Box, Button, Flex, Text } from '$ui';
+import { Button, Flex, Text } from '$ui';
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
 import { OrderSide } from '@0xsequence/marketplace-sdk';
 import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 import { observer, use$ } from '@legendapp/state/react';
+import { Address } from 'viem';
+import { use } from 'react';
 
-type CollectionBuyPageParams = {
-  params: typeof Routes.collection.params;
-};
 
-const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
-  const chainId = getChainId(params.chainParam);
-  const { collectionId } = params;
+const CollectionBuyPage = observer(({ params }: { params: Promise<{ chainParam: string; collectionId: Address }> }) => {
+  const { chainParam, collectionId } = use(params);
+  const chainId = getChainId(chainParam)!;
 
   const text = filters$.searchText.get();
   const properties = filters$.filterOptions.get();
   const includeEmpty = !filters$.showListedOnly.get();
 
   const clearAllFilters = () => filters$.clearAllFilters();
-  const appliedFilters = use$(() => filters$.appliedFilters);
+  const appliedFilters = use$(filters$.appliedFilters);
 
   const {
     data: collectibles,
     isLoading: collectiblesLoading,
     fetchNextPage: fetchNextCollectibles,
   } = useListCollectibles({
-    chainId: String(chainId),
+    chainId,
     collectionAddress: collectionId,
     filter: {
       searchText: text,

@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import "@0xsequence/marketplace-sdk/styles/preset";
+
+@import "./variables.css";
+@import "./scrollbar.css";
+@import "./animations.css";
+@import "./utilities.css";
+
+/* Component styles */
+@import "./components/toastify.css";
+@import "./components/modelviewer.css";
+
+/* Page styles */
+@import "./pages/privacy-policy.css";
+@import "./pages/terms-of-use.css";

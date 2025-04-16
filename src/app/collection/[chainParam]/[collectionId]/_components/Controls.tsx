@@ -48,7 +48,7 @@ type BaseCollectionControlsProps = {
   tabValues: { label: string; value: string }[];
 };
 
-export const BaseCollectionControls = ({
+const BaseCollectionControls = ({
   tabRoot,
   tabValues,
 }: BaseCollectionControlsProps) => {

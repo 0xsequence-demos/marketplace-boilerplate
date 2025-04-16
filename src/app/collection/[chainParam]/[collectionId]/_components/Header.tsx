@@ -36,7 +36,7 @@ const CollectionHeader = ({
   marketplaceConfig,
 }: CollectionHeaderProps) => {
   const collectionMetadata = useCollection({
-    chainId: chainId.toString(),
+    chainId,
     collectionAddress,
   });
 

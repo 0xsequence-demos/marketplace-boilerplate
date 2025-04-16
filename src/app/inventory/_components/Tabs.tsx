@@ -4,7 +4,7 @@ import ENSName from '~/components/ENSName';
 import { InfoBox } from '~/components/InfoGrid';
 import { Spinner } from '~/components/Spinner';
 
-import { Button, Flex, Grid, Tabs, Text } from '$ui';
+import { Flex, Grid, Tabs, Text } from '$ui';
 import { InventoryCollectiblesContent } from './InventoryCollectiblesContent';
 import { ContractType, type TokenBalance } from '@0xsequence/indexer';
 import { compareAddress } from '@0xsequence/marketplace-sdk';
@@ -13,10 +13,11 @@ import {
   useMarketplaceConfig,
 } from '@0xsequence/marketplace-sdk/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { type Address } from 'viem';
 
 type InventoryTabsProps = {
   chainId: number;
-  accountAddress: string;
+  accountAddress: Address;
 };
 
 const inventoryTabsList = {
@@ -79,9 +80,7 @@ export const InventoryTabs = ({
           compareAddress(
             marketplaceCollection.address,
             balanceCollection.contractAddress,
-          ) &&
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-          marketplaceCollection.chainId === balanceCollection.chainId,
+          ) && marketplaceCollection.chainId === balanceCollection.chainId,
       ),
   );
 

@@ -49,7 +49,7 @@ export const CollectibleTradeActions = ({
 
   const { data: highestOffer, isLoading: isLoadingHighestOffer } =
     useHighestOffer({
-      chainId: String(chainId),
+      chainId,
       collectionAddress,
       tokenId: tokenId,
       filter: {
@@ -62,7 +62,7 @@ export const CollectibleTradeActions = ({
 
   const { data: lowestListing, isLoading: loadingLowestListing } =
     useLowestListing({
-      chainId: String(chainId),
+      chainId,
       collectionAddress,
       tokenId,
       query: {
@@ -98,26 +98,27 @@ export const CollectibleTradeActions = ({
 
   const onClickBuy = () => {
     showBuyModal({
-      chainId: String(chainId),
+      chainId,
       collectionAddress,
-      tokenId,
-      order: lowestListing!.order!,
+      collectibleId: tokenId,
+      orderId: lowestListing!.orderId,
+      marketplace: lowestListing!.marketplace,
     });
   };
 
   const onClickSell = () => {
     showSellModal({
       collectionAddress,
-      chainId: String(chainId),
+      chainId,
       tokenId,
-      order: highestOffer!.order!,
+      order: highestOffer!,
     });
   };
 
   const onClickOffer = () => {
     showOfferModal({
       collectionAddress,
-      chainId: String(chainId),
+      chainId,
       collectibleId: tokenId,
     });
   };
@@ -125,16 +126,15 @@ export const CollectibleTradeActions = ({
   const onClickList = () => {
     showListModal({
       collectionAddress,
-      chainId: String(chainId),
+      chainId,
       collectibleId: tokenId,
     });
   };
 
-  const buyDisabled =
-    !isConnected || !lowestListing?.order || item721AlreadyOwned;
+  const buyDisabled = !isConnected || !lowestListing || item721AlreadyOwned;
   const offerDisabled = !isConnected || item721AlreadyOwned;
   const listingDisabled = !isConnected || !tokenBalance;
-  const sellDisabled = !isConnected || !highestOffer?.order || !tokenBalance;
+  const sellDisabled = !isConnected || !highestOffer || !tokenBalance;
 
   return (
     <Flex className="flex-col gap-4">

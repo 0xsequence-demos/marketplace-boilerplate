@@ -1,43 +1,49 @@
 import { classNames } from '~/config/classNames';
 import { ssrClient } from '~/config/marketplace-sdk/ssr';
-import '~/styles/globals.scss';
+import '~/styles/globals.css';
 
 import { cn } from '$ui';
 import { Layout } from './_layout';
 import Providers from './_providers';
-import '@0xsequence/marketplace-sdk/styles';
 import type { Metadata } from 'next';
+import InjectBuilderCss from '~/styles/inject-builder-css';
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { getInitialState, getMarketplaceConfig, config } = ssrClient();
-  const { fontUrl, cssString, faviconUrl } = await getMarketplaceConfig();
-  const initialState = await getInitialState();
+  const client = await ssrClient();
+  const { fontUrl, cssString, faviconUrl } =
+    await client.getMarketplaceConfig();
+  const initialState = await client.getInitialState();
 
   return (
     <html lang="en">
       <head>
         <meta name="mobile-web-app-capable" content="yes" />
 
-        <link rel="icon" href={faviconUrl} />
-        <link rel="shortcut icon" href={faviconUrl} />
+        {faviconUrl ? (
+          <>
+            <link rel="icon" href={faviconUrl} />
+            <link rel="shortcut icon" href={faviconUrl} />
+          </>
+        ) : null}
         {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null}
-        <style>{cssString}</style>
       </head>
       <body className={cn(classNames.themeManager)}>
-        <Providers sdkInitialState={initialState} sdkConfig={config}>
-          <Layout>{children}</Layout>
-        </Providers>
+        <InjectBuilderCss cssString={cssString}>
+            <Providers sdkInitialState={initialState} sdkConfig={client.config}>
+              <Layout>{children}</Layout>
+            </Providers>
+        </InjectBuilderCss>
       </body>
     </html>
   );
 }
 
 export const generateMetadata = async (): Promise<Metadata> => {
-  const { getMarketplaceConfig } = ssrClient();
+  const { getMarketplaceConfig } = await ssrClient();
   const marketplaceConfig = await getMarketplaceConfig();
   return {
     title: {

@@ -1,0 +1,34 @@
+@layer base {
+	.terms-of-use-page-container {
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 3rem;
+		margin-bottom: 3rem;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1.5rem;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+		color: hsl(var(--foreground) / 0.6);
+		max-width: 1200px;
+	}
+
+	.terms-of-use-page-container a {
+		color: hsl(var(--primary));
+		text-decoration: underline;
+	}
+
+	.terms-of-use-page-container ol li {
+		color: hsl(var(--foreground) / 0.6);
+	}
+
+	.terms-of-use-page-container > p {
+		color: hsl(var(--foreground) / 0.5);
+	}
+
+	.terms-of-use-page-container > p strong {
+		font-weight: 600;
+		color: hsl(var(--foreground) / 0.8);
+	}
+}

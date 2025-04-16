@@ -5,7 +5,8 @@ import { DefaultLayout } from './_landing/layouts/DefaultLayout';
 import { FloatingBanner } from './_landing/layouts/FloatingHeader';
 
 const LandingPage = async () => {
-  const marketplaceConfig = await ssrClient().getMarketplaceConfig();
+  const client = await ssrClient();
+  const marketplaceConfig = await client.getMarketplaceConfig();
 
   switch (marketplaceConfig.landingPageLayout) {
     case 'floating_header': {

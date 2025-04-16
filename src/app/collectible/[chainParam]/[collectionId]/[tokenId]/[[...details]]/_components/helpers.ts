@@ -29,7 +29,7 @@ export const formatProperties = (
               name: el[1].name,
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
               value: el[1].value[0] ? el[1].value[0].name : '--',
             };
           }

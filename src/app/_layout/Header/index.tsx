@@ -12,7 +12,7 @@ export const Header = () => {
       as="header"
       className={cn(
         classNames.header,
-        'h-[--headerHeight] gap-2 bg-background p-2 pt-2',
+        'h-(--headerHeight) gap-2 bg-background p-2 pt-2',
       )}
       template={`
       [row1-start] "logo search . inventory-button wallet-button order-button network-button" auto [row1-end]

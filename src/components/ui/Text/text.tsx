@@ -3,7 +3,7 @@ import React, { createElement } from 'react';
 import { cn } from '$ui';
 import { Slot } from '@radix-ui/react-slot';
 
-export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
+interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
   as?: string;
   asChild?: boolean;
 

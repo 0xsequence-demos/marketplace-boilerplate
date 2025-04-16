@@ -27,7 +27,7 @@ export const NetworkSelectModalContent = () => {
         {chains.map((chain) => {
           return (
             <Button
-              className="w-full !rounded-sm p-1"
+              className="w-full rounded-sm! p-1"
               variant="ghost"
               onClick={() => onClickNetwork(chain.id)}
               key={chain.id}

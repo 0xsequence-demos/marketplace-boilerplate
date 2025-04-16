@@ -1,0 +1,30 @@
+@layer base {
+		--animate-accordion-down: accordion-down 0.2s ease-out;
+		--animate-accordion-up: accordion-up 0.2s ease-out;
+		--animate-activity-bar-move: activity-bar-move 50s linear infinite;
+
+		@keyframes accordion-down {
+			from {
+				height: 0;
+			}
+			to {
+				height: var(--radix-accordion-content-height);
+			}
+		}
+		@keyframes accordion-up {
+			from {
+				height: var(--radix-accordion-content-height);
+			}
+			to {
+				height: 0;
+			}
+		}
+		@keyframes activity-bar-move {
+			from {
+				transform: translate(0, 0);
+			}
+			to {
+				transform: translate(-50%, 0);
+			}
+		}
+}

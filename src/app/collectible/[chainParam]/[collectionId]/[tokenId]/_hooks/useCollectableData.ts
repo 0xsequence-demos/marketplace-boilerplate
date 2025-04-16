@@ -12,7 +12,7 @@ export const useCollectableData = () => {
   const chainId = getChainId(chainParam)!;
 
   const collectibleMetadata = useCollectible({
-    chainId: String(chainId),
+    chainId,
     collectionAddress: collectionId,
     collectibleId: tokenId,
   });
