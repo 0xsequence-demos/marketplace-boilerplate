@@ -29,7 +29,7 @@ const MarketplacePill = ({
 
   return (
     <Pill>
-      <marketplaceDetails.logo width="3" height="3" />
+      <marketplaceDetails.logo className='w-3 h-3'/>
 
       <Text color="text100" fontSize="xsmall" fontWeight="bold">
         {marketplaceDetails.displayName}
