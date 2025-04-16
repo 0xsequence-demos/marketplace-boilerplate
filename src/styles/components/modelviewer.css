@@ -1,0 +1,7 @@
+@layer base {
+	/* google 3d model viewer */
+	model-viewer {
+		--poster-color: "transparent";
+		--progress-mask: "transparent";
+	}
+}
