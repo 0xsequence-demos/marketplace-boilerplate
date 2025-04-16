@@ -28,7 +28,7 @@ export const FloatingBanner = ({
         {landingBannerUrl ? (
           <Flex
             className={cn(
-              'w-full max-w-[1200px] px-3 backdrop-blur-sm',
+              'w-full max-w-[1200px] px-3 backdrop-blur-xs',
               'absolute bottom-6 left-1/2 -translate-x-1/2',
             )}
           >

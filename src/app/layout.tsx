@@ -33,9 +33,9 @@ export default async function RootLayout({
       </head>
       <body className={cn(classNames.themeManager)}>
         <InjectBuilderCss cssString={cssString}>
-          <Providers sdkInitialState={initialState} sdkConfig={client.config}>
-            <Layout>{children}</Layout>
-          </Providers>
+            <Providers sdkInitialState={initialState} sdkConfig={client.config}>
+              <Layout>{children}</Layout>
+            </Providers>
         </InjectBuilderCss>
       </body>
     </html>
