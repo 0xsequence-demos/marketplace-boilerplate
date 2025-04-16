@@ -2,6 +2,7 @@
 
  
 import { useServerInsertedHTML } from 'next/navigation';
+import { useRef } from 'react';
  
 export default function InjectBuilderCss({
   children,
@@ -10,16 +11,14 @@ export default function InjectBuilderCss({
   children: React.ReactNode;
   cssString: string;
 }) {
- 
+  const isServerInserted = useRef(false);
   useServerInsertedHTML(() => {
-    return <style>{cssString}</style>;
+    if (isServerInserted.current) return null;
+    isServerInserted.current = true;
+    // Tailwind 4 requires the variables to be in the :root
+    const rootCssString = cssString.replace(/body/g, ':root');
+    return  <style id="builder-css" dangerouslySetInnerHTML={{ __html: rootCssString }} />
   });
  
-  if (typeof window !== 'undefined') return <>{children}</>;
- 
-  return (
-    <>
-      {children}
-    </>
-  );
+   return <>{children}</>;
 }
