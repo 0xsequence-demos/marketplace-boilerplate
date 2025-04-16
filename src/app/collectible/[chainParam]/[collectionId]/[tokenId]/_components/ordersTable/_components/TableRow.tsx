@@ -104,7 +104,7 @@ const OrdersTableRow = ({ order, index }: { order: Order; index: number }) => {
       <Table.Row
         className={cn(
           index % 2 === 0 ? 'bg-muted/60' : '',
-          'hidden md:table-row',
+          'hidden md:table-row!',
         )}
       >
         <Table.Cell>
