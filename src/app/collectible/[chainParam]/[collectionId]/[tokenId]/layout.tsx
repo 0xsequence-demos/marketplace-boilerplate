@@ -11,8 +11,8 @@ const CollectableLayout = ({ children }: { children: React.ReactNode }) => {
     >
       <Flex
         className={cn(
-          '@4xl/collectibleViewContainer:gap-8 gap-6',
-          '@4xl/collectibleViewContainer:flex-row flex-col sm:px-4',
+         '@max-4xl/collectibleViewContainer:flex-col @max-4xl/collectibleViewContainer:gap-6 sm:px-4',
+          '@4xl/collectibleViewContainer:flex-row @4xl/collectibleViewContainer:gap-8'
         )}
       >
         <Sidebar />
