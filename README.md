@@ -1,3 +1,9 @@
+# ⚠️ Repository Deprecated
+
+> This repository is no longer maintained.  
+> Please use the new Marketplace Boilerplate here:  
+> 👉 https://github.com/0xsequence/marketplace-boilerplate
+
 # marketplace-boilerplate
 
 A starter White-label Marketplace boilerplate, powered by Sequence.
