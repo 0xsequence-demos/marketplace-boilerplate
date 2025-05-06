@@ -48,7 +48,7 @@ const ListingsTable = observer(() => {
   if (!listings?.listings.length && !listingsLoading) {
     return (
       <Box className="w-full text-center border border-foreground/30 py-8 rounded-md">
-        <Text fontSize="small" fontWeight="medium" color="text50">
+        <Text fontWeight="medium" color="text50">
           Your listings will appear here
         </Text>
       </Box>

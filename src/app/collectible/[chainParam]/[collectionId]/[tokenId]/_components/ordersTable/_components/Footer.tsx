@@ -56,7 +56,7 @@ const OrdersTableFooter = observer(
               {ordersCountLoading ? (
                 <Skeleton size="sm" />
               ) : (
-                <Text color="text50" fontSize="small" fontWeight="medium">
+                <Text color="text50" fontWeight="medium">
                   {displayText}
                 </Text>
               )}
@@ -142,7 +142,7 @@ function PageSelect({
       {totalPagesLoading ? (
         <Skeleton size="sm" />
       ) : (
-        <Text color="text50" fontWeight="medium" fontSize="small">
+        <Text color="text50" fontWeight="medium" >
           of {totalPages}
         </Text>
       )}

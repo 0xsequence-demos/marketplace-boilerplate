@@ -48,7 +48,7 @@ const OffersTable = observer(() => {
   if (!offers?.offers.length && !offersLoading) {
     return (
       <Box className="w-full text-center border border-foreground/30 py-8 rounded-md">
-        <Text fontSize="small" fontWeight="medium" color="text50">
+        <Text fontWeight="medium" color="text50">
           Your offers will appear here
         </Text>
       </Box>

@@ -20,7 +20,7 @@ const MarketplacePill = ({
   if (!marketplaceDetails) {
     return (
       <Pill>
-        <Text color="text100" fontSize="xsmall" fontWeight="bold">
+        <Text color="text100"  fontWeight="bold">
           Unknown
         </Text>
       </Pill>
@@ -31,7 +31,7 @@ const MarketplacePill = ({
     <Pill>
       <marketplaceDetails.logo className='w-3 h-3'/>
 
-      <Text color="text100" fontSize="xsmall" fontWeight="bold">
+      <Text color="text100"  fontWeight="bold">
         {marketplaceDetails.displayName}
       </Text>
     </Pill>

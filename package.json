@@ -17,7 +17,7 @@
 		"@0xsequence/connect": "^5.1.1",
 		"@0xsequence/design-system": "^2.1.6",
 		"@0xsequence/indexer": "^2.3.8",
-		"@0xsequence/marketplace-sdk": "^0.8.5",
+		"@0xsequence/marketplace-sdk": "^0.8.8",
 		"@0xsequence/metadata": "^2.3.8",
 		"@0xsequence/network": "^2.3.8",
 		"@google/model-viewer": "^4.1.0",
