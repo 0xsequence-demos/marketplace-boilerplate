@@ -17,7 +17,7 @@ const OrdersTableHeader = ({
       <Table.Row>
         {items.map((item) => (
           <Table.Head key={item}>
-            <Text fontSize="small" color="text80">
+            <Text color="text80">
               {item}
             </Text>
           </Table.Head>

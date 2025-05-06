@@ -31,21 +31,21 @@ const OrdersTableRow = ({ order, index }: { order: Order; index: number }) => {
         <Table.Cell className="p-2">
           <div className="flex items-center gap-10">
             <div className="flex flex-col gap-1">
-              <Text color="text50" fontSize="xsmall" fontWeight="bold">
+              <Text color="text50"  fontWeight="bold">
                 Quantity
               </Text>
 
-              <Text color="text100" fontSize="normal" fontWeight="bold">
+              <Text color="text100"  fontWeight="bold">
                 {order.quantityRemaining}
               </Text>
             </div>
 
             <div className="flex flex-col gap-1">
-              <Text color="text50" fontSize="xsmall" fontWeight="bold">
+              <Text color="text50"  fontWeight="bold">
                 Price
               </Text>
 
-              <Text color="text100" fontSize="normal" fontWeight="bold">
+              <Text color="text100"  fontWeight="bold">
                 {formatUnits(
                   BigInt(order.priceAmount),
                   Number(currency?.decimals),
@@ -55,11 +55,11 @@ const OrdersTableRow = ({ order, index }: { order: Order; index: number }) => {
             </div>
 
             <div className="flex flex-col gap-1">
-              <Text color="text50" fontSize="xsmall" fontWeight="bold">
+              <Text color="text50"  fontWeight="bold">
                 Time left
               </Text>
 
-              <Text color="text100" fontSize="normal" fontWeight="bold">
+              <Text color="text100"  fontWeight="bold">
                 {formatDistance(order.validUntil, new Date())}
               </Text>
             </div>
@@ -67,7 +67,7 @@ const OrdersTableRow = ({ order, index }: { order: Order; index: number }) => {
 
           <div className="flex items-end justify-between gap-6">
             <div className="flex flex-col gap-1 grow">
-              <Text color="text50" fontSize="xsmall" fontWeight="bold">
+              <Text color="text50"  fontWeight="bold">
                 By
               </Text>
 
@@ -75,7 +75,7 @@ const OrdersTableRow = ({ order, index }: { order: Order; index: number }) => {
             </div>
 
             <div className="flex flex-col gap-1">
-              <Text color="text50" fontSize="xsmall" fontWeight="bold">
+              <Text color="text50"  fontWeight="bold">
                 On
               </Text>
 
@@ -108,7 +108,7 @@ const OrdersTableRow = ({ order, index }: { order: Order; index: number }) => {
         )}
       >
         <Table.Cell>
-          <Text color="text80" fontSize="small" fontWeight="medium">
+          <Text color="text80"  fontWeight="medium">
             {formatUnits(BigInt(order.priceAmount), Number(currency?.decimals))}{' '}
             {currency?.symbol}
           </Text>
@@ -121,7 +121,7 @@ const OrdersTableRow = ({ order, index }: { order: Order; index: number }) => {
         </Table.Cell>
 
         <Table.Cell>
-          <Text color="text80" fontSize="small" fontWeight="medium">
+          <Text color="text80"  fontWeight="medium">
             {formatDistance(order.validUntil, new Date())}
           </Text>
         </Table.Cell>
